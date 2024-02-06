@@ -1,0 +1,18 @@
+﻿@using AgentRegister = Honma.Components.AgentRegister
+@attribute [Route(Routes.Login)]
+
+<MudContainer Class="height-screen"
+              MaxWidth="MaxWidth.Small">
+    <MudStack AlignItems="AlignItems.Center"
+              Class="height-full"
+              Justify="Justify.Center"
+              Spacing="8">
+        <AgentRegister/>
+        <MudText>OR</MudText>
+        <AgentTokenLogin/>
+    </MudStack>
+</MudContainer>
+
+@code {
+
+}

@@ -1,0 +1,14 @@
+﻿<MudStack AlignItems="AlignItems.Center"
+          Row
+          Spacing="0">
+    <MudIcon Color="Color.Secondary"
+             Icon="@PhosphorIcons.CurrencyCny"
+             Size="Size.Medium"/>
+    <MudText Style="line-height: normal">@Amount</MudText>
+</MudStack>
+
+@code {
+
+    [Parameter] public required long Amount { get; set; }
+
+}

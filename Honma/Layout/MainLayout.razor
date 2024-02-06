@@ -1,0 +1,29 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider IsDarkMode
+                  Theme="HonmaTheme.Get"/>
+
+<MudLayout>
+    <AppBar/>
+
+    <MudDrawer Class="honma-main-drawer ml-2 mt-2 rounded-lg"
+               ClipMode="DrawerClipMode.Always"
+               Elevation="0"
+               Variant="DrawerVariant.Mini">
+        <NavigationMenu/>
+    </MudDrawer>
+
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+@code
+{
+    [Inject] private IDispatcher Dispatcher { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        Dispatcher.Dispatch(new AgentInitialize());
+    }
+}

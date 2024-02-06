@@ -1,0 +1,97 @@
+﻿@attribute [Route(Routes.AgentHistory)]
+@using Honma.Services
+@inherits FluxorComponent
+
+<MudContainer MaxWidth="MaxWidth.Small">
+    @if (State.Value.Agents is not null)
+    {
+        var agents = State.Value.Agents ?? [];
+
+        <MudPaper Class="mt-4 px-8 py-4 rounded-lg width-full"
+                  Elevation="0">
+            @if (!agents.Any())
+            {
+                <MudText Typo="Typo.h5">No agents found.</MudText>
+            }
+            else
+            {
+                <MudText Color="Color.Tertiary"
+                         Typo="Typo.h6">
+                    Agent History
+                </MudText>
+
+                <MudDivider Class="my-4"
+                            DividerType="DividerType.FullWidth"/>
+
+                @foreach (var (agent, index) in agents.Select((value, index) => (value, index)))
+                {
+                    @if (index != 0)
+                    {
+                        <MudDivider Class="my-4"
+                                    DividerType="DividerType.FullWidth"/>
+                    }
+
+                    <MudStack AlignItems="AlignItems.Center"
+                              Row
+                              Spacing="0">
+                        <MudStack Spacing="1">
+                            <MudText>@agent.Symbol</MudText>
+                            <CurrencyDisplay Amount="@agent.Credits"/>
+                        </MudStack>
+                        <MudSpacer/>
+                        @if (string.IsNullOrWhiteSpace(agent.Token))
+                        {
+                            <MudText Color="Color.Error">Corrupted</MudText>
+                        }
+                        else
+                        {
+                            <MudTooltip Arrow
+                                        Text="Copy token to clipboard">
+                                <MudIconButton Icon="@PhosphorIcons.Copy"
+                                               OnClick="@(() => CopyTokenToClipboard(agent.Token))"/>
+                            </MudTooltip>
+                            <MudTooltip Arrow
+                                        Text="Sign in with this agent">
+                                <MudIconButton Icon="@PhosphorIcons.SignIn"
+                                               OnClick="@(() => SignInWithToken(agent.Token))"/>
+                            </MudTooltip>
+                        }
+                        <MudTooltip Arrow
+                                    Text="Delete from history">
+                            <MudIconButton Icon="@PhosphorIcons.TrashSimple"/>
+                        </MudTooltip>
+                    </MudStack>
+                }
+            }
+        </MudPaper>
+    }
+</MudContainer>
+
+@code {
+
+    [Inject] private IState<AgentHistoryState> State { get; set; } = null!;
+
+    [Inject] private IDispatcher Dispatcher { get; set; } = null!;
+
+    [Inject] private ClipboardService ClipboardService { get; set; } = null!;
+
+    [Inject] private ISnackbar Snackbar { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Dispatcher.Dispatch(new AgentHistoryLoad());
+    }
+
+    private async Task CopyTokenToClipboard(string token)
+    {
+        await ClipboardService.CopyToClipboard(token);
+        Snackbar.Add("Copied token to clipboard", Severity.Info);
+    }
+
+    private void SignInWithToken(string token)
+    {
+        Dispatcher.Dispatch(new AgentLogin(token));
+    }
+
+}

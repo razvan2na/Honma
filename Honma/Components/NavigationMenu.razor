@@ -1,0 +1,30 @@
+﻿<MudNavMenu Class="my-2"
+            Color="Color.Primary"
+            Margin="Margin.Normal">
+    <MudTooltip Arrow
+                Placement="Placement.Right"
+                Text="Login">
+        <MudNavLink Href="@Routes.Login"
+                    Icon="@PhosphorIcons.SignIn"
+                    Match="NavLinkMatch.All">
+        </MudNavLink>
+    </MudTooltip>
+
+    <MudTooltip Arrow
+                Placement="Placement.Right"
+                Text="Factions">
+        <MudNavLink Href="@Routes.Factions"
+                    Icon="@PhosphorIcons.UsersThree"
+                    Match="NavLinkMatch.All">
+        </MudNavLink>
+    </MudTooltip>
+
+    <MudTooltip Arrow
+                Placement="Placement.Right"
+                Text="Agent History">
+        <MudNavLink Href="@Routes.AgentHistory"
+                    Icon="@PhosphorIcons.ChalkboardTeacher"
+                    Match="NavLinkMatch.All">
+        </MudNavLink>
+    </MudTooltip>
+</MudNavMenu>

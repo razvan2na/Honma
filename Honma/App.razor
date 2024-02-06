@@ -1,0 +1,29 @@
+﻿<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(App).Assembly">
+        <Found Context="routeData">
+            <CascadingValue Name="@CascadingValues.RouteData"
+                            Value="@routeData">
+                <AuthorizeRouteView DefaultLayout="@typeof(MainLayout)"
+                                    RouteData="@routeData">
+                    <Authorizing>
+                        <MudText>Authorizing</MudText>
+                    </Authorizing>
+                    <NotAuthorized>
+                        <MudText>Not authorized</MudText>
+                    </NotAuthorized>
+                </AuthorizeRouteView>
+            </CascadingValue>
+        </Found>
+        <NotFound>
+            <PageTitle>Not found</PageTitle>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <p role="alert">Sorry, there's nothing at this address.</p>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>
+
+<Fluxor.Blazor.Web.StoreInitializer/>
+
+<MudDialogProvider/>
+<MudSnackbarProvider/>

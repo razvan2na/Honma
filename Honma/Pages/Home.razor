@@ -1,0 +1,207 @@
+﻿@attribute [Route(Routes.Home)]
+@inherits FluxorComponent
+
+<MudContainer MaxWidth="MaxWidth.Large">
+    @if (State.Value.Status is not null)
+    {
+        var status = State.Value.Status.Value;
+
+        <MudGrid Class="mt-2">
+            <MudItem lg="3"
+                     sm="6"
+                     xs="12">
+                <MudPaper Class="pa-4 rounded-lg"
+                          Elevation="0">
+                    <MudStack AlignItems="AlignItems.Center"
+                              Row>
+                        <MudIcon Icon="@PhosphorIcons.UserRectangle"/>
+                        <MudText Inline>
+                            Agents:
+                        </MudText>
+                        <MudText Inline>
+                            @status.Stats.Agents
+                        </MudText>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem lg="3"
+                     sm="6"
+                     xs="12">
+                <MudPaper Class="pa-4 rounded-lg"
+                          Elevation="0">
+                    <MudStack AlignItems="AlignItems.Center"
+                              Row>
+                        <MudIcon Icon="@PhosphorIcons.RocketLaunch"/>
+                        <MudText Inline>
+                            Ships:
+                        </MudText>
+                        <MudText Inline>
+                            @status.Stats.Ships
+                        </MudText>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem lg="3"
+                     sm="6"
+                     xs="12">
+                <MudPaper Class="pa-4 rounded-lg"
+                          Elevation="0">
+                    <MudStack AlignItems="AlignItems.Center"
+                              Row>
+                        <MudIcon Icon="@PhosphorIcons.Planet"/>
+                        <MudText Inline>
+                            Systems:
+                        </MudText>
+                        <MudText Inline>
+                            @status.Stats.Systems
+                        </MudText>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem lg="3"
+                     sm="6"
+                     xs="12">
+                <MudPaper Class="pa-4 rounded-lg"
+                          Elevation="0">
+                    <MudStack AlignItems="AlignItems.Center"
+                              Row>
+                        <MudIcon Icon="@PhosphorIcons.Path"/>
+                        <MudText Inline>
+                            Waypoints:
+                        </MudText>
+                        <MudText Inline>
+                            @status.Stats.Waypoints
+                        </MudText>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem lg="6"
+                     xs="12">
+                <MudPaper Class="pa-4 rounded-lg"
+                          Elevation="0">
+                    <MudStack AlignItems="AlignItems.Center"
+                              Row>
+                        <MudIcon Icon="@PhosphorIcons.ClockCounterClockwise"/>
+                        <MudText Inline>
+                            Last Reset:
+                        </MudText>
+                        <MudText Inline>
+                            @status.ResetDate
+                        </MudText>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem lg="6"
+                     xs="12">
+                <MudPaper Class="pa-4 rounded-lg"
+                          Elevation="0">
+                    <MudStack AlignItems="AlignItems.Center"
+                              Row>
+                        <MudIcon Icon="@PhosphorIcons.ClockCountdown"/>
+                        <MudText Inline>
+                            Next Reset:
+                        </MudText>
+                        <MudText Inline>
+                            @status.ServerResets.Next
+                        </MudText>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem lg="4"
+                     xs="12">
+                <MudPaper Class="pa-4 rounded-lg"
+                          Elevation="0">
+                    <MudText Class="ml-4"
+                             Typo="Typo.h6">
+                        Announcements
+                    </MudText>
+                    <MudDivider Class="mt-2"
+                                DividerType="DividerType.Middle"/>
+                    <MudList Dense>
+                        @foreach (var (announcement, index) in status.Announcements.Select((value, index) => (value, index)))
+                        {
+                            <MudListItem Class="@(index != 0 ? "mt-2" : "")">
+                                <MudText>@announcement.Title</MudText>
+                                <MudText Class="mt-2 word-break"
+                                         Typo="Typo.body2">
+                                    @announcement.Body
+                                </MudText>
+                            </MudListItem>
+                        }
+                    </MudList>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem lg="4"
+                     xs="12">
+                <MudPaper Class="pa-4 rounded-lg"
+                          Elevation="0">
+                    <MudText Class="ml-4"
+                             Typo="Typo.h6">
+                        Most Credits
+                    </MudText>
+                    <MudDivider Class="mt-2"
+                                DividerType="DividerType.Middle"/>
+                    <MudList Dense>
+                        @foreach (var agent in status.Leaderboards.MostCredits)
+                        {
+                            <MudListItem>
+                                <MudStack AlignItems="AlignItems.Center"
+                                          Justify="Justify.SpaceBetween"
+                                          Row>
+                                    <MudText>@agent.AgentSymbol</MudText>
+                                    <MudText>@agent.Credits</MudText>
+                                </MudStack>
+                            </MudListItem>
+                        }
+                    </MudList>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem lg="4"
+                     xs="12">
+                <MudPaper Class="pa-4 rounded-lg"
+                          Elevation="0">
+                    <MudText Class="ml-4"
+                             Typo="Typo.h6">
+                        Most Submitted Charts
+                    </MudText>
+                    <MudDivider Class="mt-2"
+                                DividerType="DividerType.Middle"/>
+                    <MudList>
+                        @foreach (var agent in status.Leaderboards.MostSubmittedCharts)
+                        {
+                            <MudListItem>
+                                <MudStack AlignItems="AlignItems.Center"
+                                          Justify="Justify.SpaceBetween"
+                                          Row>
+                                    <MudText>@agent.AgentSymbol</MudText>
+                                    <MudText>@agent.ChartCount</MudText>
+                                </MudStack>
+                            </MudListItem>
+                        }
+                    </MudList>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+    }
+</MudContainer>
+
+@code
+{
+    [Inject] private IState<ServerStatusState> State { get; set; } = null!;
+
+    [Inject] private IDispatcher Dispatcher { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Dispatcher.Dispatch(new ServerStatusLoad());
+    }
+}

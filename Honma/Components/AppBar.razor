@@ -1,0 +1,99 @@
+﻿@using Honma.Services
+@inherits FluxorComponent
+
+<MudAppBar Class="honma-appbar ml-2 rounded-b-lg"
+           DisableGutters
+           Elevation="0">
+    <MudBreadcrumbs Class="pa-0"
+                    Items="_breadcrumbs">
+        <ItemTemplate Context="item">
+            <MudLink Class="pa-0"
+                     Color="Color.Default"
+                     Href="@item.Href"
+                     Underline="Underline.None">
+                <MudStack AlignItems="AlignItems.Center"
+                          Row>
+                    @if (!string.IsNullOrWhiteSpace(item.Icon))
+                    {
+                        <MudIcon Class="ml-4"
+                                 Icon="@item.Icon"/>
+                    }
+
+                    <MudText Typo="Typo.h6">@item.Text</MudText>
+                </MudStack>
+            </MudLink>
+        </ItemTemplate>
+    </MudBreadcrumbs>
+
+    <MudSpacer/>
+
+    <AuthorizeView>
+        <NotAuthorized>
+            <MudIconButton Class="mr-2"
+                           Href="@Routes.Login"
+                           Icon="@PhosphorIcons.SignIn"/>
+        </NotAuthorized>
+        <Authorized>
+            @if (State.Value.Agent is not null)
+            {
+                var agent = State.Value.Agent.Value;
+
+                <CurrencyDisplay Amount="@agent.Credits"/>
+                <MudMenu AnchorOrigin="Origin.BottomRight"
+                         Class="ml-4 mr-4"
+                         Dense
+                         Label="@agent.Symbol"
+                         Size="Size.Large"
+                         StartIcon="@PhosphorIcons.IdentificationBadge"
+                         TransformOrigin="Origin.TopRight"
+                         Variant="Variant.Text">
+                    <MudMenuItem OnClick="@(() => CopyTokenToClipboard(agent.Token))">
+                        Copy Token to Clipboard
+                    </MudMenuItem>
+                    <MudMenuItem OnClick="@LogOut">Log Out</MudMenuItem>
+                </MudMenu>
+            }
+        </Authorized>
+    </AuthorizeView>
+
+
+</MudAppBar>
+
+@code {
+
+    [CascadingParameter(Name = CascadingValues.RouteData)]
+    private RouteData? RouteData { get; set; }
+
+    [Inject] private IState<AgentState> State { get; set; } = null!;
+
+    [Inject] private IDispatcher Dispatcher { get; set; } = null!;
+
+    [Inject] private ClipboardService ClipboardService { get; set; } = null!;
+
+    [Inject] private ISnackbar Snackbar { get; set; } = null!;
+
+    private List<BreadcrumbItem>? _breadcrumbs;
+
+    protected override void OnParametersSet()
+    {
+        _breadcrumbs = RouteData?.BuildBreadcrumbs();
+    }
+
+    private async Task CopyTokenToClipboard(string? token)
+    {
+        if (string.IsNullOrWhiteSpace(token))
+        {
+            Snackbar.Add("Couldn't copy token to clipboard", Severity.Error);
+            return;
+        }
+
+        await ClipboardService.CopyToClipboard(token);
+        Snackbar.Add("Copied token to clipboard", Severity.Info);
+    }
+
+    private void LogOut()
+    {
+        Dispatcher.Dispatch(new AgentLogout());
+    }
+
+}

@@ -1,0 +1,109 @@
+﻿@inherits FluxorComponent
+
+<MudPaper Class="pa-4 rounded-lg width-full"
+          Elevation="0">
+    <MudStack>
+        <MudText Typo="Typo.h6">Register New Agent</MudText>
+
+        <MudTextField @bind-Value="_agentSymbol"
+                      Counter="14"
+                      HelperText="Unique name used to represent your agent"
+                      Immediate
+                      Label="Symbol"
+                      MaxLength="14"
+                      Validation="@((string symbol) => ValidateAgentSymbol(symbol))"
+                      Variant="Variant.Filled">
+        </MudTextField>
+
+        <MudSelect @bind-Value="_selectedFaction"
+                   Disabled="@(State.Value.Factions is null)"
+                   HelperText="Determines your starting location."
+                   Label="Faction"
+                   T="Faction?"
+                   Variant="Variant.Filled">
+
+            @if (State.Value.Factions is not null)
+            {
+                var factions = State.Value.Factions.Where(faction => faction.IsRecruiting);
+
+
+                @foreach (var faction in factions)
+                {
+                    <MudSelectItem T="Faction?"
+                                   Value="faction">
+                        <MudStack AlignItems="AlignItems.Center"
+                                  Justify="Justify.SpaceBetween"
+                                  Row>
+                            <MudText>@faction.Name</MudText>
+                            <MudText Color="Color.Primary">[@faction.Symbol.Value]</MudText>
+                        </MudStack>
+                    </MudSelectItem>
+                }
+            }
+
+        </MudSelect>
+
+        <MudText Typo="Typo.body2">
+            Not sure which faction to choose? Go to the
+            <MudLink Href="@Routes.Factions"
+                     Typo="Typo.body2">
+                factions page
+            </MudLink> to find out more about them.
+        </MudText>
+
+        <MudButton Class="mt-2 rounded-lg"
+                   Color="Color.Primary"
+                   Disabled="@(!CanRegister)"
+                   OnClick="@Register"
+                   Variant="Variant.Filled">
+            Register
+        </MudButton>
+    </MudStack>
+</MudPaper>
+
+@code {
+
+    [Inject] private IState<FactionsState> State { get; set; } = null!;
+
+    [Inject] private IDispatcher Dispatcher { get; set; } = null!;
+
+    private string? _agentSymbol;
+    private Faction? _selectedFaction;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Dispatcher.Dispatch(new FactionsLoad());
+    }
+
+    private void Register()
+    {
+        if (CanRegister)
+        {
+            Dispatcher.Dispatch(
+                new Honma.Store.AgentRegister(
+                    _agentSymbol!,
+                    _selectedFaction?.Symbol ?? throw new InvalidOperationException()
+                )
+            );
+        }
+    }
+
+    private bool CanRegister => !string.IsNullOrWhiteSpace(_agentSymbol) &&
+                                _agentSymbol.Length is >= 3 and <= 14 &&
+                                _selectedFaction is not null;
+
+    private IEnumerable<string> ValidateAgentSymbol(string? symbol)
+    {
+        switch (symbol?.Length)
+        {
+            case < 3:
+                yield return "Min 3 characters";
+                break;
+            case > 14:
+                yield return "Max 14 characters";
+                break;
+        }
+    }
+
+}

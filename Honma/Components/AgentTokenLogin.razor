@@ -1,0 +1,26 @@
+﻿<MudPaper Class="pa-4 rounded-lg width-full"
+          Elevation="0">
+    <MudStack>
+        <MudText Typo="Typo.h6">Login With Token</MudText>
+
+        <MudTextField @bind-Value="_token"
+                      Immediate
+                      Label="Token"
+                      Variant="Variant.Filled">
+        </MudTextField>
+
+        <MudButton Class="mt-2 rounded-lg"
+                   Color="Color.Primary"
+                   Disabled="@(string.IsNullOrWhiteSpace(_token))"
+                   Variant="Variant.Filled">
+            Login
+        </MudButton>
+
+    </MudStack>
+</MudPaper>
+
+@code {
+
+    private string? _token;
+
+}

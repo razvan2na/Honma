@@ -1,0 +1,32 @@
+﻿.honma-appbar {
+    width: calc(100% - 16px) !important;
+}
+
+.honma-main-drawer {
+    height: auto !important;
+    position: fixed !important;
+}
+
+.height-screen {
+    height: calc(100vh - 64px);
+}
+
+.height-full {
+    height: 100%;
+}
+
+.width-full {
+    width: 100%;
+}
+
+.text-gradient {
+    background: linear-gradient(45deg, hsla(195, 86%, 50%, 1) 0%, hsla(236, 93%, 65%, 1) 100%);
+    background: -moz-linear-gradient(45deg, hsla(195, 86%, 50%, 1) 0%, hsla(236, 93%, 65%, 1) 100%);
+    background: -webkit-linear-gradient(45deg, hsla(195, 86%, 50%, 1) 0%, hsla(236, 93%, 65%, 1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.word-break {
+    word-break: break-word;
+}
