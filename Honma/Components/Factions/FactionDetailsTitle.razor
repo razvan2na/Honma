@@ -1,0 +1,24 @@
+﻿<MudStack AlignItems="AlignItems.Center"
+          Justify="Justify.SpaceBetween"
+          Row>
+    <MudText Typo="@Typo">
+        @Faction.Name
+    </MudText>
+    @if (!HideTag)
+    {
+        <MudText Color="Color.Primary"
+                 Typo="@Typo">
+            [@Faction.Symbol.Value]
+        </MudText>
+    }
+</MudStack>
+
+@code {
+
+    [Parameter] public required Faction Faction { get; set; }
+
+    [Parameter] public Typo Typo { get; set; } = Typo.h6;
+
+    [Parameter] public bool HideTag { get; set; }
+
+}

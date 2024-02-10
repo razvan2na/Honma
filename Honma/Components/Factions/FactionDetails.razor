@@ -1,0 +1,13 @@
+﻿<FactionDetailsTitle Faction="@Faction"/>
+
+<MudDivider Class="my-4"
+            DividerType="DividerType.Middle">
+</MudDivider>
+
+<FactionDetailsContent Faction="@Faction"/>
+
+@code {
+
+    [Parameter] public required Faction Faction { get; set; }
+
+}

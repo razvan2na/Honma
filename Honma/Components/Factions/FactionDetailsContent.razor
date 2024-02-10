@@ -1,0 +1,38 @@
+﻿<MudStack AlignItems="AlignItems.Center"
+          Justify="Justify.Center"
+          Row
+          Spacing="0">
+    @foreach (var trait in Faction.Traits)
+    {
+        <MudTooltip Arrow>
+            <ChildContent>
+                <MudChip Color="Color.Secondary"
+                         Variant="Variant.Text">
+                    @trait.Name
+                </MudChip>
+            </ChildContent>
+            <TooltipContent>
+                <MudText Class="ma-2"
+                         Style="max-width: 500px"
+                         Typo="Typo.body2">
+                    @trait.Description
+                </MudText>
+            </TooltipContent>
+        </MudTooltip>
+    }
+</MudStack>
+
+@if (!string.IsNullOrWhiteSpace(Faction.Headquarters))
+{
+    <MudText Class="mt-4">
+        <b>Headquarters:</b> <MudLink>@Faction.Headquarters</MudLink>
+    </MudText>
+}
+
+<MudText Class="mt-4 word-break">@Faction.Description</MudText>
+
+@code {
+
+    [Parameter] public required Faction Faction { get; set; }
+
+}
