@@ -90,7 +90,7 @@
                             Last Reset:
                         </MudText>
                         <MudText Inline>
-                            @status.ResetDate
+                            @status.ResetDate.ToString(Formats.Date)
                         </MudText>
                     </MudStack>
                 </MudPaper>
@@ -107,7 +107,7 @@
                             Next Reset:
                         </MudText>
                         <MudText Inline>
-                            @status.ServerResets.Next
+                            @status.ServerResets.Next.ToString(Formats.Date)
                         </MudText>
                     </MudStack>
                 </MudPaper>

@@ -6,4 +6,5 @@ public static class Routes
     public const string Login = "/login";
     public const string Factions = "/factions";
     public const string AgentHistory = "/agent-history";
+    public const string Contracts = "/contracts";
 }

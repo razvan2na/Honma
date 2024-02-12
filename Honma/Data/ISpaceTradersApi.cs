@@ -1,6 +1,5 @@
 ﻿using Honma.Data.Responses;
 using Honma.Dtos;
-using Honma.Models;
 using Refit;
 
 namespace Honma.Data;
@@ -21,4 +20,7 @@ public interface ISpaceTradersApi
 
     [Get("/factions/{symbol}")]
     Task<Response<FactionDto>> GetFaction(string symbol);
+
+    [Get("/my/contracts")]
+    Task<Response<IReadOnlyList<ContractDto>>> GetContracts([Query] int limit, [Query] int page);
 }
