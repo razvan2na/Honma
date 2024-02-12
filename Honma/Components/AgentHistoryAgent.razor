@@ -1,0 +1,80 @@
+﻿<MudPaper Class="px-8 py-4 rounded-lg"
+          Elevation="0">
+    <MudStack AlignItems="AlignItems.Center"
+              Row
+              Spacing="0">
+        <MudStack Spacing="1">
+            <MudText>
+                <b>@Agent.Symbol</b>
+            </MudText>
+            <CurrencyDisplay Amount="@Agent.Credits"/>
+            @if (Agent.Token is null)
+            {
+                <MudText Color="Color.Error"
+                         Typo="Typo.body2">
+                    Missing token
+                </MudText>
+            }
+            else if (Agent.ExpiresOn is not null)
+            {
+                <MudText Typo="Typo.body2">
+                    Expires: <b>@Agent.ExpiresOn.Value.ToString("d MMMM yyy HH:mm")</b>
+                </MudText>
+            }
+            else
+            {
+                <MudText Color="Color.Warning"
+                         Typo="Typo.body2">
+                    Missing expiry date
+                </MudText>
+            }
+        </MudStack>
+        <MudSpacer/>
+        @if (Agent.Token is not null && !(Agent.IsExpired ?? false))
+        {
+            <MudTooltip Arrow
+                        Text="Copy token to clipboard">
+                <MudIconButton Icon="@PhosphorIcons.Copy"
+                               OnClick="@(() => CopyTokenToClipboard(Agent.Token))"/>
+            </MudTooltip>
+            <MudTooltip Arrow
+                        Text="Sign in with this agent">
+                <MudIconButton Icon="@PhosphorIcons.SignIn"
+                               OnClick="@(() => SignInWithToken(Agent.Token))"/>
+            </MudTooltip>
+        }
+        <MudTooltip Arrow
+                    Text="Delete from history">
+            <MudIconButton Icon="@PhosphorIcons.TrashSimple"
+                           OnClick="@(() => RemoveAgent(Agent.AccountId ?? string.Empty))"/>
+        </MudTooltip>
+    </MudStack>
+</MudPaper>
+
+@code {
+
+    [Parameter] public required Agent Agent { get; set; }
+
+    [Inject] private IDispatcher Dispatcher { get; set; } = null!;
+
+    [Inject] private ClipboardService ClipboardService { get; set; } = null!;
+
+    [Inject] private ISnackbar Snackbar { get; set; } = null!;
+
+    private async Task CopyTokenToClipboard(string token)
+    {
+        await ClipboardService.CopyToClipboard(token);
+        Snackbar.Add("Copied token to clipboard", Severity.Info);
+    }
+
+    private void SignInWithToken(string token)
+    {
+        Dispatcher.Dispatch(new AgentLogin(token));
+    }
+
+    private void RemoveAgent(string accountId)
+    {
+        Dispatcher.Dispatch(new AgentHistoryRemoveAgent(accountId));
+    }
+
+}

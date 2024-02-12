@@ -9,17 +9,19 @@ public readonly record struct Agent(
     long Credits,
     FactionSymbol StartingFaction,
     int ShipCount,
-    string? Token
+    string? Token,
+    DateTime? ExpiresOn
 )
 {
-    public Agent(AgentDto dto, string token) : this(
+    public Agent(AgentDto dto, string token, DateTime? expiresOn = null) : this(
         dto.AccountId,
         dto.Symbol,
         dto.Headquarters,
         dto.Credits,
         new FactionSymbol(dto.StartingFaction),
         dto.ShipCount,
-        token)
-    {
-    }
+        token,
+        expiresOn) { }
+
+    public bool? IsExpired => ExpiresOn is null ? null : DateTime.UtcNow > ExpiresOn;
 }

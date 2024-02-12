@@ -3,7 +3,7 @@
 public readonly record struct ServerStatusDto(
     string Status,
     string Version,
-    string ResetDate,
+    DateTime ResetDate,
     string Description,
     ServerStatsDto Stats,
     LeaderboardsDto Leaderboards,

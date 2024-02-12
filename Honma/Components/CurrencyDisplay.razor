@@ -3,12 +3,19 @@
           Spacing="0">
     <MudIcon Color="Color.Secondary"
              Icon="@PhosphorIcons.CurrencyCny"
-             Size="Size.Medium"/>
-    <MudText Style="line-height: normal">@Amount</MudText>
+             Size="@IconSize"/>
+    <MudText Style="line-height: normal"
+             Typo="@Typo">
+        @Amount
+    </MudText>
 </MudStack>
 
 @code {
 
     [Parameter] public required long Amount { get; set; }
+
+    [Parameter] public Typo Typo { get; set; } = Typo.body1;
+
+    [Parameter] public Size IconSize { get; set; } = Size.Medium;
 
 }

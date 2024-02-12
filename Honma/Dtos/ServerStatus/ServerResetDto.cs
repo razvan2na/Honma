@@ -1,6 +1,6 @@
 ﻿namespace Honma.Dtos;
 
 public readonly record struct ServerResetDto(
-    string Next,
+    DateTime Next,
     string Frequency
 );

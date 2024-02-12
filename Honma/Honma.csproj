@@ -16,9 +16,6 @@
         <PackageReference Include="Refit.HttpClientFactory" Version="7.0.0"/>
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="Data\Requests\"/>
-    </ItemGroup>
-    <ItemGroup>
         <None Remove="Honma.csproj.DotSettings"/>
     </ItemGroup>
 </Project>
