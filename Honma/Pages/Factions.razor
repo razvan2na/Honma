@@ -6,12 +6,14 @@
     var factions = State.Value.Factions ?? [];
 
     <MudHidden Breakpoint="Breakpoint.LgAndUp">
-        <MudContainer MaxWidth="MaxWidth.Small">
-            <MudText Class="mt-4"
+        <MudContainer Class="pb-8"
+                      MaxWidth="MaxWidth.Small">
+            <MudText Class="ml-6 mt-8"
                      Color="Color.Tertiary">
                 <b>Recruiting</b>
             </MudText>
-            <MudExpansionPanels Class="mt-4">
+            <MudExpansionPanels Class="mt-4 rounded-lg"
+                                Elevation="0">
                 @foreach (var faction in factions.Where(faction => faction.IsRecruiting))
                 {
                     <MudExpansionPanel>
@@ -27,16 +29,19 @@
                 }
             </MudExpansionPanels>
 
-            <MudText Class="mt-4"
-                     Color="Color.Tertiary">
+            <MudText Class="ml-6 mt-8"
+                     Color="Color.Secondary">
                 <b>Not Recruiting</b>
             </MudText>
-            <MudExpansionPanels Class="mt-4">
+            <MudExpansionPanels Class="mt-4 rounded-lg"
+                                Elevation="0">
                 @foreach (var faction in factions.Where(faction => !faction.IsRecruiting))
                 {
                     <MudExpansionPanel>
                         <TitleContent>
-                            <FactionDetailsTitle Faction="@faction"/>
+                            <FactionDetailsTitle Faction="@faction"
+                                                 HideTag
+                                                 Typo="Typo.body1"/>
                         </TitleContent>
                         <ChildContent>
                             <FactionDetailsContent Faction="@faction"/>

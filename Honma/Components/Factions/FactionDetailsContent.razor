@@ -1,7 +1,4 @@
-﻿<MudStack AlignItems="AlignItems.Center"
-          Justify="Justify.Center"
-          Row
-          Spacing="0">
+﻿<div class="align-center d-flex flex-wrap justify-center">
     @foreach (var trait in Faction.Traits)
     {
         <MudTooltip Arrow>
@@ -20,7 +17,7 @@
             </TooltipContent>
         </MudTooltip>
     }
-</MudStack>
+</div>
 
 @if (!string.IsNullOrWhiteSpace(Faction.Headquarters))
 {
