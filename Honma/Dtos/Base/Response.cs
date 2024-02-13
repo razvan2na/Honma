@@ -1,6 +1,6 @@
-﻿namespace Honma.Data.Responses;
+﻿namespace Honma.Dtos;
 
 public readonly record struct Response<T>(
     T? Data,
-    Pagination? Meta
+    Meta? Meta
 );

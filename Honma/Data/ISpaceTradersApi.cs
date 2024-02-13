@@ -1,5 +1,4 @@
-﻿using Honma.Data.Responses;
-using Honma.Dtos;
+﻿using Honma.Dtos;
 using Refit;
 
 namespace Honma.Data;
