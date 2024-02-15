@@ -1,7 +1,5 @@
-﻿using System.Reflection;
-using Honma.Constants;
+﻿using Honma.Constants;
 using Honma.Icons;
-using Honma.Models.Base;
 using Honma.Pages;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -25,17 +23,5 @@ public static class Utils
             breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.AgentHistory, Routes.AgentHistory, true));
 
         return breadcrumbs;
-    }
-
-    public static List<T> GetConstantValues<T, TCollection>() where TCollection : IConstantCollection<T> where T : class
-    {
-        var values = typeof(TCollection)
-            .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly)
-            .Where(f => f.FieldType == typeof(T))
-            .Select(f =>
-                f.GetValue(null) as T ?? throw new Exception($"Cannot get constant collection of type {typeof(T)}"))
-            .ToList();
-
-        return values;
     }
 }

@@ -1,4 +1,6 @@
 ﻿@attribute [Route(Routes.Factions)]
+@using Honma.States
+@using Honma.Actions
 @inherits FluxorComponent
 
 @if (State.Value.Factions is not null)
@@ -107,7 +109,7 @@
                                 </MudText>
                                 <MudText Color="Color.Primary"
                                          Typo="Typo.h6">
-                                    [@selectedFaction.Symbol.Value]
+                                    [@selectedFaction.Symbol]
                                 </MudText>
                             </MudStack>
 

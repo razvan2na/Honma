@@ -25,7 +25,7 @@ builder.Services.AddFluxor(options =>
 // Register API interface with Refit, including handler for populating authentication header for every HTTP request.
 builder.Services.AddTransient<AuthenticationHeaderHandler>();
 builder.Services
-    .AddRefitClient<ISpaceTradersApi>()
+    .AddRefitClient<ISpaceTradersClient>()
     .ConfigureHttpClient(client => client.BaseAddress = new Uri("https://api.spacetraders.io/v2"))
     .AddHttpMessageHandler<AuthenticationHeaderHandler>();
 

@@ -18,7 +18,4 @@
     <ItemGroup>
         <None Remove="Honma.csproj.DotSettings"/>
     </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Models\Contract\" />
-    </ItemGroup>
 </Project>

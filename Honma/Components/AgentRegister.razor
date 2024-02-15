@@ -1,4 +1,6 @@
-﻿@inherits FluxorComponent
+﻿@using Honma.States
+@using Honma.Actions
+@inherits FluxorComponent
 
 <MudPaper Class="pa-4 rounded-lg width-full"
           Elevation="0">
@@ -35,7 +37,7 @@
                                   Justify="Justify.SpaceBetween"
                                   Row>
                             <MudText>@faction.Name</MudText>
-                            <MudText Color="Color.Primary">[@faction.Symbol.Value]</MudText>
+                            <MudText Color="Color.Primary">[@faction.Symbol]</MudText>
                         </MudStack>
                     </MudSelectItem>
                 }
@@ -81,7 +83,7 @@
         if (CanRegister)
         {
             Dispatcher.Dispatch(
-                new Honma.Store.AgentRegister(
+                new Actions.AgentRegister(
                     _agentSymbol!,
                     _selectedFaction?.Symbol ?? throw new InvalidOperationException()
                 )
