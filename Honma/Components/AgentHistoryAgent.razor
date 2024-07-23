@@ -70,7 +70,7 @@
 
     private void SignInWithToken(string token)
     {
-        Dispatcher.Dispatch(new AgentLogin(token));
+        Dispatcher.Dispatch(new Actions.UserAgentLogin(token));
     }
 
     private void RemoveAgent(string accountId)

@@ -1,7 +1,37 @@
 ﻿@attribute [Route(Routes.Contracts)]
+@using Honma.Stores.Contract
+@inherits FluxorComponent
 
-<h3>Contracts</h3>
+<MudContainer MaxWidth="MaxWidth.Medium">
+    @if (State.Value.Contracts is not null)
+    {
+        var contracts = State.Value.Contracts ?? [];
+
+        <MudStack Class="mt-4">
+            @foreach (var contract in contracts)
+            {
+                <ContractDisplay Contract="@contract"/>
+            }
+        </MudStack>
+    }
+
+    <MudPagination @bind-Selected="_page"
+                   Class="mt-4">
+    </MudPagination>
+</MudContainer>
 
 @code {
+
+    [Inject] private IState<ContractState> State { get; set; } = null!;
+
+    [Inject] private IDispatcher Dispatcher { get; set; } = null!;
+
+    private int _page = 1;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Dispatcher.Dispatch(new ContractsLoad(10, _page));
+    }
 
 }

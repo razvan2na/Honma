@@ -1,5 +1,4 @@
-﻿@using Honma.States
-@using Honma.Actions
+﻿@using Honma.Stores.Faction
 @inherits FluxorComponent
 
 <MudPaper Class="pa-4 rounded-lg width-full"
@@ -65,7 +64,7 @@
 
 @code {
 
-    [Inject] private IState<FactionsState> State { get; set; } = null!;
+    [Inject] private IState<FactionState> State { get; set; } = null!;
 
     [Inject] private IDispatcher Dispatcher { get; set; } = null!;
 
@@ -83,7 +82,7 @@
         if (CanRegister)
         {
             Dispatcher.Dispatch(
-                new Actions.AgentRegister(
+                new Actions.UserAgentRegister(
                     _agentSymbol!,
                     _selectedFaction?.Symbol ?? throw new InvalidOperationException()
                 )

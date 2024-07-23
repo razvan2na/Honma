@@ -1,6 +1,4 @@
-﻿@using Honma.Services
-@using Honma.States
-@using Honma.Actions
+﻿@using Honma.Stores.UserAgent
 @inherits FluxorComponent
 
 <MudAppBar Class="honma-appbar ml-2 rounded-b-lg"
@@ -66,7 +64,7 @@
     [CascadingParameter(Name = CascadingValues.RouteData)]
     private RouteData? RouteData { get; set; }
 
-    [Inject] private IState<AgentState> State { get; set; } = null!;
+    [Inject] private IState<UserAgentState> State { get; set; } = null!;
 
     [Inject] private IDispatcher Dispatcher { get; set; } = null!;
 
@@ -95,7 +93,7 @@
 
     private void LogOut()
     {
-        Dispatcher.Dispatch(new AgentLogout());
+        Dispatcher.Dispatch(new UserAgentLogout());
     }
 
 }

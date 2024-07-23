@@ -1,5 +1,4 @@
-﻿@using Honma.Actions
-@inherits LayoutComponentBase
+﻿@inherits LayoutComponentBase
 
 <MudThemeProvider IsDarkMode
                   Theme="HonmaTheme.Get"/>
@@ -7,12 +6,16 @@
 <MudLayout>
     <AppBar/>
 
-    <MudDrawer Class="honma-main-drawer ml-2 mt-2 rounded-lg"
-               ClipMode="DrawerClipMode.Always"
-               Elevation="0"
-               Variant="DrawerVariant.Mini">
-        <NavigationMenu/>
-    </MudDrawer>
+    <AuthorizeView>
+        <Authorized>
+            <MudDrawer Class="honma-main-drawer ml-2 mt-2 rounded-lg"
+                       ClipMode="DrawerClipMode.Always"
+                       Elevation="0"
+                       Variant="DrawerVariant.Mini">
+                <NavigationMenu/>
+            </MudDrawer>
+        </Authorized>
+    </AuthorizeView>
 
     <MudMainContent>
         @Body
@@ -25,6 +28,6 @@
 
     protected override void OnInitialized()
     {
-        Dispatcher.Dispatch(new AgentInitialize());
+        Dispatcher.Dispatch(new UserAgentInitialize());
     }
 }

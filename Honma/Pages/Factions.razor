@@ -1,5 +1,5 @@
 ﻿@attribute [Route(Routes.Factions)]
-@using Honma.States
+@using Honma.Stores.Faction
 @using Honma.Actions
 @inherits FluxorComponent
 
@@ -160,7 +160,7 @@
 
 @code
 {
-    [Inject] private IState<FactionsState> State { get; set; } = null!;
+    [Inject] private IState<FactionState> State { get; set; } = null!;
 
     [Inject] private IDispatcher Dispatcher { get; set; } = null!;
 

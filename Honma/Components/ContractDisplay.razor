@@ -1,0 +1,75 @@
+﻿<MudPaper Class="px-8 py-4 rounded-lg"
+          Elevation="0">
+    <MudStack>
+        <MudStack AlignItems="AlignItems.Center"
+                  Row>
+            <MudText Color="Color.Primary"
+                     Inline>
+                [@Contract.FactionSymbol]
+            </MudText>
+            <MudText Inline>@Contract.Type CONTRACT</MudText>
+            <MudSpacer/>
+            @if (Contract.Accepted)
+            {
+                <MudChip Color="Color.Warning"
+                         Size="Size.Small">
+                    In Progress
+                </MudChip>
+            }
+            else if (Contract.Fulfilled)
+            {
+                <MudChip Color="Color.Success"
+                         Size="Size.Small">
+                    Completed
+                </MudChip>
+            }
+            else
+            {
+                <MudChip Color="Color.Info"
+                         Size="Size.Small">
+                    Available
+                </MudChip>
+            }
+        </MudStack>
+
+        <MudDivider Class="my-2"/>
+
+        @foreach (var deliveryItem in Contract.Terms.Deliver)
+        {
+            <MudGrid>
+                <MudItem>
+                    <MudText>@deliveryItem.TradeSymbol</MudText>
+                </MudItem>
+                <MudItem>
+                    <MudText>x@(deliveryItem.UnitsRequired)</MudText>
+                </MudItem>
+                <MudItem>
+                    <MudText>to @deliveryItem.DestinationSymbol</MudText>
+                </MudItem>
+            </MudGrid>
+        }
+
+        <MudDivider Class="my-2"/>
+
+        <MudStack AlignItems="AlignItems.Center"
+                  Row>
+            <MudStack>
+                <MudText Typo="Typo.body2">Deadline: @Contract.Terms.Deadline.ToString(Formats.Date)</MudText>
+                <MudText Typo="Typo.body2">Expires On: @Contract.DeadlineToAccept.ToString(Formats.Date)</MudText>
+            </MudStack>
+            <MudSpacer/>
+            <MudButton Color="Color.Primary"
+                       DisableElevation
+                       Size="Size.Large"
+                       Variant="Variant.Filled">
+                Accept
+            </MudButton>
+        </MudStack>
+    </MudStack>
+</MudPaper>
+
+@code {
+
+    [Parameter] public required Contract Contract { get; set; }
+
+}
