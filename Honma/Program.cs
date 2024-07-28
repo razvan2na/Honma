@@ -19,7 +19,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddFluxor(options =>
 {
     options.ScanAssemblies(typeof(Program).Assembly);
-    options.UseReduxDevTools();
 });
 
 // Register API interface with Refit, including handler for populating authentication header for every HTTP request.

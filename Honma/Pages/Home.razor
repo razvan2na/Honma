@@ -1,6 +1,5 @@
 ﻿@attribute [Route(Routes.Home)]
 @using Honma.Stores.ServerStatus
-@using Honma.Actions
 @inherits FluxorComponent
 
 <MudContainer MaxWidth="MaxWidth.Large">
@@ -125,10 +124,10 @@
                     </MudText>
                     <MudDivider Class="mt-2"
                                 DividerType="DividerType.Middle"/>
-                    <MudList Dense>
+                    <MudList T="(Announcement, int)" Dense>
                         @foreach (var (announcement, index) in status.Announcements.Select((value, index) => (value, index)))
                         {
-                            <MudListItem Class="@(index != 0 ? "mt-2" : "")">
+                            <MudListItem T="(Announcement, int)" Class="@(index != 0 ? "mt-2" : "")">
                                 <MudText>@announcement.Title</MudText>
                                 <MudText Class="mt-2 word-break"
                                          Typo="Typo.body2">
@@ -150,10 +149,10 @@
                     </MudText>
                     <MudDivider Class="mt-2"
                                 DividerType="DividerType.Middle"/>
-                    <MudList Dense>
+                    <MudList T="LeaderboardCredits" Dense>
                         @foreach (var agent in status.Leaderboards.MostCredits)
                         {
-                            <MudListItem>
+                            <MudListItem T="LeaderboardCredits">
                                 <MudStack AlignItems="AlignItems.Center"
                                           Justify="Justify.SpaceBetween"
                                           Row>
@@ -176,10 +175,10 @@
                     </MudText>
                     <MudDivider Class="mt-2"
                                 DividerType="DividerType.Middle"/>
-                    <MudList>
+                    <MudList T="LeaderboardCharts">
                         @foreach (var agent in status.Leaderboards.MostSubmittedCharts)
                         {
-                            <MudListItem>
+                            <MudListItem T="LeaderboardCharts">
                                 <MudStack AlignItems="AlignItems.Center"
                                           Justify="Justify.SpaceBetween"
                                           Row>

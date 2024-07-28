@@ -11,21 +11,21 @@
             <MudSpacer/>
             @if (Contract.Accepted)
             {
-                <MudChip Color="Color.Warning"
+                <MudChip T="string" Color="Color.Warning"
                          Size="Size.Small">
                     In Progress
                 </MudChip>
             }
             else if (Contract.Fulfilled)
             {
-                <MudChip Color="Color.Success"
+                <MudChip T="string" Color="Color.Success"
                          Size="Size.Small">
                     Completed
                 </MudChip>
             }
             else
             {
-                <MudChip Color="Color.Info"
+                <MudChip T="string" Color="Color.Info"
                          Size="Size.Small">
                     Available
                 </MudChip>

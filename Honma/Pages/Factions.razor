@@ -60,10 +60,8 @@
                 <MudItem xs="4">
                     <MudPaper Class="pa-4 rounded-lg"
                               Elevation="0">
-                        <MudList @bind-SelectedItem="_selectedListItem"
-                                 @bind-SelectedValue="_selectedFaction"
-                                 Clickable
-                                 DisablePadding>
+                        <MudList T="Faction"
+                                 @bind-SelectedValue="_selectedFaction">
                             <MudText Class="ml-4"
                                      Color="Color.Tertiary">
                                 <b>Recruiting</b>
@@ -73,7 +71,8 @@
                             </MudDivider>
                             @foreach (var faction in factions.Where(faction => faction.IsRecruiting))
                             {
-                                <MudListItem Class="rounded-lg"
+                                <MudListItem T="Faction"
+                                             Class="rounded-lg"
                                              Value="faction">
                                     @faction.Name
                                 </MudListItem>
@@ -87,7 +86,7 @@
                             </MudDivider>
                             @foreach (var faction in factions.Where(faction => !faction.IsRecruiting))
                             {
-                                <MudListItem Class="rounded-lg"
+                                <MudListItem T="Faction" Class="rounded-lg"
                                              Value="faction">
                                     @faction.Name
                                 </MudListItem>
@@ -96,62 +95,59 @@
                     </MudPaper>
                 </MudItem>
 
-                @if (_selectedFaction is Faction selectedFaction)
-                {
-                    <MudItem xs="8">
-                        <MudPaper Class="px-8 py-4 rounded-lg"
-                                  Elevation="0">
-                            <MudStack AlignItems="AlignItems.Center"
-                                      Justify="Justify.SpaceBetween"
-                                      Row>
-                                <MudText Typo="Typo.h6">
-                                    @selectedFaction.Name
-                                </MudText>
-                                <MudText Color="Color.Primary"
-                                         Typo="Typo.h6">
-                                    [@selectedFaction.Symbol]
-                                </MudText>
-                            </MudStack>
+                <MudItem xs="8">
+                    <MudPaper Class="px-8 py-4 rounded-lg"
+                              Elevation="0">
+                        <MudStack AlignItems="AlignItems.Center"
+                                  Justify="Justify.SpaceBetween"
+                                  Row>
+                            <MudText Typo="Typo.h6">
+                                @_selectedFaction.Name
+                            </MudText>
+                            <MudText Color="Color.Primary"
+                                     Typo="Typo.h6">
+                                [@_selectedFaction.Symbol]
+                            </MudText>
+                        </MudStack>
 
-                            <MudDivider Class="my-4"
-                                        DividerType="DividerType.Middle">
-                            </MudDivider>
+                        <MudDivider Class="my-4"
+                                    DividerType="DividerType.Middle">
+                        </MudDivider>
 
-                            <MudStack AlignItems="AlignItems.Center"
-                                      Justify="Justify.Center"
-                                      Row
-                                      Spacing="0">
-                                @foreach (var trait in selectedFaction.Traits)
-                                {
-                                    <MudTooltip Arrow>
-                                        <ChildContent>
-                                            <MudChip Color="Color.Secondary"
-                                                     Variant="Variant.Text">
-                                                @trait.Name
-                                            </MudChip>
-                                        </ChildContent>
-                                        <TooltipContent>
-                                            <MudText Class="ma-2"
-                                                     Style="max-width: 500px"
-                                                     Typo="Typo.body2">
-                                                @trait.Description
-                                            </MudText>
-                                        </TooltipContent>
-                                    </MudTooltip>
-                                }
-                            </MudStack>
-
-                            @if (!string.IsNullOrWhiteSpace(selectedFaction.Headquarters))
+                        <MudStack AlignItems="AlignItems.Center"
+                                  Justify="Justify.Center"
+                                  Row
+                                  Spacing="0">
+                            @foreach (var trait in _selectedFaction.Traits)
                             {
-                                <MudText Class="mt-4">
-                                    <b>Headquarters:</b> <MudLink>@selectedFaction.Headquarters</MudLink>
-                                </MudText>
+                                <MudTooltip Arrow>
+                                    <ChildContent>
+                                        <MudChip T="string" Color="Color.Secondary"
+                                                 Variant="Variant.Text">
+                                            @trait.Name
+                                        </MudChip>
+                                    </ChildContent>
+                                    <TooltipContent>
+                                        <MudText Class="ma-2"
+                                                 Style="max-width: 500px"
+                                                 Typo="Typo.body2">
+                                            @trait.Description
+                                        </MudText>
+                                    </TooltipContent>
+                                </MudTooltip>
                             }
+                        </MudStack>
 
-                            <MudText Class="mt-4 word-break">@selectedFaction.Description</MudText>
-                        </MudPaper>
-                    </MudItem>
-                }
+                        @if (!string.IsNullOrWhiteSpace(_selectedFaction.Headquarters))
+                        {
+                            <MudText Class="mt-4">
+                                <b>Headquarters:</b> <MudLink>@_selectedFaction.Headquarters</MudLink>
+                            </MudText>
+                        }
+
+                        <MudText Class="mt-4 word-break">@_selectedFaction.Description</MudText>
+                    </MudPaper>
+                </MudItem>
             </MudGrid>
         </MudContainer>
     </MudHidden>
@@ -164,8 +160,7 @@
 
     [Inject] private IDispatcher Dispatcher { get; set; } = null!;
 
-    private MudListItem _selectedListItem;
-    private object _selectedFaction;
+    private Faction _selectedFaction;
 
     protected override void OnInitialized()
     {
