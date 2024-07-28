@@ -7,4 +7,5 @@ public static class BreadcrumbTexts
     public const string Factions = "Factions";
     public const string AgentHistory = "Agent History";
     public const string Contracts = "Contracts";
+    public const string Ships = "Ships";
 }

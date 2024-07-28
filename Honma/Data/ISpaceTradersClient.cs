@@ -25,4 +25,7 @@ public interface ISpaceTradersClient
 
     [Post("/my/contracts/{contractId}/accept")]
     Task<Response<ContractAcceptResponse>> AcceptContract(string contractId);
+
+    [Get("/my/ships")]
+    Task<Response<IReadOnlyCollection<Ship>>> GetShips([Query] int limit, [Query] int page);
 }

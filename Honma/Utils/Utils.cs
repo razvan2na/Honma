@@ -31,6 +31,10 @@ public static class Utils
         {
             breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Contracts, Routes.Contracts, true));
         }
+        else if (routeData.PageType == typeof(Ships))
+        {
+            breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Ships, Routes.Ships, true));
+        }
 
         return breadcrumbs;
     }
