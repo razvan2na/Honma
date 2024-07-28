@@ -24,5 +24,5 @@ public interface ISpaceTradersClient
     Task<Response<IReadOnlyList<Contract>>> GetContracts([Query] int limit, [Query] int page);
 
     [Post("/my/contracts/{contractId}/accept")]
-    Task<Response<ContractAcceptResponse>> AcceptContract(int contractId);
+    Task<Response<ContractAcceptResponse>> AcceptContract(string contractId);
 }

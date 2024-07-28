@@ -34,4 +34,8 @@ public static class Utils
 
         return breadcrumbs;
     }
+
+    public static IEnumerable<T> Replace<T, TKey>(this IEnumerable<T> source, T item, Func<T, TKey> keySelector)
+        where TKey : IEquatable<TKey> =>
+        source.Select(i => keySelector.Invoke(i).Equals(keySelector.Invoke(item)) ? item : i);
 }

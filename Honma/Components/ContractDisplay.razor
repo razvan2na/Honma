@@ -58,12 +58,16 @@
                 <MudText Typo="Typo.body2">Expires On: @Contract.DeadlineToAccept.ToString(Formats.Date)</MudText>
             </MudStack>
             <MudSpacer/>
-            <MudButton Color="Color.Primary"
-                       DisableElevation
-                       Size="Size.Large"
-                       Variant="Variant.Filled">
-                Accept
-            </MudButton>
+            @if (!Contract.Accepted)
+            {
+                <MudButton Color="Color.Primary"
+                           DisableElevation
+                           Size="Size.Large"
+                           Variant="Variant.Filled"
+                           OnClick="Accept">
+                    Accept
+                </MudButton>
+            }
         </MudStack>
     </MudStack>
 </MudPaper>
@@ -71,5 +75,12 @@
 @code {
 
     [Parameter] public required Contract Contract { get; set; }
+
+    [Inject] public required IDispatcher Dispatcher { get; set; }
+
+    private void Accept()
+    {
+        Dispatcher.Dispatch(new ContractAccept(Contract.Id));
+    }
 
 }

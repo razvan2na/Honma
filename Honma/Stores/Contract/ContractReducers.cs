@@ -1,7 +1,9 @@
 ﻿using Fluxor;
 using Honma.Actions;
+using Honma.Stores.Contract;
+using Honma.Utils;
 
-namespace Honma.Stores.Contract;
+namespace Honma.Stores;
 
 public static class ContractReducers
 {
@@ -18,7 +20,7 @@ public static class ContractReducers
     public static ContractState Reduce(ContractState state, ContractUpdated action) => new()
     {
         Contracts = state.Contracts?
-            .Select(contract => contract.Id == action.Contract.Id ? action.Contract : contract)
+            .Replace(action.Contract, contract => contract.Id)
             .ToList()
     };
 }

@@ -1,7 +1,7 @@
 ﻿using Fluxor;
 using Honma.Actions;
 
-namespace Honma.Stores.AgentHistory;
+namespace Honma.Stores;
 
 public static class AgentHistoryReducers
 {

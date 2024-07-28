@@ -2,7 +2,7 @@
 
 namespace Honma.Actions;
 
-public readonly record struct ContractAccept(int ContractId);
+public readonly record struct ContractAccept(string ContractId);
 
 public readonly record struct ContractsLoad(int Limit, int Page);
 

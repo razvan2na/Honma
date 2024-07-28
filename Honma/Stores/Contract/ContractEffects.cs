@@ -3,7 +3,7 @@ using Honma.Actions;
 using Honma.Data;
 using MudBlazor;
 
-namespace Honma.Stores.Contract;
+namespace Honma.Stores;
 
 public class ContractEffects(ISpaceTradersClient client, ISnackbar snackbar)
 {

@@ -1,6 +1,6 @@
 ﻿using Fluxor;
 
-namespace Honma.Stores.AgentHistory;
+namespace Honma.Stores;
 
 [FeatureState]
 public record AgentHistoryState

@@ -4,7 +4,7 @@ using Honma.Actions;
 using Honma.Constants;
 using MudBlazor;
 
-namespace Honma.Stores.AgentHistory;
+namespace Honma.Stores;
 
 public class AgentHistoryEffects(ILocalStorageService localStorage, ISnackbar snackbar)
 {
