@@ -2,6 +2,7 @@
 
 public static class PhosphorIcons
 {
+    public const string CaretRight = "ph-bold ph-caret-right";
     public const string ChalkboardTeacher = "ph-bold ph-chalkboard-teacher";
     public const string Circuitry = "ph-bold ph-circuitry";
     public const string ClockCountdown = "ph-bold ph-clock-countdown";
@@ -38,4 +39,6 @@ public static class PhosphorIcons
     public const string Reactor = "ph-bold ph-atom";
     public const string Speed = "ph-bold ph-speedometer";
     public const string Strength = "ph-bold ph-crosshair-simple";
+    public const string System = "ph-bold ph-map-pin-simple-area";
+    public const string Waypoint = "ph-bold ph-map-pin-simple";
 }

@@ -1,0 +1,37 @@
+﻿@attribute [Route($"{Routes.Systems}/{{systemSymbol}}{Routes.Waypoints}/{{waypointSymbol}}")]
+
+<MudContainer MaxWidth="MaxWidth.Small">
+    <MudPaper Elevation="2"
+              Class="rounded-lg my-4 pa-4">
+        <MudText Typo="Typo.h5">@WaypointSymbol</MudText>
+        @if (State.Value.Waypoint is not null)
+        {
+            var waypoint = State.Value.Waypoint.Value;
+
+            <MudText>@waypoint.Type</MudText>
+
+            @foreach (var trait in waypoint.Traits)
+            {
+                <MudChip T="string">@trait.Name</MudChip>
+            }
+        }
+    </MudPaper>
+</MudContainer>
+
+@code {
+
+    [Parameter] public required string SystemSymbol { get; set; }
+
+    [Parameter] public required string WaypointSymbol { get; set; }
+
+    [Inject] public required IState<WaypointState> State { get; set; }
+
+    [Inject] public required IDispatcher Dispatcher { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Dispatcher.Dispatch(new WaypointLoad(SystemSymbol, WaypointSymbol));
+    }
+
+}

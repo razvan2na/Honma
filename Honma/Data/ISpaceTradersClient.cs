@@ -35,6 +35,23 @@ public interface ISpaceTradersClient
     [Get("/systems/{systemSymbol}")]
     Task<Response<SystemDto>> GetSystem(string systemSymbol);
 
+    [Get("/systems/{systemSymbol}/waypoints")]
+    Task<Response<IReadOnlyCollection<Waypoint>>> GetSystemWaypoints(
+        string systemSymbol,
+        [Query] int limit,
+        [Query] int page,
+        [Query] string[]? traits = null,
+        [Query] string? type = null);
+
     [Get("/systems/{systemSymbol}/waypoints/{waypointSymbol}")]
     Task<Response<Waypoint>> GetWaypoint(string systemSymbol, string waypointSymbol);
+
+    [Get("/systems/{systemSymbol}/waypoints/{waypointSymbol}/market")]
+    Task<Response<Market>> GetMarket(string systemSymbol, string waypointSymbol);
+
+    [Get("/systems/{systemSymbol}/waypoints/{waypointSymbol}/shipyard")]
+    Task<Response<Shipyard>> GetShipyard(string systemSymbol, string waypointSymbol);
+
+    [Get("/systems/{systemSymbol}/waypoints/{waypointSymbol}/jump-gate")]
+    Task<Response<JumpGate>> GetJumpGate(string systemSymbol, string waypointSymbol);
 }

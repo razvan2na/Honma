@@ -1,0 +1,43 @@
+﻿@attribute [Route(Routes.Systems)]
+
+<MudContainer MaxWidth="MaxWidth.Small">
+    <MudText Class="my-6"
+             Typo="Typo.h5">
+        Systems
+    </MudText>
+
+    <MudPaper Class="rounded-lg"
+              Elevation="2">
+        <MudList T="string">
+            @foreach (var system in State.Value.Systems)
+            {
+                <MudListItem Href="@($"{Routes.Systems}/{system.Symbol}")">
+                    <ChildContent>
+                        <MudStack AlignItems="AlignItems.Center"
+                                  Row>
+                            <MudText>@system.Symbol</MudText>
+                            <MudChip Size="Size.Small"
+                                     T="string">
+                                @system.Type
+                            </MudChip>
+                        </MudStack>
+                    </ChildContent>
+                </MudListItem>
+            }
+        </MudList>
+    </MudPaper>
+</MudContainer>
+
+@code {
+
+    [Inject] public required IState<SystemState> State { get; set; }
+
+    [Inject] public required IDispatcher Dispatcher { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Dispatcher.Dispatch(new SystemsLoad(10, 1));
+    }
+
+}

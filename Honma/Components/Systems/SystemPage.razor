@@ -1,0 +1,83 @@
+﻿@attribute [Route($"{Routes.Systems}/{{systemSymbol}}")]
+
+<MudContainer MaxWidth="MaxWidth.Small">
+    <MudPaper Class="mt-4 pa-4 rounded-lg"
+              Elevation="2">
+        <MudStack Row
+                  AlignItems="AlignItems.Center" Spacing="2">
+            <MudIcon Icon="@PhosphorIcons.System"/>
+            <MudText Typo="Typo.h5">@SystemSymbol</MudText>
+        </MudStack>
+
+        @if (State.Value.System is not null)
+        {
+            var system = State.Value.System.Value;
+        }
+    </MudPaper>
+
+    @if (State.Value.Waypoints.Count > 0)
+    {
+        var waypoints = State.Value.Waypoints;
+
+        <MudPaper Class="mt-4 pa-4 rounded-lg"
+                  Elevation="2">
+            <MudStack AlignItems="AlignItems.Center"
+                      Justify="Justify.SpaceBetween"
+                      Row>
+                <MudStack AlignItems="AlignItems.Center"
+                          Row
+                          Spacing="2">
+                    <MudIcon Icon="@PhosphorIcons.Waypoint"/>
+                    <MudText Typo="Typo.h6">Waypoints</MudText>
+                </MudStack>
+                <MudPagination Count="@(State.Value.TotalWaypoints / 10 + 1)"
+                               Selected="_page"
+                               SelectedChanged="WaypointPageChange"/>
+            </MudStack>
+            <MudList Class="mt-4"
+                     Gutters="false"
+                     T="string">
+                @foreach (var waypoint in waypoints)
+                {
+                    <MudListItem Class="rounded-lg"
+                                 T="string">
+                        <ChildContent>
+                            <MudStack AlignItems="AlignItems.Center"
+                                      Justify="Justify.SpaceBetween"
+                                      Row>
+                                <MudText>@waypoint.Symbol</MudText>
+                                <MudIcon Icon="@PhosphorIcons.CaretRight"
+                                         Size="Size.Small"/>
+                            </MudStack>
+                        </ChildContent>
+                    </MudListItem>
+                }
+            </MudList>
+        </MudPaper>
+    }
+</MudContainer>
+
+@code {
+
+    [Parameter] public required string SystemSymbol { get; set; }
+
+    [Inject] public required IState<SystemState> State { get; set; }
+
+    [Inject] public required IDispatcher Dispatcher { get; set; }
+
+    private int _page = 1;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Dispatcher.Dispatch(new SystemLoad(SystemSymbol));
+        Dispatcher.Dispatch(new SystemWaypointsLoad(SystemSymbol, _page, null, null));
+    }
+
+    private void WaypointPageChange(int page)
+    {
+        _page = page;
+        Dispatcher.Dispatch(new SystemWaypointsLoad(SystemSymbol, _page, null, null));
+    }
+
+}
