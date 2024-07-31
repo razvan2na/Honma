@@ -1,9 +1,10 @@
 ﻿using Fluxor;
+using Honma.Models;
 
-namespace Honma.Stores.Faction;
+namespace Honma.Stores;
 
 [FeatureState]
 public record FactionState
 {
-    public IReadOnlyList<Models.Faction>? Factions { get; init; }
+    public IReadOnlyCollection<Faction> Factions { get; init; } = [];
 }

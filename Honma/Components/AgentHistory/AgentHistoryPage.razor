@@ -1,0 +1,41 @@
+﻿@attribute [Route(Routes.AgentHistory)]
+@inherits FluxorComponent
+
+<MudContainer MaxWidth="MaxWidth.Small">
+    @if (!State.Value.Agents.Any())
+    {
+        <MudText Class="mt-4"
+                 Typo="Typo.h5">
+            No agents found.
+        </MudText>
+    }
+    else
+    {
+        <MudText Class="ml-8 mt-8"
+                 Color="Color.Tertiary"
+                 Typo="Typo.h6">
+            Agent History
+        </MudText>
+
+        <MudStack Class="mt-4">
+            @foreach (var agent in State.Value.Agents)
+            {
+                <AgentHistoryAgent Agent="@agent"/>
+            }
+        </MudStack>
+    }
+</MudContainer>
+
+@code {
+
+    [Inject] private IState<AgentHistoryState> State { get; set; } = null!;
+
+    [Inject] private IDispatcher Dispatcher { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Dispatcher.Dispatch(new AgentHistoryLoad());
+    }
+
+}

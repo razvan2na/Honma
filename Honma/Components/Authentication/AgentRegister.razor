@@ -1,5 +1,4 @@
-﻿@using Honma.Stores.Faction
-@inherits FluxorComponent
+﻿@inherits FluxorComponent
 
 <MudPaper Class="pa-4 rounded-lg width-full"
           Elevation="0">
@@ -82,7 +81,7 @@
         if (CanRegister)
         {
             Dispatcher.Dispatch(
-                new Actions.UserAgentRegister(
+                new UserAgentRegister(
                     _agentSymbol!,
                     _selectedFaction?.Symbol ?? throw new InvalidOperationException()
                 )

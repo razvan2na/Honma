@@ -1,16 +1,12 @@
 ﻿using Fluxor;
-using Honma.Actions;
 
-namespace Honma.Stores.Faction;
+namespace Honma.Stores;
 
 public static class FactionReducers
 {
     [ReducerMethod]
-    public static FactionState Reduce(FactionState state, FactionsUpdated action)
+    public static FactionState Reduce(FactionState state, FactionsUpdated action) => new()
     {
-        return new FactionState
-        {
-            Factions = action.Factions
-        };
-    }
+        Factions = action.Factions
+    };
 }

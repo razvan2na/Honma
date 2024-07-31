@@ -1,0 +1,31 @@
+﻿<div class="pa-2">
+    <MudStack AlignItems="AlignItems.Center"
+              Justify="Justify.SpaceBetween"
+              Row>
+        <MudStack AlignItems="AlignItems.Center"
+                  Row
+                  Spacing="1">
+            <MudIcon Icon="@Icon"
+                     Size="Size.Small"/>
+            <MudText Typo="Typo.body2">@Title</MudText>
+        </MudStack>
+        <MudText>@Value/@Max</MudText>
+    </MudStack>
+
+    <MudProgressLinear Class="mt-1"
+                       Color="Color.Primary"
+                       Max="@Max"
+                       Value="@Value"/>
+</div>
+
+@code {
+
+    [Parameter] public required string Title { get; set; }
+
+    [Parameter] public required string Icon { get; set; }
+
+    [Parameter] public required int Max { get; set; }
+
+    [Parameter] public required int Value { get; set; }
+
+}

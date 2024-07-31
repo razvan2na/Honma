@@ -1,9 +1,10 @@
 ﻿using Fluxor;
+using Honma.Models;
 
-namespace Honma.Stores.Contract;
+namespace Honma.Stores;
 
 [FeatureState]
-public record ContractState()
+public record ContractState
 {
-    public IReadOnlyList<Models.Contract>? Contracts { get; init; }
+    public IReadOnlyCollection<Contract> Contracts { get; init; } = [];
 }

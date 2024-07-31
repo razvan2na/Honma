@@ -43,5 +43,7 @@ builder.Services.AddScoped<AuthenticationStateProvider, ClientAuthenticationStat
 
 // Register app services.
 builder.Services.AddScoped<ClipboardService>();
+builder.Services.AddScoped<UserTokenService>();
+builder.Services.AddScoped<AgentHistoryService>();
 
 await builder.Build().RunAsync();

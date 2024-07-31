@@ -4,7 +4,7 @@ namespace Honma.Themes;
 
 public static class HonmaTheme
 {
-    public static MudTheme Get => new MudTheme
+    public static MudTheme Get => new()
     {
         Typography = new Typography
         {

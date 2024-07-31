@@ -1,0 +1,170 @@
+﻿<MudStack class="height-full">
+    <MudPaper Class="pa-4 rounded-lg"
+              Elevation="2">
+        <MudStack AlignItems="AlignItems.Center"
+                  Justify="Justify.SpaceBetween"
+                  Row>
+            <MudStack AlignItems="AlignItems.Center"
+                      Row
+                      Spacing="1">
+                <MudIcon Icon="@PhosphorIcons.RocketLaunch"
+                         Size="Size.Large"/>
+                <MudText Typo="Typo.h5">@Ship.Symbol</MudText>
+            </MudStack>
+
+            <MudStack Row
+                      Spacing="1">
+                <MudChip Class="rounded-lg"
+                         Color="Color.Secondary"
+                         T="string">
+                    @Ship.Registration.Role
+                </MudChip>
+                <MudChip Class="rounded-lg"
+                         Color="Color.Primary"
+                         T="string">
+                    @Ship.Registration.FactionSymbol
+                </MudChip>
+            </MudStack>
+        </MudStack>
+
+        <MudStack Class="mt-4"
+                  Row>
+            <MudPaper Class="pa-2 rounded-lg"
+                      Elevation="2">
+                <MudStack Spacing="1">
+                    <MudText Typo="Typo.subtitle2">System</MudText>
+                    <MudText>@Ship.Nav.SystemSymbol</MudText>
+                </MudStack>
+            </MudPaper>
+
+            <MudPaper Class="pa-2 rounded-lg"
+                      Elevation="2">
+                <MudStack Spacing="1">
+                    <MudText Typo="Typo.subtitle2">Waypoint</MudText>
+                    <MudText>@Ship.Nav.WaypointSymbol</MudText>
+                </MudStack>
+            </MudPaper>
+
+            <MudPaper Class="pa-2 rounded-lg"
+                      Elevation="2">
+                <MudStack Spacing="1">
+                    <MudText Typo="Typo.subtitle2">Status</MudText>
+                    <MudText>@Ship.Nav.Status</MudText>
+                </MudStack>
+            </MudPaper>
+
+            <MudPaper Class="pa-2 rounded-lg"
+                      Elevation="2">
+                <MudStack Spacing="1">
+                    <MudText Typo="Typo.subtitle2">Flight Mode</MudText>
+                    <MudText>@Ship.Nav.FlightMode</MudText>
+                </MudStack>
+            </MudPaper>
+        </MudStack>
+
+        <MudGrid Class="my-2"
+                 Spacing="4">
+            <MudItem xs="3">
+                <StatisticRangeDisplay Icon="@PhosphorIcons.UsersThree"
+                                  Max="@Ship.Crew.Capacity"
+                                  Title="Crew"
+                                  Value="@Ship.Crew.Current"/>
+            </MudItem>
+            <MudItem xs="3">
+                <StatisticRangeDisplay Icon="@PhosphorIcons.MoraleHigh"
+                                  Max="100"
+                                  Title="Morale"
+                                  Value="@Ship.Crew.Morale"/>
+            </MudItem>
+            <MudItem xs="3">
+                <StatisticRangeDisplay Icon="@PhosphorIcons.Fuel"
+                                  Max="@Ship.Fuel.Capacity"
+                                  Title="Fuel"
+                                  Value="@Ship.Fuel.Current"/>
+            </MudItem>
+            <MudItem xs="3">
+                <StatisticRangeDisplay Icon="@PhosphorIcons.Package"
+                                       Max="@Ship.Cargo.Capacity"
+                                       Title="Cargo"
+                                       Value="@Ship.Cargo.Units"/>
+            </MudItem>
+            <MudItem xs="3">
+                <StatisticRangeDisplay Icon="@PhosphorIcons.DiamondsFour"
+                                       Max="@Ship.Frame.ModuleSlots"
+                                       Title="Modules"
+                                       Value="@Ship.Modules.Count"/>
+            </MudItem>
+            <MudItem xs="3">
+                <StatisticRangeDisplay Icon="@PhosphorIcons.Memory"
+                                       Max="@Ship.Frame.MountingPoints"
+                                       Title="Mounts"
+                                       Value="@Ship.Mounts.Count"/>
+            </MudItem>
+            <MudItem xs="3">
+                <StatisticRangeDisplay Icon="@PhosphorIcons.Power"
+                                       Max="@Ship.Reactor.PowerOutput"
+                                       Title="Power"
+                                       Value="@PowerConsumption()"/>
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+    <MudPaper Class="rounded-lg"
+              Elevation="2">
+        <MudTabs Centered
+                 Class="rounded-lg">
+            <MudTabPanel Icon="@PhosphorIcons.Circuitry"
+                         Text="Loadout">
+                <div class="pa-4">
+                    <ShipLoadout Ship="Ship"/>
+                </div>
+            </MudTabPanel>
+            <MudTabPanel Icon="@PhosphorIcons.DiamondsFour"
+                         Text="Modules"
+                         Disabled="@(Ship.Modules.Count == 0)">
+                <div class="pa-4">
+                    <ShipModules Modules="Ship.Modules"/>
+                </div>
+            </MudTabPanel>
+            <MudTabPanel Icon="@PhosphorIcons.Memory"
+                         Text="Mounts"
+                         Disabled="@(Ship.Mounts.Count == 0)">
+                <div class="pa-4">
+                    <ShipMounts Mounts="Ship.Mounts"/>
+                </div>
+            </MudTabPanel>
+            <MudTabPanel Disabled="@(Ship.Cargo.Units == 0)"
+                         Icon="@PhosphorIcons.Package"
+                         Text="Cargo">
+                <MudTable Class="rounded-lg"
+                          Elevation="2"
+                          Items="Ship.Cargo.Inventory">
+                    <HeaderContent>
+                        <MudTh>Name</MudTh>
+                        <MudTh>Description</MudTh>
+                        <MudTh>Units</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd>@context.Name</MudTd>
+                        <MudTd>@context.Description</MudTd>
+                        <MudTd>@context.Units</MudTd>
+                    </RowTemplate>
+                    <NoRecordsContent>
+                        <MudText>Ship has no cargo</MudText>
+                    </NoRecordsContent>
+                </MudTable>
+            </MudTabPanel>
+        </MudTabs>
+    </MudPaper>
+</MudStack>
+
+@code {
+
+    [Parameter] public required Ship Ship { get; set; }
+
+    private int PowerConsumption() =>
+        (Ship.Frame.Requirements.Power ?? 0) +
+        (Ship.Engine.Requirements.Power ?? 0) +
+        Ship.Modules.Aggregate(0, (total, module) => total + (module.Requirements.Power ?? 0)) +
+        Ship.Mounts.Aggregate(0, (total, mount) => total + (mount.Requirements.Power ?? 0));
+}

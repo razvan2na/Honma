@@ -1,6 +1,11 @@
-﻿using Honma.Constants;
+﻿using Honma.Components.AgentHistory;
+using Honma.Components.Authentication;
+using Honma.Components.Contracts;
+using Honma.Components.Factions;
+using Honma.Components.Navigation;
+using Honma.Components.Ships;
+using Honma.Constants;
 using Honma.Icons;
-using Honma.Pages;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
@@ -15,25 +20,29 @@ public static class Utils
             new(BreadcrumbTexts.Home, Routes.Home, false, PhosphorIcons.Cube)
         };
 
-        if (routeData.PageType == typeof(Login))
+        if (routeData.PageType == typeof(LoginPage))
         {
             breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Login, Routes.Login, true));
         }
-        else if (routeData.PageType == typeof(Factions))
+        else if (routeData.PageType == typeof(FactionsPage))
         {
             breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Factions, Routes.Factions, true));
         }
-        else if (routeData.PageType == typeof(AgentHistory))
+        else if (routeData.PageType == typeof(AgentHistoryPage))
         {
             breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.AgentHistory, Routes.AgentHistory, true));
         }
-        else if (routeData.PageType == typeof(Contracts))
+        else if (routeData.PageType == typeof(ContractsPage))
         {
             breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Contracts, Routes.Contracts, true));
         }
-        else if (routeData.PageType == typeof(Ships))
+        else if (routeData.PageType == typeof(ShipsPage))
         {
             breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Ships, Routes.Ships, true));
+        }
+        else if (routeData.PageType == typeof(NavigationPage))
+        {
+            breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Navigation, Routes.Navigation, true));
         }
 
         return breadcrumbs;

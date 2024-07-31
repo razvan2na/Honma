@@ -7,6 +7,7 @@ public static class ShipReducers
 	[ReducerMethod]
 	public static ShipState Reduce(ShipState state, ShipsUpdated action) => new()
 	{
-		Ships = action.Ships
+		Ships = action.Ships,
+		TotalShipCount = action.TotalShipCount
 	};
 }

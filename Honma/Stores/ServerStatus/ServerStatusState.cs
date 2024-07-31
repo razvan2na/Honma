@@ -1,9 +1,10 @@
 ﻿using Fluxor;
+using Honma.Models;
 
-namespace Honma.Stores.ServerStatus;
+namespace Honma.Stores;
 
 [FeatureState]
 public record ServerStatusState
 {
-    public Models.ServerStatus? Status { get; init; }
+    public ServerStatus? Status { get; init; }
 }

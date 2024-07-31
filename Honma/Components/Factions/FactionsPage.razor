@@ -1,0 +1,61 @@
+﻿@attribute [Route(Routes.Factions)]
+@inherits FluxorComponent
+
+<MudContainer Class="pb-8"
+              MaxWidth="MaxWidth.Small">
+    <MudText Class="ml-6 mt-8"
+             Color="Color.Tertiary">
+        <b>Recruiting</b>
+    </MudText>
+    <MudExpansionPanels Class="mt-4 rounded-lg"
+                        Elevation="0">
+        @foreach (var faction in State.Value.Factions.Where(faction => faction.IsRecruiting))
+        {
+            <MudExpansionPanel>
+                <TitleContent>
+                    <FactionDetailsTitle Faction="@faction"
+                                         HideTag
+                                         Typo="Typo.body1"/>
+                </TitleContent>
+                <ChildContent>
+                    <FactionDetailsContent Faction="@faction"/>
+                </ChildContent>
+            </MudExpansionPanel>
+        }
+    </MudExpansionPanels>
+
+    <MudText Class="ml-6 mt-8"
+             Color="Color.Secondary">
+        <b>Not Recruiting</b>
+    </MudText>
+    <MudExpansionPanels Class="mt-4 rounded-lg"
+                        Elevation="0">
+        @foreach (var faction in State.Value.Factions.Where(faction => !faction.IsRecruiting))
+        {
+            <MudExpansionPanel>
+                <TitleContent>
+                    <FactionDetailsTitle Faction="@faction"
+                                         HideTag
+                                         Typo="Typo.body1"/>
+                </TitleContent>
+                <ChildContent>
+                    <FactionDetailsContent Faction="@faction"/>
+                </ChildContent>
+            </MudExpansionPanel>
+        }
+    </MudExpansionPanels>
+</MudContainer>
+
+
+@code
+{
+    [Inject] public required IState<FactionState> State { get; set; }
+
+    [Inject] public required IDispatcher Dispatcher { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Dispatcher.Dispatch(new FactionsLoad());
+    }
+}

@@ -1,0 +1,29 @@
+﻿@if (Requirements.Power is not null ||
+     Requirements.Crew is not null ||
+     Requirements.Slots is not null)
+{
+    <MudStack Spacing="1">
+        <MudText Typo="Typo.body2">Requirements:</MudText>
+
+        @if (Requirements.Power > 0)
+        {
+            <TextWithIcon Text="Power" Icon="@PhosphorIcons.Power" StartText="@(Requirements.Power.ToString())"/>
+        }
+
+        @if (Requirements.Crew > 0)
+        {
+            <TextWithIcon Text="Crew" Icon="@PhosphorIcons.UsersThree" StartText="@(Requirements.Crew.ToString())"/>
+        }
+
+        @if (Requirements.Slots > 0)
+        {
+            <TextWithIcon Text="Slots" Icon="@PhosphorIcons.DiamondsFour" StartText="@(Requirements.Slots.ToString())"/>
+        }
+    </MudStack>
+}
+
+@code {
+
+    [Parameter] public required ShipRequirements Requirements { get; set; }
+
+}

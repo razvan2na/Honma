@@ -1,9 +1,9 @@
 ﻿using Honma.Models;
 
-namespace Honma.Actions;
+namespace Honma.Stores;
 
 public readonly record struct AgentHistoryLoad;
 
-public readonly record struct AgentHistoryUpdated(IReadOnlyList<Agent> Agents);
+public readonly record struct AgentHistoryUpdated(IReadOnlyCollection<Agent> Agents);
 
 public readonly record struct AgentHistoryRemoveAgent(string AccountId);

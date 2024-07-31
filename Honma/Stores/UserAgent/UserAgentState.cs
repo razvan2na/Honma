@@ -1,7 +1,7 @@
 ﻿using Fluxor;
 using Honma.Models;
 
-namespace Honma.Stores.UserAgent;
+namespace Honma.Stores;
 
 [FeatureState]
 public record UserAgentState

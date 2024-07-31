@@ -1,19 +1,20 @@
 ﻿using Blazored.LocalStorage;
 using Fluxor;
-using Honma.Actions;
 using Honma.Authentication;
 using Honma.Constants;
 using Honma.Data;
+using Honma.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using Refit;
 
-namespace Honma.Stores.UserAgent;
+namespace Honma.Stores;
 
 public class UserAgentEffects(
     ISpaceTradersClient client,
-    ILocalStorageService localStorage,
+    UserTokenService userTokenService,
+    AgentHistoryService agentHistoryService,
     AuthenticationStateProvider authenticationStateProvider,
     NavigationManager navigationManager,
     ISnackbar snackbar)
@@ -21,7 +22,7 @@ public class UserAgentEffects(
     [EffectMethod]
     public async Task Handle(UserAgentInitialize action, IDispatcher dispatcher)
     {
-        var token = await localStorage.GetItemAsync<string>(LocalStorageKeys.AuthenticationToken);
+        var token = await userTokenService.Get();
 
         if (string.IsNullOrWhiteSpace(token))
         {
@@ -34,7 +35,7 @@ public class UserAgentEffects(
     [EffectMethod]
     public async Task Handle(UserAgentLogin action, IDispatcher dispatcher)
     {
-        await localStorage.SetItemAsync(LocalStorageKeys.AuthenticationToken, action.Token);
+        await userTokenService.Set(action.Token);
 
         try
         {
@@ -54,7 +55,7 @@ public class UserAgentEffects(
     [EffectMethod]
     public async Task Handle(UserAgentLogout action, IDispatcher dispatcher)
     {
-        await localStorage.RemoveItemAsync(LocalStorageKeys.AuthenticationToken);
+        await userTokenService.Remove();
         (authenticationStateProvider as ClientAuthenticationStateProvider)?.NotifyUserLogout();
         navigationManager.NavigateTo(Routes.Home);
     }
@@ -67,7 +68,7 @@ public class UserAgentEffects(
             var (userData, _) =
                 await client.RegisterAgent(new AgentRegisterRequest(action.Symbol, action.FactionSymbol));
 
-            await localStorage.SetItemAsync(LocalStorageKeys.AuthenticationToken, userData.Token);
+            await userTokenService.Set(userData.Token);
             (authenticationStateProvider as ClientAuthenticationStateProvider)
                 ?.NotifyUserAuthentication(userData.Token);
             dispatcher.Dispatch(new UserAgentRegistered(userData));
@@ -84,9 +85,7 @@ public class UserAgentEffects(
     {
         try
         {
-            var agentHistory =
-                await localStorage.GetItemAsync<IReadOnlyList<Models.Agent>>(LocalStorageKeys.AgentHistory) ??
-                new List<Models.Agent>();
+            var agentHistory = await agentHistoryService.Get() ?? [];
             var serverStatus = await client.GetStatus();
             var newAgent = action.UserData.Agent with
             {
@@ -94,10 +93,10 @@ public class UserAgentEffects(
                 ExpiresOn = serverStatus.ServerResets.Next
             };
 
-            if (agentHistory.Any(agent => agent.AccountId == action.UserData.Agent.AccountId))
+            if (agentHistory.Any(agent => agent.AccountId == newAgent.AccountId))
             {
                 agentHistory = agentHistory
-                    .Select(agent => agent.AccountId == action.UserData.Agent.AccountId ? newAgent : agent)
+                    .Select(agent => agent.AccountId == newAgent.AccountId ? newAgent : agent)
                     .ToList();
             }
             else
@@ -105,7 +104,7 @@ public class UserAgentEffects(
                 agentHistory = new List<Models.Agent>(agentHistory) { newAgent };
             }
 
-            await localStorage.SetItemAsync(LocalStorageKeys.AgentHistory, agentHistory);
+            await agentHistoryService.Set(agentHistory);
             dispatcher.Dispatch(new AgentHistoryUpdated(agentHistory));
         }
         catch (Exception exception)
@@ -119,19 +118,17 @@ public class UserAgentEffects(
     {
         try
         {
-            var agentHistory =
-                await localStorage.GetItemAsync<IReadOnlyList<Models.Agent>>(LocalStorageKeys.AgentHistory) ??
-                new List<Models.Agent>();
+            var agentHistory = await agentHistoryService.Get() ?? [];
             var serverStatus = await client.GetStatus();
             var newAgent = action.Agent with
             {
                 ExpiresOn = serverStatus.ServerResets.Next
             };
 
-            if (agentHistory.Any(agent => agent.AccountId == action.Agent.AccountId))
+            if (agentHistory.Any(agent => agent.AccountId == newAgent.AccountId))
             {
                 agentHistory = agentHistory
-                    .Select(agent => agent.AccountId == action.Agent.AccountId ? newAgent : agent)
+                    .Select(agent => agent.AccountId == newAgent.AccountId ? newAgent : agent)
                     .ToList();
             }
             else
@@ -139,7 +136,7 @@ public class UserAgentEffects(
                 agentHistory = new List<Models.Agent>(agentHistory) { newAgent };
             }
 
-            await localStorage.SetItemAsync(LocalStorageKeys.AgentHistory, agentHistory);
+            await agentHistoryService.Set(agentHistory);
             dispatcher.Dispatch(new AgentHistoryUpdated(agentHistory));
         }
         catch (Exception exception)

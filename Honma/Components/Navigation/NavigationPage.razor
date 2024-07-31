@@ -1,0 +1,85 @@
+﻿@attribute [Route(Routes.Navigation)]
+@inherits FluxorComponent
+
+<MudContainer Class="height-screen mt-2"
+              MaxWidth="MaxWidth.ExtraLarge">
+    <MudGrid Class="height-full">
+        <MudItem Class="height-full"
+                 xs="8">
+            <MudPaper Class="height-full"
+                      Elevation="0">
+                @if (SystemState.Value.System is not null)
+                {
+                    var system = SystemState.Value.System.Value;
+
+                    <MudText>@system.Symbol</MudText>
+                    <MudText>@system.Type</MudText>
+                }
+            </MudPaper>
+        </MudItem>
+        <MudItem Class="height-full"
+                 xs="4">
+            <MudStack Class="height-full">
+                <MudPaper Class="height-full"
+                          Elevation="0">
+                    <MudSelect T="Ship?" AnchorOrigin="Origin.BottomCenter"
+                               Value="_selectedShip"
+                               ValueChanged="@((Ship? ship) => SelectedShipChanged(ship))"
+                               Class="mt-0"
+                               Dense
+                               Label="Ship"
+                               Placeholder="Choose a ship"
+                               ToStringFunc="_shipToString"
+                               Variant="Variant.Filled">
+                        @foreach (var ship in ShipState.Value.Ships)
+                        {
+                            <MudSelectItem T="Ship?" Value="ship">@ship.Symbol</MudSelectItem>
+                        }
+                    </MudSelect>
+
+                    @if (_selectedShip is not null)
+                    {
+                        var ship = _selectedShip.Value;
+
+                        <div class="pa-4">
+                            <MudText>@ship.Nav.Status</MudText>
+                        </div>
+                    }
+                </MudPaper>
+                <MudPaper Class="height-full"
+                          Elevation="0">
+                </MudPaper>
+            </MudStack>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+@code {
+
+    [Inject] public required IState<SystemState> SystemState { get; set; }
+
+    [Inject] public required IState<ShipState> ShipState { get; set; }
+
+    [Inject] public required IDispatcher Dispatcher { get; set; }
+
+    private Ship? _selectedShip;
+    private readonly Func<Ship?, string> _shipToString = ship => ship?.Symbol ?? string.Empty;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Dispatcher.Dispatch(new ShipsLoad(20, 1));
+    }
+
+    private void SelectedShipChanged(Ship? ship)
+    {
+        _selectedShip = ship;
+
+        if (ship is null)
+        {
+            return;
+        }
+
+        Dispatcher.Dispatch(new SystemLoad(ship.Value.Nav.SystemSymbol));
+    }
+}

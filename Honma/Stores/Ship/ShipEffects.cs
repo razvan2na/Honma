@@ -11,8 +11,14 @@ public class ShipEffects(ISpaceTradersClient client, ISnackbar snackbar)
 	{
 		try
 		{
-			var (ships, _) = await client.GetShips(action.Limit, action.Page);
-			dispatcher.Dispatch(new ShipsUpdated(ships ?? throw new InvalidOperationException()));
+			var (ships, meta) = await client.GetShips(action.Limit, action.Page);
+
+			dispatcher.Dispatch(
+				new ShipsUpdated(
+					ships ?? throw new InvalidOperationException(),
+					meta?.Total ?? throw new InvalidOperationException()
+				)
+			);
 		}
 		catch (Exception exception)
 		{

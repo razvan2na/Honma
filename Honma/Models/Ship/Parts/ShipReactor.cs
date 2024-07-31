@@ -4,7 +4,8 @@ public readonly record struct ShipReactor(
     string Symbol,
     string Name,
     string Description,
-    int? Condition,
+    double Condition,
+    double Integrity,
     int PowerOutput,
     ShipRequirements Requirements
 );

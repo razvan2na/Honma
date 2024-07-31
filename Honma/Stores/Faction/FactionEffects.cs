@@ -1,10 +1,9 @@
 ﻿using Fluxor;
-using Honma.Actions;
 using Honma.Data;
 using MudBlazor;
 using Refit;
 
-namespace Honma.Stores.Faction;
+namespace Honma.Stores;
 
 public class FactionEffects(ISpaceTradersClient client, ISnackbar snackbar)
 {

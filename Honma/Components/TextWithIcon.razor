@@ -1,0 +1,21 @@
+﻿<MudStack Row
+          Spacing="1"
+          AlignItems="AlignItems.Center">
+    @if (StartText is not null)
+    {
+        <MudText Typo="Typo.subtitle2">@StartText</MudText>
+    }
+    <MudIcon Icon="@Icon"
+             Size="Size.Small"/>
+    <MudText Typo="Typo.subtitle2">@Text</MudText>
+</MudStack>
+
+@code {
+
+    [Parameter] public required string Text { get; set; }
+
+    [Parameter] public required string Icon { get; set; }
+
+    [Parameter] public string? StartText { get; set; }
+
+}

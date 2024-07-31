@@ -1,6 +1,6 @@
 ﻿using Honma.Data;
 
-namespace Honma.Actions;
+namespace Honma.Stores;
 
 public readonly record struct UserAgentInitialize;
 

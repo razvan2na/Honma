@@ -1,0 +1,31 @@
+﻿<MudPaper Class="rounded-lg"
+          Elevation="2">
+    <MudList SelectedValue="SelectedShip"
+             SelectedValueChanged="@((Ship? ship) => SelectedShipChanged.InvokeAsync(ship))"
+             SelectionMode="SelectionMode.SingleSelection"
+             T="Ship?">
+        @foreach (var ship in Ships)
+        {
+            <MudListItem T="Ship?"
+                         Value="ship">
+                <MudStack Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Row>
+                    <MudText>@ship.Symbol</MudText>
+                    <MudChip T="string"
+                             Color="Color.Secondary"
+                             Size="Size.Small">@ship.Registration.Role</MudChip>
+                </MudStack>
+
+            </MudListItem>
+        }
+    </MudList>
+</MudPaper>
+
+@code {
+
+    [Parameter] public required IReadOnlyCollection<Ship> Ships { get; set; }
+
+    [Parameter] public Ship? SelectedShip { get; set; }
+
+    [Parameter] public EventCallback<Ship?> SelectedShipChanged { get; set; }
+
+}

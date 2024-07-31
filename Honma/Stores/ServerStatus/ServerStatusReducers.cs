@@ -1,13 +1,12 @@
 ﻿using Fluxor;
-using Honma.Actions;
 
-namespace Honma.Stores.ServerStatus;
+namespace Honma.Stores;
 
 public static class ServerStatusReducers
 {
     [ReducerMethod]
-    public static ServerStatusState Reduce(ServerStatusState state, ServerStatusUpdated action)
+    public static ServerStatusState Reduce(ServerStatusState state, ServerStatusUpdated action) => new()
     {
-        return new ServerStatusState { Status = action.Status };
-    }
+        Status = action.Status
+    };
 }

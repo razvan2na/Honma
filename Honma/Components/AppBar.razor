@@ -1,14 +1,12 @@
-﻿@using Honma.Stores.UserAgent
-@inherits FluxorComponent
+﻿@inherits FluxorComponent
 
 <MudAppBar Class="honma-appbar ml-2 rounded-b-lg"
-           DisableGutters
            Elevation="0">
     <MudBreadcrumbs Class="pa-0"
                     Items="_breadcrumbs">
         <ItemTemplate Context="item">
             <MudLink Class="pa-0"
-                     Color="Color.Default"
+                     Color="Color.Inherit"
                      Href="@item.Href"
                      Underline="Underline.None">
                 <MudStack AlignItems="AlignItems.Center"
@@ -23,6 +21,10 @@
                 </MudStack>
             </MudLink>
         </ItemTemplate>
+
+        <SeparatorTemplate>
+            <MudText Color="Color.Inherit">/</MudText>
+        </SeparatorTemplate>
     </MudBreadcrumbs>
 
     <MudSpacer/>
@@ -41,6 +43,7 @@
                 <CurrencyDisplay Amount="@agent.Credits"/>
                 <MudMenu AnchorOrigin="Origin.BottomRight"
                          Class="ml-4 mr-4"
+                         Color="Color.Inherit"
                          Dense
                          Label="@agent.Symbol"
                          Size="Size.Large"
@@ -55,8 +58,6 @@
             }
         </Authorized>
     </AuthorizeView>
-
-
 </MudAppBar>
 
 @code {

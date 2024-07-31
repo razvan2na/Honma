@@ -1,7 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider IsDarkMode
-                  Theme="HonmaTheme.Get"/>
+<MudThemeProvider Theme="HonmaTheme.Get"/>
 
 <MudLayout>
     <AppBar/>
@@ -10,7 +9,7 @@
         <Authorized>
             <MudDrawer Class="honma-main-drawer ml-2 mt-2 rounded-lg"
                        ClipMode="DrawerClipMode.Always"
-                       Elevation="0"
+                       Elevation="2"
                        Variant="DrawerVariant.Mini">
                 <NavigationMenu/>
             </MudDrawer>

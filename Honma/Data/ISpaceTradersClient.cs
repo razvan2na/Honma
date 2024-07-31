@@ -28,4 +28,13 @@ public interface ISpaceTradersClient
 
     [Get("/my/ships")]
     Task<Response<IReadOnlyCollection<Ship>>> GetShips([Query] int limit, [Query] int page);
+
+    [Get("/systems")]
+    Task<Response<IReadOnlyCollection<SystemDto>>> GetSystems([Query] int limit, [Query] int page);
+
+    [Get("/systems/{systemSymbol}")]
+    Task<Response<SystemDto>> GetSystem(string systemSymbol);
+
+    [Get("/systems/{systemSymbol}/waypoints/{waypointSymbol}")]
+    Task<Response<Waypoint>> GetWaypoint(string systemSymbol, string waypointSymbol);
 }

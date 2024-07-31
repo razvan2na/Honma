@@ -1,34 +1,24 @@
 ﻿using Fluxor;
-using Honma.Actions;
 
-namespace Honma.Stores.UserAgent;
+namespace Honma.Stores;
 
 public static class UserAgentReducers
 {
     [ReducerMethod]
-    public static UserAgentState Reduce(UserAgentState state, UserAgentRegistered action)
+    public static UserAgentState Reduce(UserAgentState state, UserAgentRegistered action) => new()
     {
-        return new UserAgentState
+        Agent = action.UserData.Agent with
         {
-            Agent = action.UserData.Agent with
-            {
-                Token = action.UserData.Token
-            }
-        };
-    }
+            Token = action.UserData.Token
+        }
+    };
 
     [ReducerMethod]
-    public static UserAgentState Reduce(UserAgentState state, UserAgentLogout action)
-    {
-        return new UserAgentState();
-    }
+    public static UserAgentState Reduce(UserAgentState state, UserAgentLogout action) => new();
 
     [ReducerMethod]
-    public static UserAgentState Reduce(UserAgentState state, UserAgentUpdated action)
+    public static UserAgentState Reduce(UserAgentState state, UserAgentUpdated action) => new()
     {
-        return new UserAgentState
-        {
-            Agent = action.Agent
-        };
-    }
+        Agent = action.Agent
+    };
 }

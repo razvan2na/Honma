@@ -1,5 +1,4 @@
 ﻿@attribute [Route(Routes.Home)]
-@using Honma.Stores.ServerStatus
 @inherits FluxorComponent
 
 <MudContainer MaxWidth="MaxWidth.Large">
@@ -12,7 +11,7 @@
                      sm="6"
                      xs="12">
                 <MudPaper Class="pa-4 rounded-lg"
-                          Elevation="0">
+                          Elevation="2">
                     <MudStack AlignItems="AlignItems.Center"
                               Row>
                         <MudIcon Icon="@PhosphorIcons.UserRectangle"/>
@@ -30,7 +29,7 @@
                      sm="6"
                      xs="12">
                 <MudPaper Class="pa-4 rounded-lg"
-                          Elevation="0">
+                          Elevation="2">
                     <MudStack AlignItems="AlignItems.Center"
                               Row>
                         <MudIcon Icon="@PhosphorIcons.RocketLaunch"/>
@@ -48,7 +47,7 @@
                      sm="6"
                      xs="12">
                 <MudPaper Class="pa-4 rounded-lg"
-                          Elevation="0">
+                          Elevation="2">
                     <MudStack AlignItems="AlignItems.Center"
                               Row>
                         <MudIcon Icon="@PhosphorIcons.Planet"/>
@@ -66,7 +65,7 @@
                      sm="6"
                      xs="12">
                 <MudPaper Class="pa-4 rounded-lg"
-                          Elevation="0">
+                          Elevation="2">
                     <MudStack AlignItems="AlignItems.Center"
                               Row>
                         <MudIcon Icon="@PhosphorIcons.Path"/>
@@ -83,7 +82,7 @@
             <MudItem lg="6"
                      xs="12">
                 <MudPaper Class="pa-4 rounded-lg"
-                          Elevation="0">
+                          Elevation="2">
                     <MudStack AlignItems="AlignItems.Center"
                               Row>
                         <MudIcon Icon="@PhosphorIcons.ClockCounterClockwise"/>
@@ -100,7 +99,7 @@
             <MudItem lg="6"
                      xs="12">
                 <MudPaper Class="pa-4 rounded-lg"
-                          Elevation="0">
+                          Elevation="2">
                     <MudStack AlignItems="AlignItems.Center"
                               Row>
                         <MudIcon Icon="@PhosphorIcons.ClockCountdown"/>
@@ -117,77 +116,77 @@
             <MudItem lg="4"
                      xs="12">
                 <MudPaper Class="pa-4 rounded-lg"
-                          Elevation="0">
+                          Elevation="2">
                     <MudText Class="ml-4"
                              Typo="Typo.h6">
                         Announcements
                     </MudText>
                     <MudDivider Class="mt-2"
                                 DividerType="DividerType.Middle"/>
-                    <MudList T="(Announcement, int)" Dense>
-                        @foreach (var (announcement, index) in status.Announcements.Select((value, index) => (value, index)))
+                    <MudStack>
+                        @foreach (var announcement in status.Announcements)
                         {
-                            <MudListItem T="(Announcement, int)" Class="@(index != 0 ? "mt-2" : "")">
+                            <div class="px-4 py-2">
                                 <MudText>@announcement.Title</MudText>
                                 <MudText Class="mt-2 word-break"
                                          Typo="Typo.body2">
                                     @announcement.Body
                                 </MudText>
-                            </MudListItem>
+                            </div>
                         }
-                    </MudList>
+                    </MudStack>
                 </MudPaper>
             </MudItem>
 
             <MudItem lg="4"
                      xs="12">
                 <MudPaper Class="pa-4 rounded-lg"
-                          Elevation="0">
+                          Elevation="2">
                     <MudText Class="ml-4"
                              Typo="Typo.h6">
                         Most Credits
                     </MudText>
                     <MudDivider Class="mt-2"
                                 DividerType="DividerType.Middle"/>
-                    <MudList T="LeaderboardCredits" Dense>
+                    <MudStack Class="pt-4">
                         @foreach (var agent in status.Leaderboards.MostCredits)
                         {
-                            <MudListItem T="LeaderboardCredits">
+                            <div class="px-4">
                                 <MudStack AlignItems="AlignItems.Center"
                                           Justify="Justify.SpaceBetween"
                                           Row>
                                     <MudText>@agent.AgentSymbol</MudText>
                                     <MudText>@agent.Credits</MudText>
                                 </MudStack>
-                            </MudListItem>
+                            </div>
                         }
-                    </MudList>
+                    </MudStack>
                 </MudPaper>
             </MudItem>
 
             <MudItem lg="4"
                      xs="12">
                 <MudPaper Class="pa-4 rounded-lg"
-                          Elevation="0">
+                          Elevation="2">
                     <MudText Class="ml-4"
                              Typo="Typo.h6">
                         Most Submitted Charts
                     </MudText>
                     <MudDivider Class="mt-2"
                                 DividerType="DividerType.Middle"/>
-                    <MudList T="LeaderboardCharts">
+                    <MudStack Class="pt-4">
                         @foreach (var agent in status.Leaderboards.MostSubmittedCharts)
                         {
-                            <MudListItem T="LeaderboardCharts">
+                            <div class="px-4">
                                 <MudStack AlignItems="AlignItems.Center"
                                           Justify="Justify.SpaceBetween"
                                           Row>
                                     <MudText>@agent.AgentSymbol</MudText>
                                     <MudText>@agent.ChartCount</MudText>
                                 </MudStack>
-                            </MudListItem>
+                            </div>
                         }
-                    </MudList>
+                    </MudStack>
                 </MudPaper>
             </MudItem>
         </MudGrid>

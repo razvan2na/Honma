@@ -8,4 +8,5 @@ public static class Routes
     public const string AgentHistory = "/agent-history";
     public const string Contracts = "/contracts";
     public const string Ships = "/ships";
+    public const string Navigation = "/nav";
 }

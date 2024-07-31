@@ -1,10 +1,9 @@
 ﻿using Fluxor;
-using Honma.Actions;
 using Honma.Data;
 using MudBlazor;
 using Refit;
 
-namespace Honma.Stores.ServerStatus;
+namespace Honma.Stores;
 
 public class ServerStatusEffects(ISpaceTradersClient client, ISnackbar snackbar)
 {
