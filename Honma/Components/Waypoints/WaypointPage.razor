@@ -1,12 +1,14 @@
 ﻿@attribute [Route($"{Routes.Systems}/{{systemSymbol}}{Routes.Waypoints}/{{waypointSymbol}}")]
+@inherits FluxorComponent
 
 <MudContainer MaxWidth="MaxWidth.Small">
-    <MudPaper Elevation="2"
-              Class="rounded-lg my-4 pa-4">
-        <MudText Typo="Typo.h5">@WaypointSymbol</MudText>
-        @if (State.Value.Waypoint is not null)
-        {
-            var waypoint = State.Value.Waypoint.Value;
+    @if (State.Value.Waypoint is not null)
+    {
+        var waypoint = State.Value.Waypoint.Value;
+
+        <MudPaper Class="my-4 pa-4 rounded-lg"
+                  Elevation="2">
+            <MudText Typo="Typo.h5">@WaypointSymbol</MudText>
 
             <MudText>@waypoint.Type</MudText>
 
@@ -14,8 +16,117 @@
             {
                 <MudChip T="string">@trait.Name</MudChip>
             }
-        }
-    </MudPaper>
+        </MudPaper>
+
+        <MudPaper Class="mb-4 rounded-lg"
+                  Elevation="2">
+            <MudTabs Centered>
+                <MudTabPanel Disabled="@(waypoint.Traits.All(trait => trait.Symbol != WaypointTraitSymbol.Marketplace.ToString().ToMacroCase()))"
+                             Icon="@PhosphorIcons.Market"
+                             Text="Market">
+
+                </MudTabPanel>
+
+                <MudTabPanel Disabled="@(waypoint.Traits.All(trait => trait.Symbol != WaypointTraitSymbol.Shipyard.ToString().ToMacroCase()))"
+                             Icon="@PhosphorIcons.Shipyard"
+                             Text="Shipyard">
+                    @if (State.Value.Shipyard is not null)
+                    {
+                        var shipyard = State.Value.Shipyard.Value;
+
+                        @foreach (var ship in shipyard.Ships ?? [])
+                        {
+                            <MudPaper Class="ma-4 pa-4 rounded-lg"
+                                      Elevation="2">
+                                <MudStack Spacing="4">
+                                    <MudStack AlignItems="AlignItems.Center"
+                                              Justify="Justify.SpaceBetween"
+                                              Row>
+                                        <MudStack Spacing="0">
+                                            <MudText>
+                                                <b>@ship.Name</b>
+                                            </MudText>
+                                            <CurrencyDisplay Amount="@ship.PurchasePrice"
+                                                             Typo="Typo.subtitle2"/>
+                                        </MudStack>
+
+                                        <MudButton Color="Color.Primary"
+                                                   StartIcon="@PhosphorIcons.CurrencyCny"
+                                                   Variant="Variant.Filled">
+                                            Buy
+                                        </MudButton>
+                                    </MudStack>
+
+                                    <MudText Typo="Typo.subtitle2">@ship.Description</MudText>
+
+                                    <MudList T="string">
+                                        <MudListItem Class="rounded-lg"
+                                                     T="string">
+                                            <MudStack AlignItems="AlignItems.Center"
+                                                      Justify="Justify.SpaceBetween"
+                                                      Row>
+                                                <MudStack Spacing="0">
+                                                    <TextWithIcon Icon="@PhosphorIcons.Frame"
+                                                                  Text="Frame"/>
+                                                    <MudText>@ship.Frame.Name</MudText>
+                                                </MudStack>
+                                                <MudStack AlignItems="AlignItems.Center"
+                                                          Row>
+                                                    <TextWithIcon Icon="@PhosphorIcons.Fuel"
+                                                                  Text="@ship.Frame.FuelCapacity.ToString()"/>
+                                                    <TextWithIcon Icon="@PhosphorIcons.DiamondsFour"
+                                                                  Text="@ship.Frame.ModuleSlots.ToString()"/>
+                                                    <TextWithIcon Icon="@PhosphorIcons.Memory"
+                                                                  Text="@ship.Frame.MountingPoints.ToString()"/>
+                                                </MudStack>
+                                            </MudStack>
+                                        </MudListItem>
+
+                                        <MudListItem Class="rounded-lg"
+                                                     T="string">
+                                            <MudStack AlignItems="AlignItems.Center"
+                                                      Justify="Justify.SpaceBetween"
+                                                      Row>
+                                                <MudStack Spacing="0">
+                                                    <TextWithIcon Icon="@PhosphorIcons.Reactor"
+                                                                  Text="Reactor"/>
+                                                    <MudText>@ship.Reactor.Name</MudText>
+                                                </MudStack>
+                                                <MudStack AlignItems="AlignItems.Center"
+                                                          Row>
+                                                    <TextWithIcon Icon="@PhosphorIcons.Power"
+                                                                  Text="@ship.Reactor.PowerOutput.ToString()"/>
+                                                </MudStack>
+                                            </MudStack>
+                                        </MudListItem>
+
+                                        <MudListItem Class="rounded-lg"
+                                                     T="string">
+                                            <MudStack AlignItems="AlignItems.Center"
+                                                      Justify="Justify.SpaceBetween"
+                                                      Row>
+                                                <MudStack Spacing="0">
+                                                    <TextWithIcon Icon="@PhosphorIcons.Engine"
+                                                                  Text="Engine"/>
+                                                    <MudText>@ship.Engine.Name</MudText>
+                                                </MudStack>
+                                                <MudStack AlignItems="AlignItems.Center"
+                                                          Row>
+                                                    <TextWithIcon Icon="@PhosphorIcons.Speed"
+                                                                  Text="@ship.Engine.Speed.ToString()"/>
+                                                </MudStack>
+                                            </MudStack>
+                                        </MudListItem>
+                                    </MudList>
+
+                                </MudStack>
+                            </MudPaper>
+                        }
+                    }
+                </MudTabPanel>
+            </MudTabs>
+        </MudPaper>
+    }
 </MudContainer>
 
 @code {

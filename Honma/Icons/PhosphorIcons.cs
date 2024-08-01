@@ -30,6 +30,7 @@ public static class PhosphorIcons
 
     public const string Engine = "ph-bold ph-engine";
     public const string Frame = "ph-bold ph-cube-transparent";
+    public const string Market = "ph-bold ph-storefront";
     public const string MoraleHigh = "ph-bold ph-smiley";
     public const string MoraleMedium = "ph-bold ph-smiley-meh";
     public const string MoraleLow = "ph-bold ph-smiley-nervous";
@@ -37,6 +38,7 @@ public static class PhosphorIcons
     public const string Power = "ph-bold ph-lightning";
     public const string Range = "ph-bold ph-compass-tool";
     public const string Reactor = "ph-bold ph-atom";
+    public const string Shipyard = "ph-bold ph-crane-tower";
     public const string Speed = "ph-bold ph-speedometer";
     public const string Strength = "ph-bold ph-crosshair-simple";
     public const string System = "ph-bold ph-map-pin-simple-area";

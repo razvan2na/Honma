@@ -5,5 +5,5 @@ public readonly record struct Shipyard(
     IReadOnlyList<ShipType> ShipTypes,
     IReadOnlyList<ShipyardTransaction>? Transactions,
     IReadOnlyList<ShipyardShip>? Ships,
-    int? ModificationFee
+    int ModificationsFee
 );

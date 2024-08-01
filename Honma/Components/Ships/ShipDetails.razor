@@ -33,7 +33,7 @@
                       Elevation="2">
                 <MudStack Spacing="1">
                     <MudText Typo="Typo.subtitle2">System</MudText>
-                    <MudText>@Ship.Nav.SystemSymbol</MudText>
+                    <MudLink Href="@($"{Routes.Systems}/{Ship.Nav.SystemSymbol}")">@Ship.Nav.SystemSymbol</MudLink>
                 </MudStack>
             </MudPaper>
 
@@ -41,7 +41,7 @@
                       Elevation="2">
                 <MudStack Spacing="1">
                     <MudText Typo="Typo.subtitle2">Waypoint</MudText>
-                    <MudText>@Ship.Nav.WaypointSymbol</MudText>
+                    <MudLink Href="@($"{Routes.Systems}/{Ship.Nav.SystemSymbol}{Routes.Waypoints}/{Ship.Nav.WaypointSymbol}")">@Ship.Nav.WaypointSymbol</MudLink>
                 </MudStack>
             </MudPaper>
 
@@ -66,21 +66,21 @@
                  Spacing="4">
             <MudItem xs="3">
                 <StatisticRangeDisplay Icon="@PhosphorIcons.UsersThree"
-                                  Max="@Ship.Crew.Capacity"
-                                  Title="Crew"
-                                  Value="@Ship.Crew.Current"/>
+                                       Max="@Ship.Crew.Capacity"
+                                       Title="Crew"
+                                       Value="@Ship.Crew.Current"/>
             </MudItem>
             <MudItem xs="3">
                 <StatisticRangeDisplay Icon="@PhosphorIcons.MoraleHigh"
-                                  Max="100"
-                                  Title="Morale"
-                                  Value="@Ship.Crew.Morale"/>
+                                       Max="100"
+                                       Title="Morale"
+                                       Value="@Ship.Crew.Morale"/>
             </MudItem>
             <MudItem xs="3">
                 <StatisticRangeDisplay Icon="@PhosphorIcons.Fuel"
-                                  Max="@Ship.Fuel.Capacity"
-                                  Title="Fuel"
-                                  Value="@Ship.Fuel.Current"/>
+                                       Max="@Ship.Fuel.Capacity"
+                                       Title="Fuel"
+                                       Value="@Ship.Fuel.Current"/>
             </MudItem>
             <MudItem xs="3">
                 <StatisticRangeDisplay Icon="@PhosphorIcons.Package"
@@ -119,16 +119,16 @@
                     <ShipLoadout Ship="Ship"/>
                 </div>
             </MudTabPanel>
-            <MudTabPanel Icon="@PhosphorIcons.DiamondsFour"
-                         Text="Modules"
-                         Disabled="@(Ship.Modules.Count == 0)">
+            <MudTabPanel Disabled="@(Ship.Modules.Count == 0)"
+                         Icon="@PhosphorIcons.DiamondsFour"
+                         Text="Modules">
                 <div class="pa-4">
                     <ShipModules Modules="Ship.Modules"/>
                 </div>
             </MudTabPanel>
-            <MudTabPanel Icon="@PhosphorIcons.Memory"
-                         Text="Mounts"
-                         Disabled="@(Ship.Mounts.Count == 0)">
+            <MudTabPanel Disabled="@(Ship.Mounts.Count == 0)"
+                         Icon="@PhosphorIcons.Memory"
+                         Text="Mounts">
                 <div class="pa-4">
                     <ShipMounts Mounts="Ship.Mounts"/>
                 </div>
@@ -167,4 +167,5 @@
         (Ship.Engine.Requirements.Power ?? 0) +
         Ship.Modules.Aggregate(0, (total, module) => total + (module.Requirements.Power ?? 0)) +
         Ship.Mounts.Aggregate(0, (total, mount) => total + (mount.Requirements.Power ?? 0));
+
 }

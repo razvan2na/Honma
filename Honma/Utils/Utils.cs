@@ -1,4 +1,5 @@
-﻿using Honma.Components.AgentHistory;
+﻿using System.Text;
+using Honma.Components.AgentHistory;
 using Honma.Components.Authentication;
 using Honma.Components.Contracts;
 using Honma.Components.Factions;
@@ -54,13 +55,13 @@ public static class Utils
 		}
 		else if (routeData.PageType == typeof(WaypointPage))
 		{
-			breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Waypoints, Routes.Waypoints, true));
+			var systemSymbol = routeData.RouteValues.First(entry => entry.Key == "systemSymbol").Value!.ToString();
+			var waypointSymbol = routeData.RouteValues.First(entry => entry.Key == "waypointSymbol").Value!.ToString();
 
-			breadcrumbs.AddRange(
-				routeData.RouteValues.Values
-					.Where(value => value is not null)
-					.Select(value => new BreadcrumbItem(value!.ToString()!, Routes.Waypoints, true))
-			);
+			breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Systems, Routes.Systems));
+			breadcrumbs.Add(new BreadcrumbItem(systemSymbol!, $"{Routes.Systems}/{systemSymbol}"));
+			breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Waypoints, $"{Routes.Systems}/{systemSymbol}"));
+			breadcrumbs.Add(new BreadcrumbItem(waypointSymbol!, null, true));
 		}
 
 		return breadcrumbs;
@@ -69,4 +70,50 @@ public static class Utils
 	public static IEnumerable<T> Replace<T, TKey>(this IEnumerable<T> source, T item, Func<T, TKey> keySelector)
 		where TKey : IEquatable<TKey> =>
 		source.Select(i => keySelector.Invoke(i).Equals(keySelector.Invoke(item)) ? item : i);
+
+	public static string ToMacroCase(this string pascalCase)
+	{
+		if (string.IsNullOrEmpty(pascalCase))
+		{
+			return string.Empty;
+		}
+
+		var result = new StringBuilder();
+
+		for (var i = 0; i < pascalCase.Length; i++)
+		{
+			var c = pascalCase[i];
+
+			if (char.IsUpper(c) && i > 0)
+			{
+				result.Append('_');
+			}
+
+			result.Append(char.ToUpper(c));
+		}
+
+		return result.ToString();
+	}
+
+	public static string ToNaturalLanguage(this string pascalCase)
+	{
+		if (string.IsNullOrEmpty(pascalCase))
+		{
+			return pascalCase;
+		}
+
+		var result = new StringBuilder();
+
+		foreach (var character in pascalCase)
+		{
+			if (char.IsUpper(character) && result.Length > 0)
+			{
+				result.Append(' ');
+			}
+
+			result.Append(character);
+		}
+
+		return result.ToString();
+	}
 }

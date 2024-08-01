@@ -1,11 +1,9 @@
-﻿using Blazored.LocalStorage;
-using Fluxor;
+﻿using Fluxor;
 using Honma.Authentication;
 using Honma.Constants;
 using Honma.Data;
 using Honma.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using Refit;
 
@@ -15,7 +13,7 @@ public class UserAgentEffects(
     ISpaceTradersClient client,
     UserTokenService userTokenService,
     AgentHistoryService agentHistoryService,
-    AuthenticationStateProvider authenticationStateProvider,
+    ClientAuthenticationStateProvider authenticationStateProvider,
     NavigationManager navigationManager,
     ISnackbar snackbar)
 {
@@ -40,8 +38,7 @@ public class UserAgentEffects(
         try
         {
             var (agent, _) = await client.GetMyAgent();
-            (authenticationStateProvider as ClientAuthenticationStateProvider)
-                ?.NotifyUserAuthentication(action.Token);
+            authenticationStateProvider.NotifyUserAuthentication(action.Token);
             dispatcher.Dispatch(new UserAgentUpdated(agent with { Token = action.Token }));
             navigationManager.NavigateTo(Routes.Home);
         }
@@ -56,7 +53,7 @@ public class UserAgentEffects(
     public async Task Handle(UserAgentLogout action, IDispatcher dispatcher)
     {
         await userTokenService.Remove();
-        (authenticationStateProvider as ClientAuthenticationStateProvider)?.NotifyUserLogout();
+        authenticationStateProvider.NotifyUserLogout();
         navigationManager.NavigateTo(Routes.Home);
     }
 
@@ -69,8 +66,7 @@ public class UserAgentEffects(
                 await client.RegisterAgent(new AgentRegisterRequest(action.Symbol, action.FactionSymbol));
 
             await userTokenService.Set(userData.Token);
-            (authenticationStateProvider as ClientAuthenticationStateProvider)
-                ?.NotifyUserAuthentication(userData.Token);
+            authenticationStateProvider.NotifyUserAuthentication(userData.Token);
             dispatcher.Dispatch(new UserAgentRegistered(userData));
             navigationManager.NavigateTo(Routes.Home);
         }

@@ -1,4 +1,6 @@
-﻿<CascadingAuthenticationState>
+﻿@inherits FluxorComponent
+
+<CascadingAuthenticationState>
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
             <CascadingValue Name="@CascadingValues.RouteData"
@@ -28,3 +30,13 @@
 <MudDialogProvider/>
 <MudPopoverProvider/>
 <MudSnackbarProvider/>
+
+@code
+{
+    [Inject] private IDispatcher Dispatcher { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        Dispatcher.Dispatch(new UserAgentInitialize());
+    }
+}

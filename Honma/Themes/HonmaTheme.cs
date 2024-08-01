@@ -10,7 +10,7 @@ public static class HonmaTheme
         {
             Default = new Default
             {
-                FontFamily = [ "JetBrains Mono" ]
+                FontFamily = [ "Rubik" ]
             }
         }
     };

@@ -20,13 +20,3 @@
         @Body
     </MudMainContent>
 </MudLayout>
-
-@code
-{
-    [Inject] private IDispatcher Dispatcher { get; set; } = null!;
-
-    protected override void OnInitialized()
-    {
-        Dispatcher.Dispatch(new UserAgentInitialize());
-    }
-}
