@@ -33,7 +33,7 @@
         <NotAuthorized>
             <MudIconButton Class="mr-2"
                            Href="@Routes.Login"
-                           Icon="@PhosphorIcons.SignIn"/>
+                           Icon="@HonmaIcons.SignIn"/>
         </NotAuthorized>
         <Authorized>
             @if (State.Value.Agent is not null)
@@ -47,7 +47,7 @@
                          Dense
                          Label="@agent.Symbol"
                          Size="Size.Large"
-                         StartIcon="@PhosphorIcons.IdentificationBadge"
+                         StartIcon="@HonmaIcons.Agent"
                          TransformOrigin="Origin.TopRight"
                          Variant="Variant.Text">
                     <MudMenuItem OnClick="@(() => CopyTokenToClipboard(agent.Token))">

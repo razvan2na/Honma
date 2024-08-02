@@ -7,7 +7,7 @@
             <MudStack AlignItems="AlignItems.Center"
                       Row
                       Spacing="1">
-                <MudIcon Icon="@PhosphorIcons.RocketLaunch"
+                <MudIcon Icon="@HonmaIcons.Ship"
                          Size="Size.Large"/>
                 <MudText Typo="Typo.h5">@Ship.Symbol</MudText>
             </MudStack>
@@ -65,43 +65,43 @@
         <MudGrid Class="my-2"
                  Spacing="4">
             <MudItem xs="3">
-                <StatisticRangeDisplay Icon="@PhosphorIcons.UsersThree"
+                <StatisticRangeDisplay Icon="@HonmaIcons.Crew"
                                        Max="@Ship.Crew.Capacity"
                                        Title="Crew"
                                        Value="@Ship.Crew.Current"/>
             </MudItem>
             <MudItem xs="3">
-                <StatisticRangeDisplay Icon="@PhosphorIcons.MoraleHigh"
+                <StatisticRangeDisplay Icon="@HonmaIcons.MoraleHigh"
                                        Max="100"
                                        Title="Morale"
                                        Value="@Ship.Crew.Morale"/>
             </MudItem>
             <MudItem xs="3">
-                <StatisticRangeDisplay Icon="@PhosphorIcons.Fuel"
+                <StatisticRangeDisplay Icon="@HonmaIcons.Fuel"
                                        Max="@Ship.Fuel.Capacity"
                                        Title="Fuel"
                                        Value="@Ship.Fuel.Current"/>
             </MudItem>
             <MudItem xs="3">
-                <StatisticRangeDisplay Icon="@PhosphorIcons.Package"
+                <StatisticRangeDisplay Icon="@HonmaIcons.Cargo"
                                        Max="@Ship.Cargo.Capacity"
                                        Title="Cargo"
                                        Value="@Ship.Cargo.Units"/>
             </MudItem>
             <MudItem xs="3">
-                <StatisticRangeDisplay Icon="@PhosphorIcons.DiamondsFour"
+                <StatisticRangeDisplay Icon="@HonmaIcons.Module"
                                        Max="@Ship.Frame.ModuleSlots"
                                        Title="Modules"
                                        Value="@Ship.Modules.Count"/>
             </MudItem>
             <MudItem xs="3">
-                <StatisticRangeDisplay Icon="@PhosphorIcons.Memory"
+                <StatisticRangeDisplay Icon="@HonmaIcons.Mount"
                                        Max="@Ship.Frame.MountingPoints"
                                        Title="Mounts"
                                        Value="@Ship.Mounts.Count"/>
             </MudItem>
             <MudItem xs="3">
-                <StatisticRangeDisplay Icon="@PhosphorIcons.Power"
+                <StatisticRangeDisplay Icon="@HonmaIcons.Power"
                                        Max="@Ship.Reactor.PowerOutput"
                                        Title="Power"
                                        Value="@PowerConsumption()"/>
@@ -113,28 +113,28 @@
               Elevation="2">
         <MudTabs Centered
                  Class="rounded-lg">
-            <MudTabPanel Icon="@PhosphorIcons.Circuitry"
+            <MudTabPanel Icon="@HonmaIcons.Loadout"
                          Text="Loadout">
                 <div class="pa-4">
                     <ShipLoadout Ship="Ship"/>
                 </div>
             </MudTabPanel>
             <MudTabPanel Disabled="@(Ship.Modules.Count == 0)"
-                         Icon="@PhosphorIcons.DiamondsFour"
+                         Icon="@HonmaIcons.Module"
                          Text="Modules">
                 <div class="pa-4">
                     <ShipModules Modules="Ship.Modules"/>
                 </div>
             </MudTabPanel>
             <MudTabPanel Disabled="@(Ship.Mounts.Count == 0)"
-                         Icon="@PhosphorIcons.Memory"
+                         Icon="@HonmaIcons.Mount"
                          Text="Mounts">
                 <div class="pa-4">
                     <ShipMounts Mounts="Ship.Mounts"/>
                 </div>
             </MudTabPanel>
             <MudTabPanel Disabled="@(Ship.Cargo.Units == 0)"
-                         Icon="@PhosphorIcons.Package"
+                         Icon="@HonmaIcons.Cargo"
                          Text="Cargo">
                 <MudTable Class="rounded-lg"
                           Elevation="2"

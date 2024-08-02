@@ -34,18 +34,18 @@
         {
             <MudTooltip Arrow
                         Text="Copy token to clipboard">
-                <MudIconButton Icon="@PhosphorIcons.Copy"
+                <MudIconButton Icon="@HonmaIcons.Copy"
                                OnClick="@(() => CopyTokenToClipboard(Agent.Token))"/>
             </MudTooltip>
             <MudTooltip Arrow
                         Text="Sign in with this agent">
-                <MudIconButton Icon="@PhosphorIcons.SignIn"
+                <MudIconButton Icon="@HonmaIcons.SignIn"
                                OnClick="@(() => SignInWithToken(Agent.Token))"/>
             </MudTooltip>
         }
         <MudTooltip Arrow
                     Text="Delete from history">
-            <MudIconButton Icon="@PhosphorIcons.TrashSimple"
+            <MudIconButton Icon="@HonmaIcons.Trash"
                            OnClick="@(() => RemoveAgent(Agent.AccountId ?? string.Empty))"/>
         </MudTooltip>
     </MudStack>

@@ -22,13 +22,13 @@
                   Elevation="2">
             <MudTabs Centered>
                 <MudTabPanel Disabled="@(waypoint.Traits.All(trait => trait.Symbol != WaypointTraitSymbol.Marketplace.ToString().ToMacroCase()))"
-                             Icon="@PhosphorIcons.Market"
+                             Icon="@HonmaIcons.Market"
                              Text="Market">
 
                 </MudTabPanel>
 
                 <MudTabPanel Disabled="@(waypoint.Traits.All(trait => trait.Symbol != WaypointTraitSymbol.Shipyard.ToString().ToMacroCase()))"
-                             Icon="@PhosphorIcons.Shipyard"
+                             Icon="@HonmaIcons.Shipyard"
                              Text="Shipyard">
                     @if (State.Value.Shipyard is not null)
                     {

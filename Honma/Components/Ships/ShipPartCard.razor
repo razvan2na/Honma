@@ -69,10 +69,10 @@
     @if (Frame is not null || Reactor is not null || Engine is not null)
     {
         <MudStack>
-            <StatisticPercentageDisplay Icon="@PhosphorIcons.Nut"
+            <StatisticPercentageDisplay Icon="@HonmaIcons.Condition"
                                         Title="Condition"
                                         Value="@_condition"/>
-            <StatisticPercentageDisplay Icon="@PhosphorIcons.SubtractSquare"
+            <StatisticPercentageDisplay Icon="@HonmaIcons.Integrity"
                                         Title="Integrity"
                                         Value="@_integrity"/>
         </MudStack>
@@ -89,7 +89,7 @@
         {
             _frame = value;
             _type = nameof(Frame);
-            _icon = PhosphorIcons.Frame;
+            _icon = HonmaIcons.Frame;
 
             if (_frame is null)
             {
@@ -112,7 +112,7 @@
         {
             _reactor = value;
             _type = nameof(Reactor);
-            _icon = PhosphorIcons.Reactor;
+            _icon = HonmaIcons.Reactor;
 
             if (_reactor is null)
             {
@@ -135,7 +135,7 @@
         {
             _engine = value;
             _type = nameof(Engine);
-            _icon = PhosphorIcons.Engine;
+            _icon = HonmaIcons.Engine;
 
             if (_engine is null)
             {
@@ -158,7 +158,7 @@
         {
             _module = value;
             _type = nameof(Module);
-            _icon = PhosphorIcons.DiamondsFour;
+            _icon = HonmaIcons.Module;
 
             if (_module is null)
             {
@@ -179,7 +179,7 @@
         {
             _mount = value;
             _type = nameof(Mount);
-            _icon = PhosphorIcons.Memory;
+            _icon = HonmaIcons.Mount;
 
             if (_mount is null)
             {

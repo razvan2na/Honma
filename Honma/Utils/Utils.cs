@@ -19,7 +19,7 @@ public static class Utils
 	{
 		var breadcrumbs = new List<BreadcrumbItem>
 		{
-			new(BreadcrumbTexts.Home, Routes.Home, false, PhosphorIcons.Cube)
+			new(BreadcrumbTexts.Home, Routes.Home, false, HonmaIcons.Cube)
 		};
 
 		if (routeData.PageType == typeof(LoginPage))

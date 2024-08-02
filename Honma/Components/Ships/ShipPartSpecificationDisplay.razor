@@ -1,13 +1,13 @@
-﻿@if (Value != 0)
+﻿@if (_value != 0)
 {
     <MudStack AlignItems="AlignItems.Center"
               Row
               Spacing="1">
         <MudText Typo="Typo.subtitle2">
-            @(ShowPlus ? "+" : "")
-            @Value
+            @(_showPlus ? "+" : "")
+            @_value
         </MudText>
-        <MudIcon Icon="@PhosphorIcons.Specification[Specification]"
+        <MudIcon Icon="@HonmaIcons.Specification[Specification]"
                  Size="Size.Small"/>
         @if (ShowText)
         {
@@ -24,12 +24,12 @@
 
     [Parameter] public bool ShowText { get; set; }
 
-    private int Value { get; set; }
-    private bool ShowPlus { get; set; }
+    private int _value;
+    private bool _showPlus;
 
     protected override void OnParametersSet()
     {
-        Value = Specification switch
+        _value = Specification switch
         {
             ShipPartSpecification.FuelCapacity => Part.IsFrame ? Part.Frame.FuelCapacity : default,
             ShipPartSpecification.ModuleSlots => Part.IsFrame ? Part.Frame.ModuleSlots : default,
@@ -42,7 +42,7 @@
             _ => throw new ArgumentOutOfRangeException()
         };
 
-        ShowPlus = Specification == ShipPartSpecification.Capacity;
+        _showPlus = Specification == ShipPartSpecification.Capacity;
     }
 
 }
