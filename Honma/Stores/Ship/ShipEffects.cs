@@ -16,7 +16,7 @@ public class ShipEffects(ISpaceTradersClient client, ISnackbar snackbar)
 			dispatcher.Dispatch(
 				new ShipsUpdated(
 					ships ?? throw new InvalidOperationException(),
-					meta?.Total ?? throw new InvalidOperationException()
+					meta.Total
 				)
 			);
 		}

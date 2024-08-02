@@ -18,17 +18,13 @@
 
     [Parameter] public required string Icon { get; set; }
 
-    [Parameter] public required double Value
-    {
-        get => _value;
-        set
-        {
-            _value = value;
-            _percentage = (int)(_value * 100);
-        }
-    }
+    [Parameter] public required double Value { get; set; }
 
-    private double _value;
     private int _percentage;
+
+    protected override void OnParametersSet()
+    {
+        _percentage = (int)(Value * 100);
+    }
 
 }

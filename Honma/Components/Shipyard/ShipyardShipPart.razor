@@ -2,46 +2,17 @@
           Justify="Justify.SpaceBetween"
           Row>
     <MudStack Spacing="0">
-        <TextWithIcon Icon="@_icon"
-                      Text="@_type"/>
-        <MudText>@_name</MudText>
+        <TextWithIcon Icon="@Part.Icon"
+                      Text="@Part.TypeName"/>
+        <MudText>@Part.Name</MudText>
     </MudStack>
     <MudStack AlignItems="AlignItems.Center"
               Row>
-        @if (Part.IsFrame)
+        @foreach (var specification in Enum.GetValues<ShipPartSpecification>())
         {
-            <ShipPartSpecificationDisplay Part="Part"
-                                          Specification="ShipPartSpecification.FuelCapacity"/>
-            <ShipPartSpecificationDisplay Part="Part"
-                                          Specification="ShipPartSpecification.ModuleSlots"/>
-            <ShipPartSpecificationDisplay Part="Part"
-                                          Specification="ShipPartSpecification.MountingPoints"/>
-        }
-
-        @if (Part.IsReactor)
-        {
-            <ShipPartSpecificationDisplay Part="Part"
-                                          Specification="ShipPartSpecification.PowerOutput"/>
-        }
-
-        @if (Part.IsEngine)
-        {
-            <ShipPartSpecificationDisplay Part="Part"
-                                          Specification="ShipPartSpecification.Speed"/>
-        }
-
-        @if (Part.IsModule)
-        {
-            <ShipPartSpecificationDisplay Part="Part"
-                                          Specification="ShipPartSpecification.Capacity"/>
-            <ShipPartSpecificationDisplay Part="Part"
-                                          Specification="ShipPartSpecification.Range"/>
-        }
-
-        @if (Part.IsMount)
-        {
-            <ShipPartSpecificationDisplay Part="Part"
-                                          Specification="ShipPartSpecification.Strength"/>
+            <ShipPartSpecificationDisplay HideText
+                                          Part="Part"
+                                          Specification="specification"/>
         }
     </MudStack>
 </MudStack>
@@ -49,36 +20,5 @@
 @code {
 
     [Parameter] public required ShipPart Part { get; set; }
-
-    private string _type = string.Empty;
-    private string _icon = string.Empty;
-    private string _name = string.Empty;
-
-    protected override void OnParametersSet()
-    {
-        _type = Part.Match(
-            _ => "Frame",
-            _ => "Reactor",
-            _ => "Engine",
-            _ => "Module",
-            _ => "Mount"
-        );
-
-        _icon = Part.Match(
-            _ => HonmaIcons.Frame,
-            _ => HonmaIcons.Reactor,
-            _ => HonmaIcons.Engine,
-            _ => HonmaIcons.Module,
-            _ => HonmaIcons.Mount
-        );
-
-        _name = Part.Match(
-            frame => frame.Name,
-            reactor => reactor.Name,
-            engine => engine.Name,
-            module => module.Name,
-            mount => mount.Name
-        );
-    }
 
 }

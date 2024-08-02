@@ -25,7 +25,7 @@ public class ContractEffects(ISpaceTradersClient client, ISnackbar snackbar)
     {
         try
         {
-            var (response, _) = await client.AcceptContract(action.ContractId);
+            var response = (await client.AcceptContract(action.ContractId)).Data;
 
             dispatcher.Dispatch(new ContractUpdated(response.Contract));
             dispatcher.Dispatch(new UserAgentUpdated(response.Agent));

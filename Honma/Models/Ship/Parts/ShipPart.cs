@@ -1,4 +1,5 @@
-﻿using OneOf;
+﻿using Honma.Icons;
+using OneOf;
 
 namespace Honma.Models;
 
@@ -46,4 +47,60 @@ public partial class ShipPart : OneOfBase<ShipFrame, ShipReactor, ShipEngine, Sh
 		mount = IsMount ? Mount : null;
 		return IsMount;
 	}
+
+	public string TypeName => Match(
+		_ => "Frame",
+		_ => "Reactor",
+		_ => "Engine",
+		_ => "Module",
+		_ => "Mount"
+	);
+
+	public string Icon => Match(
+		_ => HonmaIcons.Frame,
+		_ => HonmaIcons.Reactor,
+		_ => HonmaIcons.Engine,
+		_ => HonmaIcons.Module,
+		_ => HonmaIcons.Mount
+	);
+
+	public string Name => Match(
+		frame => frame.Name,
+		reactor => reactor.Name,
+		engine => engine.Name,
+		module => module.Name,
+		mount => mount.Name
+	);
+
+	public string Description => Match(
+		frame => frame.Description,
+		reactor => reactor.Description,
+		engine => engine.Description,
+		module => module.Description,
+		mount => mount.Description ?? string.Empty
+	);
+
+	public ShipRequirements Requirements => Match(
+		frame => frame.Requirements,
+		reactor => reactor.Requirements,
+		engine => engine.Requirements,
+		module => module.Requirements,
+		mount => mount.Requirements
+	);
+
+	public double? Condition => Match<double?>(
+		frame => frame.Condition,
+		reactor => reactor.Condition,
+		engine => engine.Condition,
+		_ => null,
+		_ => null
+	);
+
+	public double? Integrity => Match<double?>(
+		frame => frame.Integrity,
+		reactor => reactor.Integrity,
+		engine => engine.Integrity,
+		_ => null,
+		_ => null
+	);
 }

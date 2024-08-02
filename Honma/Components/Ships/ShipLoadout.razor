@@ -1,22 +1,13 @@
 ﻿<MudGrid>
-    <MudItem xs="4">
-        <MudPaper Class="pa-4 rounded-lg"
-                  Elevation="2">
-            <ShipPartCard Frame="Ship.Frame"/>
-        </MudPaper>
-    </MudItem>
-    <MudItem xs="4">
-        <MudPaper Class="pa-4 rounded-lg"
-                  Elevation="2">
-            <ShipPartCard Reactor="Ship.Reactor"/>
-        </MudPaper>
-    </MudItem>
-    <MudItem xs="4">
-        <MudPaper Class="pa-4 rounded-lg"
-                  Elevation="2">
-            <ShipPartCard Engine="Ship.Engine"/>
-        </MudPaper>
-    </MudItem>
+    @foreach (var part in (ShipPart[])[Ship.Frame, Ship.Reactor, Ship.Engine])
+    {
+        <MudItem xs="4">
+            <MudPaper Class="pa-4 rounded-lg"
+                      Elevation="2">
+                <ShipPartCard Part="part"/>
+            </MudPaper>
+        </MudItem>
+    }
 </MudGrid>
 
 @code {

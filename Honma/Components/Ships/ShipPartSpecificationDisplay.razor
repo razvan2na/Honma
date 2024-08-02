@@ -9,7 +9,7 @@
         </MudText>
         <MudIcon Icon="@HonmaIcons.Specification[Specification]"
                  Size="Size.Small"/>
-        @if (ShowText)
+        @if (!HideText)
         {
             <MudText Typo="Typo.subtitle2">@(Specification.ToString().ToNaturalLanguage())</MudText>
         }
@@ -22,7 +22,7 @@
 
     [Parameter] public required ShipPartSpecification Specification { get; set; }
 
-    [Parameter] public bool ShowText { get; set; }
+    [Parameter] public bool HideText { get; set; }
 
     private int _value;
     private bool _showPlus;

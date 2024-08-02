@@ -31,7 +31,7 @@ public class UserAgentEffects(
 
         try
         {
-            var (agent, _) = await client.GetMyAgent();
+            var agent = (await client.GetMyAgent()).Data;
             authenticationStateProvider.NotifyUserAuthentication(token);
             dispatcher.Dispatch(new UserAgentUpdated(agent with { Token = token }));
         }
@@ -49,7 +49,7 @@ public class UserAgentEffects(
 
         try
         {
-            var (agent, _) = await client.GetMyAgent();
+            var agent = (await client.GetMyAgent()).Data;
             authenticationStateProvider.NotifyUserAuthentication(action.Token);
             dispatcher.Dispatch(new UserAgentUpdated(agent with { Token = action.Token }));
             navigationManager.NavigateTo(Routes.Home);
@@ -74,8 +74,7 @@ public class UserAgentEffects(
     {
         try
         {
-            var (userData, _) =
-                await client.RegisterAgent(new AgentRegisterRequest(action.Symbol, action.FactionSymbol));
+            var userData = (await client.RegisterAgent(new AgentRegisterRequest(action.Symbol, action.FactionSymbol))).Data;
 
             await userTokenService.Set(userData.Token);
             authenticationStateProvider.NotifyUserAuthentication(userData.Token);

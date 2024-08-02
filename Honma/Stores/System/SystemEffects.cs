@@ -16,7 +16,7 @@ public class SystemEffects(ISpaceTradersClient client, ISnackbar snackbar)
 			dispatcher.Dispatch(
 				new SystemsUpdated(
 					systems ?? throw new InvalidOperationException(),
-					meta?.Total ?? throw new InvalidOperationException()
+					meta.Total
 				)
 			);
 		}
@@ -31,7 +31,7 @@ public class SystemEffects(ISpaceTradersClient client, ISnackbar snackbar)
 	{
 		try
 		{
-			var (system, _) = await client.GetSystem(action.Symbol);
+			var system = (await client.GetSystem(action.Symbol)).Data;
 
 			dispatcher.Dispatch(new SystemUpdated(system));
 		}
@@ -52,7 +52,7 @@ public class SystemEffects(ISpaceTradersClient client, ISnackbar snackbar)
 
 			dispatcher.Dispatch(new SystemWaypointsUpdated(
 				waypoints ?? throw new InvalidOperationException(),
-				meta?.Total ?? throw new InvalidOperationException()
+				meta.Total
 			));
 		}
 		catch (Exception exception)

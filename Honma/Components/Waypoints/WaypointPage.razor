@@ -2,9 +2,9 @@
 @inherits FluxorComponent
 
 <MudContainer MaxWidth="MaxWidth.Small">
-    @if (State.Value.Waypoint is not null)
+    @if (WaypointState.Value.Waypoint is not null)
     {
-        var waypoint = State.Value.Waypoint.Value;
+        var waypoint = WaypointState.Value.Waypoint.Value;
 
         <MudPaper Class="my-4 pa-4 rounded-lg"
                   Elevation="2">
@@ -30,9 +30,9 @@
                 <MudTabPanel Disabled="@(waypoint.Traits.All(trait => trait.Symbol != WaypointTraitSymbol.Shipyard.ToString().ToMacroCase()))"
                              Icon="@HonmaIcons.Shipyard"
                              Text="Shipyard">
-                    @if (State.Value.Shipyard is not null)
+                    @if (ShipyardState.Value.Shipyard is not null)
                     {
-                        <ShipyardDisplay Shipyard="State.Value.Shipyard.Value"/>
+                        <ShipyardDisplay Shipyard="ShipyardState.Value.Shipyard.Value"/>
                     }
                 </MudTabPanel>
             </MudTabs>
@@ -46,7 +46,9 @@
 
     [Parameter] public required string WaypointSymbol { get; set; }
 
-    [Inject] public required IState<WaypointState> State { get; set; }
+    [Inject] public required IState<WaypointState> WaypointState { get; set; }
+
+    [Inject] public required IState<ShipyardState> ShipyardState { get; set; }
 
     [Inject] public required IDispatcher Dispatcher { get; set; }
 

@@ -1,7 +1,9 @@
 ﻿@inherits FluxorComponent
 
 <MudAppBar Class="honma-appbar ml-2 rounded-b-lg"
-           Elevation="0" Dense Gutters="false">
+           Dense
+           Elevation="0"
+           Gutters="false">
     <MudBreadcrumbs Class="pa-0"
                     Items="_breadcrumbs">
         <ItemTemplate Context="item">
@@ -17,7 +19,9 @@
                                  Icon="@item.Icon"/>
                     }
 
-                    <MudText Typo="Typo.h6"><b>@item.Text</b></MudText>
+                    <MudText Typo="Typo.h6">
+                        <b>@item.Text</b>
+                    </MudText>
                 </MudStack>
             </MudLink>
         </ItemTemplate>
@@ -32,6 +36,7 @@
     <AuthorizeView>
         <NotAuthorized>
             <MudIconButton Class="mr-2"
+                           Color="Color.Inherit"
                            Href="@Routes.Login"
                            Icon="@HonmaIcons.SignIn"/>
         </NotAuthorized>

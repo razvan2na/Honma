@@ -4,7 +4,7 @@ using Honma.Models;
 namespace Honma.Stores;
 
 [FeatureState]
-public record WaypointState
+public record ShipyardState
 {
-	public Waypoint? Waypoint { get; init; }
+	public Shipyard? Shipyard { get; set; }
 }

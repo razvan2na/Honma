@@ -15,28 +15,31 @@ public interface ISpaceTradersClient
     Task<Response<Agent>> GetMyAgent();
 
     [Get("/factions")]
-    Task<Response<IReadOnlyList<Faction>>> GetFactions([Query] int limit, [Query] int page);
+    Task<PagedResponse<List<Faction>>> GetFactions([Query] int limit, [Query] int page);
 
     [Get("/factions/{symbol}")]
     Task<Response<Faction>> GetFaction(string symbol);
 
     [Get("/my/contracts")]
-    Task<Response<IReadOnlyList<Contract>>> GetContracts([Query] int limit, [Query] int page);
+    Task<PagedResponse<List<Contract>>> GetContracts([Query] int limit, [Query] int page);
 
     [Post("/my/contracts/{contractId}/accept")]
     Task<Response<ContractAcceptResponse>> AcceptContract(string contractId);
 
     [Get("/my/ships")]
-    Task<Response<IReadOnlyCollection<Ship>>> GetShips([Query] int limit, [Query] int page);
+    Task<PagedResponse<List<Ship>>> GetShips([Query] int limit, [Query] int page);
+
+    [Post("/my/ships")]
+    Task<Response<ShipPurchaseResponse>> PurchaseShip([Body] string shipType, string waypointSymbol);
 
     [Get("/systems")]
-    Task<Response<IReadOnlyCollection<SystemDto>>> GetSystems([Query] int limit, [Query] int page);
+    Task<PagedResponse<List<SystemDto>>> GetSystems([Query] int limit, [Query] int page);
 
     [Get("/systems/{systemSymbol}")]
     Task<Response<SystemDto>> GetSystem(string systemSymbol);
 
     [Get("/systems/{systemSymbol}/waypoints")]
-    Task<Response<IReadOnlyCollection<Waypoint>>> GetSystemWaypoints(
+    Task<PagedResponse<List<Waypoint>>> GetSystemWaypoints(
         string systemSymbol,
         [Query] int limit,
         [Query] int page,
