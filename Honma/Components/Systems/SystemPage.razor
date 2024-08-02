@@ -83,6 +83,13 @@
                                     <MudText>@waypoint.Symbol</MudText>
                                     <MudStack AlignItems="AlignItems.Center"
                                               Row>
+                                        <MudChip Color="Color.Primary"
+                                                 Size="Size.Small"
+                                                 T="string"
+                                                 Variant="Variant.Filled">
+                                            @waypoint.Type
+                                        </MudChip>
+
                                         @if (waypoint.Traits.Any(trait => trait.Symbol == WaypointTraitSymbol.Marketplace.ToString().ToMacroCase()))
                                         {
                                             <MudChip Color="Color.Primary"
