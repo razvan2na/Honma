@@ -4,30 +4,7 @@
         <MudItem xs="4">
             <MudPaper Class="pa-4 rounded-lg"
                       Elevation="2">
-                <MudStack Spacing="4">
-                    <MudStack Spacing="2">
-                        <TextWithIcon Icon="@PhosphorIcons.Memory"
-                                      Text="Mount"/>
-
-                        <MudDivider/>
-
-                        <MudText Class="mt-2">
-                            <b>@mount.Name</b>
-                        </MudText>
-                        <MudText Typo="Typo.subtitle2">@mount.Description</MudText>
-                    </MudStack>
-
-                    <MudStack Spacing="1">
-                        @if (mount.Strength is not null)
-                        {
-                            <ShipPartStat Icon="@PhosphorIcons.Strength"
-                                          Name="Strength"
-                                          Value="mount.Strength.Value"/>
-                        }
-                    </MudStack>
-
-                    <ShipPartRequirements Requirements="@mount.Requirements"/>
-                </MudStack>
+                <ShipPartCard Mount="mount"/>
             </MudPaper>
         </MudItem>
     }

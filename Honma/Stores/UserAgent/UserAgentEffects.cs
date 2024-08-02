@@ -27,7 +27,19 @@ public class UserAgentEffects(
             return;
         }
 
-        dispatcher.Dispatch(new UserAgentLogin(token));
+        await userTokenService.Set(token);
+
+        try
+        {
+            var (agent, _) = await client.GetMyAgent();
+            authenticationStateProvider.NotifyUserAuthentication(token);
+            dispatcher.Dispatch(new UserAgentUpdated(agent with { Token = token }));
+        }
+        catch (Exception exception)
+        {
+            snackbar.Add(exception.Message, Severity.Error);
+            dispatcher.Dispatch(new UserAgentLogout());
+        }
     }
 
     [EffectMethod]

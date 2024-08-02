@@ -32,14 +32,13 @@ builder.Services.AddMudServices(configuration =>
 });
 
 // Register web local storage service.
-builder.Services.AddBlazoredLocalStorageAsSingleton();
+builder.Services.AddBlazoredLocalStorage();
 
 // Register .NET authorization.
 builder.Services.AddAuthorizationCore();
-builder.Services.AddSingleton<ClientAuthenticationStateProvider>();
-builder.Services.AddSingleton<AuthenticationStateProvider>(provider =>
-	provider.GetRequiredService<ClientAuthenticationStateProvider>()
-);
+builder.Services.AddScoped<ClientAuthenticationStateProvider>();
+builder.Services.AddScoped<AuthenticationStateProvider>(provider =>
+	provider.GetRequiredService<ClientAuthenticationStateProvider>());
 
 // Register app services.
 builder.Services.AddScoped<ClipboardService>();

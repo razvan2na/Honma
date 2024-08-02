@@ -2,123 +2,19 @@
     <MudItem xs="4">
         <MudPaper Class="pa-4 rounded-lg"
                   Elevation="2">
-            <MudStack Spacing="4">
-                <MudStack Spacing="2">
-                    <TextWithIcon Icon="@PhosphorIcons.Frame"
-                                  Text="Frame"/>
-
-                    <MudDivider/>
-
-                    <MudText Class="mt-2">
-                        <b>@Ship.Frame.Name</b>
-                    </MudText>
-                    <MudText Typo="Typo.subtitle2">@Ship.Frame.Description</MudText>
-                </MudStack>
-
-                <MudStack Spacing="1">
-                    @if (Ship.Frame.FuelCapacity > 0)
-                    {
-                        <ShipPartStat Icon="@PhosphorIcons.Fuel"
-                                      Name="Fuel Capacity"
-                                      Value="@Ship.Frame.FuelCapacity"/>
-                    }
-
-                    @if (Ship.Frame.ModuleSlots > 0)
-                    {
-                        <ShipPartStat Icon="@PhosphorIcons.DiamondsFour"
-                                      Name="Module Slots"
-                                      Value="@Ship.Frame.ModuleSlots"/>
-                    }
-
-                    @if (Ship.Frame.MountingPoints > 0)
-                    {
-                        <ShipPartStat Icon="@PhosphorIcons.Memory"
-                                      Name="Mounting Points"
-                                      Value="@Ship.Frame.MountingPoints"/>
-                    }
-                </MudStack>
-
-                <ShipPartRequirements Requirements="@Ship.Frame.Requirements"/>
-
-                <MudStack>
-                    <StatisticPercentageDisplay Icon="@PhosphorIcons.Nut"
-                                                Title="Condition"
-                                                Value="@Ship.Frame.Condition"/>
-                    <StatisticPercentageDisplay Icon="@PhosphorIcons.SubtractSquare"
-                                                Title="Integrity"
-                                                Value="@Ship.Frame.Integrity"/>
-                </MudStack>
-            </MudStack>
+            <ShipPartCard Frame="Ship.Frame"/>
         </MudPaper>
     </MudItem>
     <MudItem xs="4">
         <MudPaper Class="pa-4 rounded-lg"
                   Elevation="2">
-            <MudStack Spacing="4">
-                <MudStack Spacing="2">
-                    <TextWithIcon Icon="@PhosphorIcons.Reactor"
-                                  Text="Reactor"/>
-
-                    <MudDivider/>
-
-                    <MudText Class="mt-2">
-                        <b>@Ship.Reactor.Name</b>
-                    </MudText>
-                    <MudText Typo="Typo.subtitle2">@Ship.Reactor.Description</MudText>
-                </MudStack>
-
-                <MudStack Spacing="1">
-                    <TextWithIcon Icon="@PhosphorIcons.Power"
-                                  StartText="@(Ship.Reactor.PowerOutput.ToString())"
-                                  Text="Power Output"/>
-                </MudStack>
-
-                <ShipPartRequirements Requirements="@Ship.Reactor.Requirements"/>
-
-                <MudStack>
-                    <StatisticPercentageDisplay Icon="@PhosphorIcons.Nut"
-                                                Title="Condition"
-                                                Value="@Ship.Reactor.Condition"/>
-                    <StatisticPercentageDisplay Icon="@PhosphorIcons.SubtractSquare"
-                                                Title="Integrity"
-                                                Value="@Ship.Reactor.Integrity"/>
-                </MudStack>
-            </MudStack>
+            <ShipPartCard Reactor="Ship.Reactor"/>
         </MudPaper>
     </MudItem>
     <MudItem xs="4">
         <MudPaper Class="pa-4 rounded-lg"
                   Elevation="2">
-            <MudStack Spacing="4">
-                <MudStack Spacing="2">
-                    <TextWithIcon Icon="@PhosphorIcons.Engine"
-                                  Text="Engine"/>
-
-                    <MudDivider/>
-
-                    <MudText Class="mt-2">
-                        <b>@Ship.Engine.Name</b>
-                    </MudText>
-                    <MudText Typo="Typo.subtitle2">@Ship.Engine.Description</MudText>
-                </MudStack>
-
-                <MudStack Spacing="1">
-                    <TextWithIcon Icon="@PhosphorIcons.Speed"
-                                  StartText="@(Ship.Engine.Speed.ToString())"
-                                  Text="Speed"/>
-                </MudStack>
-
-                <ShipPartRequirements Requirements="@Ship.Engine.Requirements"/>
-
-                <MudStack>
-                    <StatisticPercentageDisplay Icon="@PhosphorIcons.Nut"
-                                                Title="Condition"
-                                                Value="@Ship.Engine.Condition"/>
-                    <StatisticPercentageDisplay Icon="@PhosphorIcons.SubtractSquare"
-                                                Title="Integrity"
-                                                Value="@Ship.Engine.Integrity"/>
-                </MudStack>
-            </MudStack>
+            <ShipPartCard Engine="Ship.Engine"/>
         </MudPaper>
     </MudItem>
 </MudGrid>

@@ -4,39 +4,7 @@
         <MudItem xs="4">
             <MudPaper Class="pa-4 rounded-lg"
                       Elevation="2">
-                <MudStack Spacing="4">
-                    <MudStack Spacing="2">
-                        <TextWithIcon Icon="@PhosphorIcons.DiamondsFour"
-                                      Text="Module"/>
-
-                        <MudDivider/>
-
-                        <MudText Class="mt-2">
-                            <b>@module.Name</b>
-                        </MudText>
-                        <MudText Typo="Typo.subtitle2">@module.Description</MudText>
-                    </MudStack>
-
-                    <MudStack Spacing="1">
-                        @if (module.Capacity is not null)
-                        {
-                            <ShipPartStat AddedValue
-                                          Icon="@PhosphorIcons.Package"
-                                          Name="Capacity"
-                                          Value="module.Capacity.Value"/>
-                        }
-
-                        @if (module.Range is not null)
-                        {
-                            <ShipPartStat AddedValue
-                                          Icon="@PhosphorIcons.Range"
-                                          Name="Range"
-                                          Value="module.Range.Value"/>
-                        }
-                    </MudStack>
-
-                    <ShipPartRequirements Requirements="@module.Requirements"/>
-                </MudStack>
+                <ShipPartCard Module="module"/>
             </MudPaper>
         </MudItem>
     }

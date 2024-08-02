@@ -1,0 +1,217 @@
+﻿<MudStack Spacing="4">
+    <MudStack Spacing="2">
+        <TextWithIcon Icon="@_icon"
+                      Text="@_type"/>
+
+        <MudDivider/>
+
+        <MudText Class="mt-2">
+            <b>@_name</b>
+        </MudText>
+        <MudText Typo="Typo.subtitle2">@_description</MudText>
+    </MudStack>
+
+    <MudStack Spacing="1">
+        @if (Frame?.FuelCapacity > 0)
+        {
+            <ShipPartStat Icon="@PhosphorIcons.Fuel"
+                          Name="Fuel Capacity"
+                          Value="@(Frame?.FuelCapacity ?? 0)"/>
+        }
+
+        @if (Frame?.ModuleSlots > 0)
+        {
+            <ShipPartStat Icon="@PhosphorIcons.DiamondsFour"
+                          Name="Module Slots"
+                          Value="@(Frame?.ModuleSlots ?? 0)"/>
+        }
+
+        @if (Frame?.MountingPoints > 0)
+        {
+            <ShipPartStat Icon="@PhosphorIcons.Memory"
+                          Name="Mounting Points"
+                          Value="@(Frame?.MountingPoints ?? 0)"/>
+        }
+
+        @if (Reactor?.PowerOutput > 0)
+        {
+            <ShipPartStat Icon="@PhosphorIcons.Power"
+                          Name="Power Output"
+                          Value="@(Reactor?.PowerOutput ?? 0)"/>
+        }
+
+        @if (Engine?.Speed > 0)
+        {
+            <ShipPartStat Icon="@PhosphorIcons.Speed"
+                          Name="Speed"
+                          Value="@(Engine?.Speed ?? 0)"/>
+        }
+
+        @if (Module?.Capacity > 0)
+        {
+            <ShipPartStat Icon="@PhosphorIcons.Package"
+                          Name="Capacity"
+                          Value="@(Module?.Capacity ?? 0)"/>
+        }
+
+        @if (Module?.Range > 0)
+        {
+            <ShipPartStat Icon="@PhosphorIcons.Range"
+                          Name="Range"
+                          Value="@(Module?.Range ?? 0)"/>
+        }
+
+        @if (Mount?.Strength > 0)
+        {
+            <ShipPartStat Icon="@PhosphorIcons.Strength"
+                          Name="Strength"
+                          Value="@(Mount?.Strength ?? 0)"/>
+        }
+    </MudStack>
+
+    @if (_requirements is not null)
+    {
+        <ShipPartRequirements Requirements="@_requirements.Value"/>
+    }
+
+    @if (Frame is not null || Reactor is not null || Engine is not null)
+    {
+        <MudStack>
+            <StatisticPercentageDisplay Icon="@PhosphorIcons.Nut"
+                                        Title="Condition"
+                                        Value="@_condition"/>
+            <StatisticPercentageDisplay Icon="@PhosphorIcons.SubtractSquare"
+                                        Title="Integrity"
+                                        Value="@_integrity"/>
+        </MudStack>
+    }
+</MudStack>
+
+@code {
+
+    [Parameter]
+    public ShipFrame? Frame
+    {
+        get => _frame;
+        set
+        {
+            _frame = value;
+            _type = nameof(Frame);
+            _icon = PhosphorIcons.Frame;
+
+            if (_frame is null)
+            {
+                return;
+            }
+
+            _name = _frame.Value.Name;
+            _description = _frame.Value.Description;
+            _requirements = _frame.Value.Requirements;
+            _condition = _frame.Value.Condition;
+            _integrity = _frame.Value.Integrity;
+        }
+    }
+
+    [Parameter]
+    public ShipReactor? Reactor
+    {
+        get => _reactor;
+        set
+        {
+            _reactor = value;
+            _type = nameof(Reactor);
+            _icon = PhosphorIcons.Reactor;
+
+            if (_reactor is null)
+            {
+                return;
+            }
+
+            _name = _reactor.Value.Name;
+            _description = _reactor.Value.Description;
+            _requirements = _reactor.Value.Requirements;
+            _condition = _reactor.Value.Condition;
+            _integrity = _reactor.Value.Integrity;
+        }
+    }
+
+    [Parameter]
+    public ShipEngine? Engine
+    {
+        get => _engine;
+        set
+        {
+            _engine = value;
+            _type = nameof(Engine);
+            _icon = PhosphorIcons.Engine;
+
+            if (_engine is null)
+            {
+                return;
+            }
+
+            _name = _engine.Value.Name;
+            _description = _engine.Value.Description;
+            _requirements = _engine.Value.Requirements;
+            _condition = _engine.Value.Condition;
+            _integrity = _engine.Value.Integrity;
+        }
+    }
+
+    [Parameter]
+    public ShipModule? Module
+    {
+        get => _module;
+        set
+        {
+            _module = value;
+            _type = nameof(Module);
+            _icon = PhosphorIcons.DiamondsFour;
+
+            if (_module is null)
+            {
+                return;
+            }
+
+            _name = _module.Value.Name;
+            _description = _module.Value.Description;
+            _requirements = _module.Value.Requirements;
+        }
+    }
+
+    [Parameter]
+    public ShipMount? Mount
+    {
+        get => _mount;
+        set
+        {
+            _mount = value;
+            _type = nameof(Mount);
+            _icon = PhosphorIcons.Memory;
+
+            if (_mount is null)
+            {
+                return;
+            }
+
+            _name = _mount.Value.Name;
+            _description = _mount.Value.Description ?? string.Empty;
+            _requirements = _mount.Value.Requirements;
+        }
+    }
+
+    private ShipFrame? _frame;
+    private ShipReactor? _reactor;
+    private ShipEngine? _engine;
+    private ShipModule? _module;
+    private ShipMount? _mount;
+
+    private string _type = string.Empty;
+    private string _icon = string.Empty;
+    private string _name = string.Empty;
+    private string _description = string.Empty;
+    private ShipRequirements? _requirements;
+    private double _condition;
+    private double _integrity;
+
+}
