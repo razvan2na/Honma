@@ -6,10 +6,10 @@
         <MudItem xs="3" Class="mt-2">
             <ShipList Ships="State.Value.Ships" @bind-SelectedShip="_selectedShip"/>
 
-            @if (State.Value.TotalShipCount / _pageSize > 1)
+            @if (State.Value.Pagination.Total / _pageSize > 1)
             {
                 <MudPagination @bind-Selected="_page"
-                               Class="mt-4" Count="State.Value.TotalShipCount / _pageSize">
+                               Class="mt-4" Count="State.Value.Pagination.Total / _pageSize">
                 </MudPagination>
             }
         </MudItem>

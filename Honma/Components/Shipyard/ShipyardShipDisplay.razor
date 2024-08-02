@@ -1,0 +1,70 @@
+﻿<MudStack Spacing="4">
+    <MudStack AlignItems="AlignItems.Center"
+              Justify="Justify.SpaceBetween"
+              Row>
+        <MudStack Spacing="0">
+            <MudText>
+                <b>@Ship.Name</b>
+            </MudText>
+            <CurrencyDisplay Amount="@Ship.PurchasePrice"
+                             Typo="Typo.subtitle2"/>
+        </MudStack>
+
+        <MudButton Color="Color.Primary"
+                   OnClick="Purchase"
+                   StartIcon="@HonmaIcons.Credits"
+                   Variant="Variant.Filled">
+            Buy
+        </MudButton>
+    </MudStack>
+
+    <MudText Typo="Typo.subtitle2">@Ship.Description</MudText>
+
+    <MudList T="string">
+        <MudListItem Class="rounded-lg"
+                     T="string">
+            <ShipyardShipPart Part="Ship.Frame"/>
+        </MudListItem>
+
+        <MudListItem Class="rounded-lg"
+                     T="string">
+            <ShipyardShipPart Part="Ship.Reactor"/>
+        </MudListItem>
+
+        <MudListItem Class="rounded-lg"
+                     T="string">
+            <ShipyardShipPart Part="Ship.Engine"/>
+        </MudListItem>
+
+        @foreach (var module in Ship.Modules)
+        {
+            <MudListItem Class="rounded-lg"
+                         T="string">
+                <ShipyardShipPart Part="module"/>
+            </MudListItem>
+        }
+
+        @foreach (var mount in Ship.Mounts)
+        {
+            <MudListItem Class="rounded-lg"
+                         T="string">
+                <ShipyardShipPart Part="mount"/>
+            </MudListItem>
+        }
+    </MudList>
+</MudStack>
+
+@code {
+
+    [Parameter] public required ShipyardShip Ship { get; set; }
+
+    [Parameter] public required Shipyard Shipyard { get; set; }
+
+    [Inject] public required IDispatcher Dispatcher { get; set; }
+
+    private void Purchase()
+    {
+        Dispatcher.Dispatch(new ShipPurchase(Ship.Type, Shipyard.Symbol));
+    }
+
+}

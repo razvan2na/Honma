@@ -2,60 +2,7 @@
 {
     <MudPaper Class="ma-4 pa-4 rounded-lg"
               Elevation="2">
-        <MudStack Spacing="4">
-            <MudStack AlignItems="AlignItems.Center"
-                      Justify="Justify.SpaceBetween"
-                      Row>
-                <MudStack Spacing="0">
-                    <MudText>
-                        <b>@ship.Name</b>
-                    </MudText>
-                    <CurrencyDisplay Amount="@ship.PurchasePrice"
-                                     Typo="Typo.subtitle2"/>
-                </MudStack>
-
-                <MudButton Color="Color.Primary"
-                           StartIcon="@HonmaIcons.Credits"
-                           Variant="Variant.Filled">
-                    Buy
-                </MudButton>
-            </MudStack>
-
-            <MudText Typo="Typo.subtitle2">@ship.Description</MudText>
-
-            <MudList T="string">
-                <MudListItem Class="rounded-lg"
-                             T="string">
-                    <ShipyardShipPart Part="ship.Frame"/>
-                </MudListItem>
-
-                <MudListItem Class="rounded-lg"
-                             T="string">
-                    <ShipyardShipPart Part="ship.Reactor"/>
-                </MudListItem>
-
-                <MudListItem Class="rounded-lg"
-                             T="string">
-                    <ShipyardShipPart Part="ship.Engine"/>
-                </MudListItem>
-
-                @foreach (var module in ship.Modules)
-                {
-                    <MudListItem Class="rounded-lg"
-                                 T="string">
-                        <ShipyardShipPart Part="module"/>
-                    </MudListItem>
-                }
-
-                @foreach (var mount in ship.Mounts)
-                {
-                    <MudListItem Class="rounded-lg"
-                                 T="string">
-                        <ShipyardShipPart Part="mount"/>
-                    </MudListItem>
-                }
-            </MudList>
-        </MudStack>
+        <ShipyardShipDisplay Ship="ship" Shipyard="Shipyard"/>
     </MudPaper>
 }
 

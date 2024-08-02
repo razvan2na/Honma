@@ -1,7 +1,10 @@
-﻿using Honma.Models;
+﻿using Honma.Data;
+using Honma.Models;
 
 namespace Honma.Stores;
 
-public record ShipsLoad(int Limit, int Page);
+public readonly record struct ShipsLoad(int Limit, int Page);
 
-public record ShipsUpdated(IReadOnlyCollection<Ship> Ships, int TotalShipCount);
+public readonly record struct ShipsUpdated(IReadOnlyCollection<Ship> Ships, Pagination Pagination);
+
+public readonly record struct ShipPurchase(string ShipType, string WaypointSymbol);

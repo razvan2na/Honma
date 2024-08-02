@@ -2,99 +2,127 @@
 @inherits FluxorComponent
 
 <MudContainer MaxWidth="MaxWidth.Small">
-    <MudPaper Class="mt-4 pa-4 rounded-lg"
-              Elevation="2">
-        <MudStack AlignItems="AlignItems.Center"
-                  Row
-                  Spacing="2">
-            <MudIcon Icon="@HonmaIcons.System"/>
-            <MudText Typo="Typo.h5">@SystemSymbol</MudText>
-        </MudStack>
+    @if (State.Value.System is not null)
+    {
+        var system = State.Value.System.Value;
 
-        @if (State.Value.System is not null)
-        {
-            var system = State.Value.System.Value;
-        }
-    </MudPaper>
+        <MudPaper Class="mt-4 pa-4 rounded-lg"
+                  Elevation="2">
+            <MudStack Spacing="4">
+                <MudStack AlignItems="AlignItems.Center"
+                          Justify="Justify.SpaceBetween"
+                          Row>
+                    <MudStack AlignItems="AlignItems.Center"
+                              Row
+                              Spacing="2">
+                        <MudIcon Icon="@HonmaIcons.System"/>
+                        <MudText Typo="Typo.h5">@SystemSymbol</MudText>
+                    </MudStack>
+                    <MudChip Color="Color.Primary"
+                             T="string"
+                             Variant="Variant.Text">
+                        @system.Type
+                    </MudChip>
+                </MudStack>
 
-    <MudPaper Class="mt-4 pa-4 rounded-lg"
-              Elevation="2">
-        <MudStack AlignItems="AlignItems.Center"
-                  Justify="Justify.SpaceBetween"
-                  Row>
-            <MudStack AlignItems="AlignItems.Center"
-                      Row
-                      Spacing="2">
-                <MudIcon Icon="@HonmaIcons.Waypoint"/>
-                <MudText Typo="Typo.h6">Waypoints</MudText>
+                @if (system.Factions.Any())
+                {
+                    <MudStack AlignItems="AlignItems.Center"
+                              Row
+                              Wrap="Wrap.Wrap">
+                        @foreach (var faction in system.Factions)
+                        {
+                            <MudChip Color="Color.Secondary"
+                                     T="string"
+                                     Variant="Variant.Text">
+                                @faction.Symbol
+                            </MudChip>
+                        }
+                    </MudStack>
+                }
             </MudStack>
-            <MudPagination BoundaryCount="1"
-                           Count="@(State.Value.TotalWaypoints / 10 + 1)"
-                           MiddleCount="3"
-                           Rectangular
-                           Selected="_page"
-                           SelectedChanged="WaypointPageChange"
-                           Size="Size.Small"
-                           Variant="Variant.Text"/>
-        </MudStack>
+        </MudPaper>
 
-        <MudList Class="mt-4"
-                 Gutters="false"
-                 T="string">
-            @foreach (var waypoint in State.Value.Waypoints)
-            {
-                <MudListItem Class="rounded-lg"
-                             Href="@($"{Routes.Systems}/{SystemSymbol}{Routes.Waypoints}/{waypoint.Symbol}")"
-                             T="string">
-                    <ChildContent>
-                        <MudStack AlignItems="AlignItems.Center"
-                                  Justify="Justify.SpaceBetween"
-                                  Row>
+        <MudPaper Class="mt-4 pa-4 rounded-lg"
+                  Elevation="2">
+            <MudStack AlignItems="AlignItems.Center"
+                      Justify="Justify.SpaceBetween"
+                      Row>
+                <MudStack AlignItems="AlignItems.Center"
+                          Row
+                          Spacing="2">
+                    <MudIcon Icon="@HonmaIcons.Waypoint"/>
+                    <MudText Typo="Typo.h6">Waypoints</MudText>
+                </MudStack>
+                <MudPagination BoundaryCount="1"
+                               Count="@(State.Value.TotalWaypoints / 10 + 1)"
+                               MiddleCount="3"
+                               Rectangular
+                               Selected="_page"
+                               SelectedChanged="WaypointPageChange"
+                               Size="Size.Small"
+                               Variant="Variant.Text"/>
+            </MudStack>
+
+            <MudList Class="mt-4"
+                     Gutters="false"
+                     T="string">
+                @foreach (var waypoint in State.Value.Waypoints)
+                {
+                    <MudListItem Class="rounded-lg"
+                                 Href="@($"{Routes.Systems}/{SystemSymbol}{Routes.Waypoints}/{waypoint.Symbol}")"
+                                 T="string">
+                        <ChildContent>
                             <MudStack AlignItems="AlignItems.Center"
                                       Justify="Justify.SpaceBetween"
-                                      Row Class="width-full">
-                                <MudText>@waypoint.Symbol</MudText>
+                                      Row>
                                 <MudStack AlignItems="AlignItems.Center"
+                                          Class="width-full"
+                                          Justify="Justify.SpaceBetween"
                                           Row>
-                                    @if (waypoint.Traits.Any(trait => trait.Symbol == WaypointTraitSymbol.Marketplace.ToString().ToMacroCase()))
-                                    {
-                                        <MudChip Color="Color.Primary"
-                                                 Size="Size.Small"
-                                                 T="string"
-                                                 Variant="Variant.Text">
-                                            Market
-                                        </MudChip>
-                                    }
+                                    <MudText>@waypoint.Symbol</MudText>
+                                    <MudStack AlignItems="AlignItems.Center"
+                                              Row>
+                                        @if (waypoint.Traits.Any(trait => trait.Symbol == WaypointTraitSymbol.Marketplace.ToString().ToMacroCase()))
+                                        {
+                                            <MudChip Color="Color.Primary"
+                                                     Size="Size.Small"
+                                                     T="string"
+                                                     Variant="Variant.Text">
+                                                Market
+                                            </MudChip>
+                                        }
 
-                                    @if (waypoint.Traits.Any(trait => trait.Symbol == WaypointTraitSymbol.Shipyard.ToString().ToMacroCase()))
-                                    {
-                                        <MudChip Color="Color.Secondary"
-                                                 Size="Size.Small"
-                                                 T="string"
-                                                 Variant="Variant.Text">
-                                            Shipyard
-                                        </MudChip>
-                                    }
+                                        @if (waypoint.Traits.Any(trait => trait.Symbol == WaypointTraitSymbol.Shipyard.ToString().ToMacroCase()))
+                                        {
+                                            <MudChip Color="Color.Secondary"
+                                                     Size="Size.Small"
+                                                     T="string"
+                                                     Variant="Variant.Text">
+                                                Shipyard
+                                            </MudChip>
+                                        }
 
-                                    @if (waypoint.Traits.Any(trait => trait.Symbol == WaypointTraitSymbol.Uncharted.ToString().ToMacroCase()))
-                                    {
-                                        <MudChip Size="Size.Small"
-                                                 T="string"
-                                                 Variant="Variant.Text">
-                                            Uncharted
-                                        </MudChip>
-                                    }
+                                        @if (waypoint.Traits.Any(trait => trait.Symbol == WaypointTraitSymbol.Uncharted.ToString().ToMacroCase()))
+                                        {
+                                            <MudChip Size="Size.Small"
+                                                     T="string"
+                                                     Variant="Variant.Text">
+                                                Uncharted
+                                            </MudChip>
+                                        }
+                                    </MudStack>
                                 </MudStack>
-                            </MudStack>
 
-                            <MudIcon Icon="@HonmaIcons.CaretRight"
-                                     Size="Size.Small"/>
-                        </MudStack>
-                    </ChildContent>
-                </MudListItem>
-            }
-        </MudList>
-    </MudPaper>
+                                <MudIcon Icon="@HonmaIcons.CaretRight"
+                                         Size="Size.Small"/>
+                            </MudStack>
+                        </ChildContent>
+                    </MudListItem>
+                }
+            </MudList>
+        </MudPaper>
+    }
 </MudContainer>
 
 @code {
@@ -106,6 +134,12 @@
     [Inject] public required IDispatcher Dispatcher { get; set; }
 
     private int _page = 1;
+
+    private static List<string> Traits =>
+        Enum.GetValues<WaypointTraitSymbol>()
+            .Select(trait => trait.ToString().ToNaturalLanguage())
+            .Order()
+            .ToList();
 
     protected override void OnInitialized()
     {

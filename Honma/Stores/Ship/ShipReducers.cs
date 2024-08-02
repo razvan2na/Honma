@@ -1,4 +1,5 @@
 ﻿using Fluxor;
+using Honma.Utils;
 
 namespace Honma.Stores;
 
@@ -8,6 +9,6 @@ public static class ShipReducers
 	public static ShipState Reduce(ShipState state, ShipsUpdated action) => new()
 	{
 		Ships = action.Ships,
-		TotalShipCount = action.TotalShipCount
+		Pagination = action.Pagination
 	};
 }

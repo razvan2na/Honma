@@ -1,4 +1,5 @@
 ﻿using Fluxor;
+using Honma.Data;
 using Honma.Models;
 
 namespace Honma.Stores;
@@ -8,5 +9,5 @@ public record ShipState
 {
 	public IReadOnlyCollection<Ship> Ships { get; init; } = [];
 
-	public int TotalShipCount { get; init; }
+	public Pagination Pagination { get; init; }
 }
