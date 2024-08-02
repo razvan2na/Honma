@@ -1,0 +1,48 @@
+﻿@if (Value != 0)
+{
+    <MudStack AlignItems="AlignItems.Center"
+              Row
+              Spacing="1">
+        <MudText Typo="Typo.subtitle2">
+            @(ShowPlus ? "+" : "")
+            @Value
+        </MudText>
+        <MudIcon Icon="@PhosphorIcons.Specification[Specification]"
+                 Size="Size.Small"/>
+        @if (ShowText)
+        {
+            <MudText Typo="Typo.subtitle2">@(Specification.ToString().ToNaturalLanguage())</MudText>
+        }
+    </MudStack>
+}
+
+@code {
+
+    [Parameter] public required ShipPart Part { get; set; }
+
+    [Parameter] public required ShipPartSpecification Specification { get; set; }
+
+    [Parameter] public bool ShowText { get; set; }
+
+    private int Value { get; set; }
+    private bool ShowPlus { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        Value = Specification switch
+        {
+            ShipPartSpecification.FuelCapacity => Part.IsFrame ? Part.Frame.FuelCapacity : default,
+            ShipPartSpecification.ModuleSlots => Part.IsFrame ? Part.Frame.ModuleSlots : default,
+            ShipPartSpecification.MountingPoints => Part.IsFrame ? Part.Frame.MountingPoints : default,
+            ShipPartSpecification.PowerOutput => Part.IsReactor ? Part.Reactor.PowerOutput : default,
+            ShipPartSpecification.Speed => Part.IsEngine ? Part.Engine.Speed : default,
+            ShipPartSpecification.Capacity => Part.IsModule ? Part.Module.Capacity ?? 0 : default,
+            ShipPartSpecification.Range => Part.IsModule ? Part.Module.Range ?? 0 : default,
+            ShipPartSpecification.Strength => Part.IsMount ? Part.Mount.Strength ?? 0 : default,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        ShowPlus = Specification == ShipPartSpecification.Capacity;
+    }
+
+}

@@ -14,58 +14,50 @@
     <MudStack Spacing="1">
         @if (Frame?.FuelCapacity > 0)
         {
-            <ShipPartStat Icon="@PhosphorIcons.Fuel"
-                          Name="Fuel Capacity"
-                          Value="@(Frame?.FuelCapacity ?? 0)"/>
+            <ShipPartSpecificationDisplay Part="Frame"
+                                          Specification="ShipPartSpecification.FuelCapacity"/>
         }
 
         @if (Frame?.ModuleSlots > 0)
         {
-            <ShipPartStat Icon="@PhosphorIcons.DiamondsFour"
-                          Name="Module Slots"
-                          Value="@(Frame?.ModuleSlots ?? 0)"/>
+            <ShipPartSpecificationDisplay Part="Frame"
+                                          Specification="ShipPartSpecification.ModuleSlots"/>
         }
 
         @if (Frame?.MountingPoints > 0)
         {
-            <ShipPartStat Icon="@PhosphorIcons.Memory"
-                          Name="Mounting Points"
-                          Value="@(Frame?.MountingPoints ?? 0)"/>
+            <ShipPartSpecificationDisplay Part="Frame"
+                                          Specification="ShipPartSpecification.MountingPoints"/>
         }
 
         @if (Reactor?.PowerOutput > 0)
         {
-            <ShipPartStat Icon="@PhosphorIcons.Power"
-                          Name="Power Output"
-                          Value="@(Reactor?.PowerOutput ?? 0)"/>
+            <ShipPartSpecificationDisplay Part="Reactor"
+                                          Specification="ShipPartSpecification.PowerOutput"/>
         }
 
         @if (Engine?.Speed > 0)
         {
-            <ShipPartStat Icon="@PhosphorIcons.Speed"
-                          Name="Speed"
-                          Value="@(Engine?.Speed ?? 0)"/>
+            <ShipPartSpecificationDisplay Part="Engine"
+                                          Specification="ShipPartSpecification.Speed"/>
         }
 
         @if (Module?.Capacity > 0)
         {
-            <ShipPartStat Icon="@PhosphorIcons.Package"
-                          Name="Capacity"
-                          Value="@(Module?.Capacity ?? 0)"/>
+            <ShipPartSpecificationDisplay Part="Module"
+                                          Specification="ShipPartSpecification.Capacity"/>
         }
 
         @if (Module?.Range > 0)
         {
-            <ShipPartStat Icon="@PhosphorIcons.Range"
-                          Name="Range"
-                          Value="@(Module?.Range ?? 0)"/>
+            <ShipPartSpecificationDisplay Part="Module"
+                                          Specification="ShipPartSpecification.Range"/>
         }
 
         @if (Mount?.Strength > 0)
         {
-            <ShipPartStat Icon="@PhosphorIcons.Strength"
-                          Name="Strength"
-                          Value="@(Mount?.Strength ?? 0)"/>
+            <ShipPartSpecificationDisplay Part="Mount"
+                                          Specification="ShipPartSpecification.Strength"/>
         }
     </MudStack>
 
