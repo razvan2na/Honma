@@ -1,7 +1,7 @@
 ﻿@attribute [Route(Routes.Home)]
 @inherits FluxorComponent
 
-<MudContainer MaxWidth="MaxWidth.Large">
+<MudContainer>
     @if (State.Value.Status is not null)
     {
         var status = State.Value.Status.Value;
@@ -193,15 +193,16 @@
     }
 </MudContainer>
 
-@code
-{
-    [Inject] private IState<ServerStatusState> State { get; set; } = null!;
+@code {
 
-    [Inject] private IDispatcher Dispatcher { get; set; } = null!;
+    [Inject] public required IState<ServerStatusState> State { get; set; }
+
+    [Inject] public required IDispatcher Dispatcher { get; set; }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
         Dispatcher.Dispatch(new ServerStatusLoad());
     }
+
 }

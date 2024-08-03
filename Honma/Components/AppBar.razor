@@ -1,12 +1,12 @@
 ﻿@inherits FluxorComponent
 
-<MudAppBar Class="honma-appbar ml-2 rounded-b-lg"
+<MudAppBar Class="honma-appbar ml-2 px-4 rounded-b-lg"
            Dense
            Elevation="0"
            Gutters="false">
     <div onclick="@(() => NavigationManager.NavigateTo(Routes.Home))">
         <MudStack AlignItems="AlignItems.Center"
-                  Class="cursor-pointer ml-4"
+                  Class="cursor-pointer"
                   Row
                   Spacing="2">
             <MudIcon Icon="@HonmaIcons.Path"/>
@@ -24,8 +24,10 @@
 
     <AuthorizeView>
         <NotAuthorized>
-            <MudIconButton Class="mr-2"
-                           Color="Color.Inherit"
+            <MudIconButton Color="Color.Inherit"
+                           Href="@Routes.AgentHistory"
+                           Icon="@HonmaIcons.Agent"/>
+            <MudIconButton Color="Color.Inherit"
                            Href="@Routes.Login"
                            Icon="@HonmaIcons.SignIn"/>
         </NotAuthorized>
