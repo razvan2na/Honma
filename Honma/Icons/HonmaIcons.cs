@@ -5,7 +5,6 @@ namespace Honma.Icons;
 public static class HonmaIcons
 {
     public const string CaretRight = "ph-bold ph-caret-right";
-    public const string ChalkboardTeacher = "ph-bold ph-chalkboard-teacher";
     public const string ClockCountdown = "ph-bold ph-clock-countdown";
     public const string ClockCounterClockwise = "ph-bold ph-clock-counter-clockwise";
     public const string Copy = "ph-bold ph-copy";
@@ -18,6 +17,7 @@ public static class HonmaIcons
     public const string Key = "ph-bold ph-key";
 
     public const string Agent = "ph-bold ph-identification-badge";
+    public const string AgentHistory = "ph-bold ph-user-list";
     public const string Cargo = "ph-bold ph-package";
     public const string Condition = "ph-bold ph-nut";
     public const string Contract = "ph-bold ph-file-text";

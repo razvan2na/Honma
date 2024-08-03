@@ -1,8 +1,9 @@
 ﻿@foreach (var ship in Shipyard.Ships ?? [])
 {
     <MudPaper Class="ma-4 pa-4 rounded-lg"
-              Elevation="2">
-        <ShipyardShipDisplay Ship="ship" Shipyard="Shipyard"/>
+              Elevation="0">
+        <ShipyardShipDisplay Ship="ship"
+                             Shipyard="Shipyard"/>
     </MudPaper>
 }
 

@@ -6,18 +6,19 @@
 <MudLayout>
     <AppBar/>
 
-    <AuthorizeView>
-        <Authorized>
-            <MudDrawer Class="honma-main-drawer ml-2 mt-2 rounded-lg"
-                       ClipMode="DrawerClipMode.Always"
-                       Elevation="2"
-                       Variant="DrawerVariant.Mini">
-                <NavigationMenu/>
-            </MudDrawer>
-        </Authorized>
-    </AuthorizeView>
+    <MudDrawer Class="honma-main-drawer ml-4 mt-4 rounded-lg"
+               ClipMode="DrawerClipMode.Always"
+               Elevation="0"
+               Variant="DrawerVariant.Mini">
+        <NavigationMenu/>
+    </MudDrawer>
 
     <MudMainContent>
-        @Body
+        <MudContainer Class="mt-2 pl-8 pr-4"
+                      Fixed
+                      Gutters="false"
+                      MaxWidth="MaxWidth.False">
+            @Body
+        </MudContainer>
     </MudMainContent>
 </MudLayout>

@@ -1,5 +1,5 @@
 ﻿<MudPaper Class="rounded-lg"
-          Elevation="2">
+          Elevation="0">
     <MudList SelectedValue="SelectedShip"
              SelectedValueChanged="@((Ship? ship) => SelectedShipChanged.InvokeAsync(ship))"
              SelectionMode="SelectionMode.SingleSelection"
@@ -8,11 +8,15 @@
         {
             <MudListItem T="Ship?"
                          Value="ship">
-                <MudStack Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Row>
+                <MudStack AlignItems="AlignItems.Center"
+                          Justify="Justify.SpaceBetween"
+                          Row>
                     <MudText>@ship.Symbol</MudText>
-                    <MudChip T="string"
-                             Color="Color.Secondary"
-                             Size="Size.Small">@ship.Registration.Role</MudChip>
+                    <MudChip Color="Color.Secondary"
+                             Size="Size.Small"
+                             T="string">
+                        @ship.Registration.Role
+                    </MudChip>
                 </MudStack>
 
             </MudListItem>

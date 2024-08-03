@@ -45,4 +45,6 @@ builder.Services.AddScoped<ClipboardService>();
 builder.Services.AddScoped<UserTokenService>();
 builder.Services.AddScoped<AgentHistoryService>();
 
+builder.Logging.SetMinimumLevel(LogLevel.Warning);
+
 await builder.Build().RunAsync();

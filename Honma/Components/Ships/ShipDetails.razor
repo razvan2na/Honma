@@ -1,6 +1,6 @@
 ﻿<MudStack class="height-full">
     <MudPaper Class="pa-4 rounded-lg"
-              Elevation="2">
+              Elevation="0">
         <MudStack AlignItems="AlignItems.Center"
                   Justify="Justify.SpaceBetween"
                   Row>
@@ -30,7 +30,7 @@
         <MudStack Class="mt-4"
                   Row>
             <MudPaper Class="pa-2 rounded-lg"
-                      Elevation="2">
+                      Elevation="0">
                 <MudStack Spacing="1">
                     <MudText Typo="Typo.subtitle2">System</MudText>
                     <MudLink Href="@($"{Routes.Systems}/{Ship.Nav.SystemSymbol}")">@Ship.Nav.SystemSymbol</MudLink>
@@ -38,7 +38,7 @@
             </MudPaper>
 
             <MudPaper Class="pa-2 rounded-lg"
-                      Elevation="2">
+                      Elevation="0">
                 <MudStack Spacing="1">
                     <MudText Typo="Typo.subtitle2">Waypoint</MudText>
                     <MudLink Href="@($"{Routes.Systems}/{Ship.Nav.SystemSymbol}{Routes.Waypoints}/{Ship.Nav.WaypointSymbol}")">@Ship.Nav.WaypointSymbol</MudLink>
@@ -46,7 +46,7 @@
             </MudPaper>
 
             <MudPaper Class="pa-2 rounded-lg"
-                      Elevation="2">
+                      Elevation="0">
                 <MudStack Spacing="1">
                     <MudText Typo="Typo.subtitle2">Status</MudText>
                     <MudText>@Ship.Nav.Status</MudText>
@@ -54,7 +54,7 @@
             </MudPaper>
 
             <MudPaper Class="pa-2 rounded-lg"
-                      Elevation="2">
+                      Elevation="0">
                 <MudStack Spacing="1">
                     <MudText Typo="Typo.subtitle2">Flight Mode</MudText>
                     <MudText>@Ship.Nav.FlightMode</MudText>
@@ -110,7 +110,7 @@
     </MudPaper>
 
     <MudPaper Class="rounded-lg"
-              Elevation="2">
+              Elevation="0">
         <MudTabs Centered
                  Class="rounded-lg">
             <MudTabPanel Icon="@HonmaIcons.Loadout"
@@ -137,7 +137,7 @@
                          Icon="@HonmaIcons.Cargo"
                          Text="Cargo">
                 <MudTable Class="rounded-lg"
-                          Elevation="2"
+                          Elevation="0"
                           Items="Ship.Cargo.Inventory">
                     <HeaderContent>
                         <MudTh>Name</MudTh>
@@ -162,10 +162,12 @@
 
     [Parameter] public required Ship Ship { get; set; }
 
-    private int PowerConsumption() =>
-        (Ship.Frame.Requirements.Power ?? 0) +
-        (Ship.Engine.Requirements.Power ?? 0) +
-        Ship.Modules.Aggregate(0, (total, module) => total + (module.Requirements.Power ?? 0)) +
-        Ship.Mounts.Aggregate(0, (total, mount) => total + (mount.Requirements.Power ?? 0));
+    private int PowerConsumption()
+    {
+        return (Ship.Frame.Requirements.Power ?? 0) +
+               (Ship.Engine.Requirements.Power ?? 0) +
+               Ship.Modules.Aggregate(0, (total, module) => total + (module.Requirements.Power ?? 0)) +
+               Ship.Mounts.Aggregate(0, (total, mount) => total + (mount.Requirements.Power ?? 0));
+    }
 
 }

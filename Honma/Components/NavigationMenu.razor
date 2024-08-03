@@ -1,11 +1,46 @@
 ﻿<MudNavMenu Class="my-2"
             Color="Color.Primary"
             Margin="Margin.Normal">
+
+    <AuthorizeView>
+        <Authorized>
+            <MudTooltip Arrow
+                        Placement="Placement.Right"
+                        Text="Ships">
+                <MudNavLink Href="@Routes.Ships"
+                            Icon="@HonmaIcons.Ship"
+                            Match="NavLinkMatch.All">
+                </MudNavLink>
+            </MudTooltip>
+
+            <MudTooltip Arrow
+                        Placement="Placement.Right"
+                        Text="Contracts">
+                <MudNavLink Href="@Routes.Contracts"
+                            Icon="@HonmaIcons.Contract"
+                            Match="NavLinkMatch.All">
+                </MudNavLink>
+            </MudTooltip>
+
+            <MudTooltip Arrow
+                        Placement="Placement.Right"
+                        Text="Systems">
+                <MudNavLink Href="@Routes.Systems"
+                            Icon="@HonmaIcons.System"
+                            Match="NavLinkMatch.All">
+                </MudNavLink>
+            </MudTooltip>
+
+            <MudDivider Class="my-2"
+                        DividerType="DividerType.Middle"/>
+        </Authorized>
+    </AuthorizeView>
+
     <MudTooltip Arrow
                 Placement="Placement.Right"
                 Text="Factions">
         <MudNavLink Href="@Routes.Factions"
-                    Icon="@HonmaIcons.Crew"
+                    Icon="@HonmaIcons.Faction"
                     Match="NavLinkMatch.All">
         </MudNavLink>
     </MudTooltip>
@@ -14,34 +49,7 @@
                 Placement="Placement.Right"
                 Text="Agent History">
         <MudNavLink Href="@Routes.AgentHistory"
-                    Icon="@HonmaIcons.ChalkboardTeacher"
-                    Match="NavLinkMatch.All">
-        </MudNavLink>
-    </MudTooltip>
-
-    <MudTooltip Arrow
-                Placement="Placement.Right"
-                Text="Contracts">
-        <MudNavLink Href="@Routes.Contracts"
-                    Icon="@HonmaIcons.Contract"
-                    Match="NavLinkMatch.All">
-        </MudNavLink>
-    </MudTooltip>
-
-    <MudTooltip Arrow
-                Placement="Placement.Right"
-                Text="Ships">
-        <MudNavLink Href="@Routes.Ships"
-                    Icon="@HonmaIcons.Ship"
-                    Match="NavLinkMatch.All">
-        </MudNavLink>
-    </MudTooltip>
-
-    <MudTooltip Arrow
-                Placement="Placement.Right"
-                Text="Systems">
-        <MudNavLink Href="@Routes.Systems"
-                    Icon="@HonmaIcons.System"
+                    Icon="@HonmaIcons.AgentHistory"
                     Match="NavLinkMatch.All">
         </MudNavLink>
     </MudTooltip>

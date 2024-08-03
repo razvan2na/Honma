@@ -1,35 +1,40 @@
 ﻿@attribute [Route(Routes.Ships)]
 @inherits FluxorComponent
 
-<MudContainer MaxWidth="MaxWidth.ExtraLarge">
-    <MudGrid>
-        <MudItem xs="3" Class="mt-2">
-            <ShipList Ships="State.Value.Ships" @bind-SelectedShip="_selectedShip"/>
+<MudGrid>
+    <MudItem Class="mt-2"
+             xs="3">
+        <ShipList @bind-SelectedShip="_selectedShip"
+                  Ships="State.Value.Ships"/>
 
-            @if (State.Value.Pagination.Total / _pageSize > 1)
-            {
-                <MudPagination @bind-Selected="_page"
-                               Class="mt-4" Count="State.Value.Pagination.Total / _pageSize">
-                </MudPagination>
-            }
-        </MudItem>
+        @if (State.Value.Pagination.Total / _pageSize > 1)
+        {
+            <MudPagination @bind-Selected="_page"
+                           Class="mt-4"
+                           Count="State.Value.Pagination.Total / _pageSize">
+            </MudPagination>
+        }
+    </MudItem>
 
-        <MudItem xs="9" Class="mt-2 height-screen">
-            @if (_selectedShip is null)
-            {
-                <MudPaper Elevation="2" Class="height-full rounded-lg">
-                    <MudStack Class="height-full" Justify="Justify.Center" AlignItems="AlignItems.Center">
-                        <MudText>Select a ship from the list to view its details</MudText>
-                    </MudStack>
-                </MudPaper>
-            }
-            else
-            {
-                <ShipDetails Ship="_selectedShip.Value"/>
-            }
-        </MudItem>
-    </MudGrid>
-</MudContainer>
+    <MudItem Class="height-screen mt-2"
+             xs="9">
+        @if (_selectedShip is null)
+        {
+            <MudPaper Class="height-full rounded-lg"
+                      Elevation="0">
+                <MudStack AlignItems="AlignItems.Center"
+                          Class="height-full"
+                          Justify="Justify.Center">
+                    <MudText>Select a ship from the list to view its details</MudText>
+                </MudStack>
+            </MudPaper>
+        }
+        else
+        {
+            <ShipDetails Ship="_selectedShip.Value"/>
+        }
+    </MudItem>
+</MudGrid>
 
 @code {
 

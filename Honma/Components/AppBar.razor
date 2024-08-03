@@ -1,35 +1,39 @@
 ﻿@inherits FluxorComponent
 
-<MudAppBar Class="honma-appbar ml-2 px-4 rounded-b-lg"
+<MudAppBar Class="honma-appbar ml-4 px-1 rounded-b-lg"
            Dense
            Elevation="0"
            Gutters="false">
-    <div onclick="@(() => NavigationManager.NavigateTo(Routes.Home))">
-        <MudStack AlignItems="AlignItems.Center"
-                  Class="cursor-pointer"
-                  Row
-                  Spacing="2">
-            <MudIcon Icon="@HonmaIcons.Path"/>
-            <MudText Typo="Typo.h6">Honma</MudText>
-            <MudChip Color="Color.Warning"
-                     Size="Size.Small"
-                     T="string"
-                     Variant="Variant.Text">
-                ALPHA
-            </MudChip>
-        </MudStack>
-    </div>
+    <MudBreadcrumbs Items="_breadcrumbs">
+        <ItemTemplate Context="item">
+            <MudStack AlignItems="AlignItems.Center"
+                      Row
+                      Spacing="2">
+                @if (item.Icon is not null)
+                {
+                    <MudIcon Color="Color.Inherit"
+                             Icon="@item.Icon"/>
+                }
+                <MudText Color="Color.Inherit"
+                         Typo="Typo.h6">
+                    @item.Text
+                </MudText>
+            </MudStack>
+        </ItemTemplate>
+    </MudBreadcrumbs>
 
     <MudSpacer/>
 
     <AuthorizeView>
         <NotAuthorized>
-            <MudIconButton Color="Color.Inherit"
-                           Href="@Routes.AgentHistory"
-                           Icon="@HonmaIcons.Agent"/>
-            <MudIconButton Color="Color.Inherit"
-                           Href="@Routes.Login"
-                           Icon="@HonmaIcons.SignIn"/>
+            <MudButton Class="rounded-lg"
+                       Color="Color.Inherit"
+                       Href="@Routes.Login"
+                       Size="Size.Large"
+                       StartIcon="@HonmaIcons.SignIn"
+                       Variant="Variant.Text">
+                Login
+            </MudButton>
         </NotAuthorized>
         <Authorized>
             @if (State.Value.Agent is not null)
@@ -54,6 +58,13 @@
             }
         </Authorized>
     </AuthorizeView>
+
+    <MudChip Color="Color.Warning"
+             Size="Size.Small"
+             T="string"
+             Variant="Variant.Text">
+        Alpha Build v0.1
+    </MudChip>
 </MudAppBar>
 
 @code {
@@ -68,8 +79,6 @@
     [Inject] private ClipboardService ClipboardService { get; set; } = null!;
 
     [Inject] private ISnackbar Snackbar { get; set; } = null!;
-
-    [Inject] public required NavigationManager NavigationManager { get; set; }
 
     private List<BreadcrumbItem>? _breadcrumbs;
 

@@ -7,7 +7,7 @@
         var waypoint = WaypointState.Value.Waypoint.Value;
 
         <MudPaper Class="my-4 pa-4 rounded-lg"
-                  Elevation="2">
+                  Elevation="0">
             <MudText Typo="Typo.h5">@WaypointSymbol</MudText>
 
             <MudText>@waypoint.Type</MudText>
@@ -19,7 +19,7 @@
         </MudPaper>
 
         <MudPaper Class="mb-4 rounded-lg"
-                  Elevation="2">
+                  Elevation="0">
             <MudTabs Centered>
                 <MudTabPanel Disabled="@(waypoint.Traits.All(trait => trait.Symbol != WaypointTraitSymbol.Marketplace.ToString().ToMacroCase()))"
                              Icon="@HonmaIcons.Market"

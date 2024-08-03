@@ -8,7 +8,7 @@
         <b>Recruiting</b>
     </MudText>
     <MudExpansionPanels Class="mt-4 rounded-lg"
-                        Elevation="2">
+                        Elevation="0">
         @foreach (var faction in State.Value.Factions.Where(faction => faction.IsRecruiting))
         {
             <MudExpansionPanel>
@@ -29,7 +29,7 @@
         <b>Not Recruiting</b>
     </MudText>
     <MudExpansionPanels Class="mt-4 rounded-lg"
-                        Elevation="2">
+                        Elevation="0">
         @foreach (var faction in State.Value.Factions.Where(faction => !faction.IsRecruiting))
         {
             <MudExpansionPanel>
