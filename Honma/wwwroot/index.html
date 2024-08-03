@@ -13,15 +13,23 @@
     />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+          rel="stylesheet">
     <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet"/>
-    <link rel="icon" type="image/png" href="favicon.png"/>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
     <link href="Honma.styles.css" rel="stylesheet"/>
 </head>
 
 <body>
+
 <div id="app">
-    <div>Loading</div>
+    <div style="position:absolute; top:30vh; width:100%; text-align:center; font-family: Rubik, sans-serif;">
+        <h1>Honma</h1>
+        <div style="display:flex; gap:10px; justify-content:center; align-items:center">
+            <div class="spinner-border" role="status"></div>
+            The application is loading...
+        </div>
+    </div>
 </div>
 
 <div id="blazor-error-ui">
@@ -31,5 +39,6 @@
 </div>
 <script src="_framework/blazor.webassembly.js"></script>
 <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+
 </body>
 </html>

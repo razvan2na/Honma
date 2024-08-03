@@ -4,32 +4,21 @@
            Dense
            Elevation="0"
            Gutters="false">
-    <MudBreadcrumbs Class="pa-0"
-                    Items="_breadcrumbs">
-        <ItemTemplate Context="item">
-            <MudLink Class="pa-0"
-                     Color="Color.Inherit"
-                     Href="@item.Href"
-                     Underline="Underline.None">
-                <MudStack AlignItems="AlignItems.Center"
-                          Row>
-                    @if (!string.IsNullOrWhiteSpace(item.Icon))
-                    {
-                        <MudIcon Class="ml-4"
-                                 Icon="@item.Icon"/>
-                    }
-
-                    <MudText Typo="Typo.h6">
-                        <b>@item.Text</b>
-                    </MudText>
-                </MudStack>
-            </MudLink>
-        </ItemTemplate>
-
-        <SeparatorTemplate>
-            <MudText Color="Color.Inherit">/</MudText>
-        </SeparatorTemplate>
-    </MudBreadcrumbs>
+    <div onclick="@(() => NavigationManager.NavigateTo(Routes.Home))">
+        <MudStack AlignItems="AlignItems.Center"
+                  Class="cursor-pointer ml-4"
+                  Row
+                  Spacing="2">
+            <MudIcon Icon="@HonmaIcons.Path"/>
+            <MudText Typo="Typo.h6">Honma</MudText>
+            <MudChip Color="Color.Warning"
+                     Size="Size.Small"
+                     T="string"
+                     Variant="Variant.Text">
+                ALPHA
+            </MudChip>
+        </MudStack>
+    </div>
 
     <MudSpacer/>
 
@@ -77,6 +66,8 @@
     [Inject] private ClipboardService ClipboardService { get; set; } = null!;
 
     [Inject] private ISnackbar Snackbar { get; set; } = null!;
+
+    [Inject] public required NavigationManager NavigationManager { get; set; }
 
     private List<BreadcrumbItem>? _breadcrumbs;
 

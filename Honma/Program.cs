@@ -21,14 +21,14 @@ builder.Services.AddFluxor(options => { options.ScanAssemblies(typeof(Program).A
 // Register API interface with Refit, including handler for populating authentication header for every HTTP request.
 builder.Services.AddTransient<AuthenticationHeaderHandler>();
 builder.Services
-	.AddRefitClient<ISpaceTradersClient>()
-	.ConfigureHttpClient(client => client.BaseAddress = new Uri("https://api.spacetraders.io/v2"))
-	.AddHttpMessageHandler<AuthenticationHeaderHandler>();
+    .AddRefitClient<ISpaceTradersClient>()
+    .ConfigureHttpClient(client => client.BaseAddress = new Uri("https://api.spacetraders.io/v2"))
+    .AddHttpMessageHandler<AuthenticationHeaderHandler>();
 
 // Register MudBlazor component library services.
 builder.Services.AddMudServices(configuration =>
 {
-	configuration.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight;
+    configuration.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight;
 });
 
 // Register web local storage service.
@@ -38,7 +38,7 @@ builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<ClientAuthenticationStateProvider>();
 builder.Services.AddScoped<AuthenticationStateProvider>(provider =>
-	provider.GetRequiredService<ClientAuthenticationStateProvider>());
+    provider.GetRequiredService<ClientAuthenticationStateProvider>());
 
 // Register app services.
 builder.Services.AddScoped<ClipboardService>();
