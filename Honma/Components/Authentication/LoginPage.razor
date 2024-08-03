@@ -7,9 +7,17 @@
               Class="height-full"
               Justify="Justify.Center"
               Spacing="8">
-        <AgentRegister/>
+        <MudPaper Class="pa-4 rounded-lg width-full"
+                  Elevation="2">
+            <AgentRegister/>
+        </MudPaper>
+
         <MudText>OR</MudText>
-        <AgentTokenLogin/>
+
+        <MudPaper Class="pa-4 rounded-lg width-full"
+                  Elevation="2">
+            <AgentTokenLogin/>
+        </MudPaper>
     </MudStack>
 </MudContainer>
 
@@ -21,7 +29,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        SubscribeToAction<UserAgentUpdated>((_) => NavigationManager.NavigateTo(Routes.Home));
+        SubscribeToAction<UserAgentUpdated>(_ => NavigationManager.NavigateTo(Routes.Home));
     }
 
 }

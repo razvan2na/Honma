@@ -1,11 +1,12 @@
 ﻿@inherits FluxorComponent
 
-<MudPaper Class="pa-4 rounded-lg width-full"
-          Elevation="2">
-    <MudStack>
-        <MudText Typo="Typo.h6">Register New Agent</MudText>
+<MudStack Spacing="4">
+    <MudText Typo="Typo.h5">Register New Agent</MudText>
 
-        <MudTextField @bind-Value="_agentSymbol"
+    <MudStack Spacing="2">
+        <MudTextField Adornment="Adornment.End"
+                      AdornmentIcon="@HonmaIcons.Agent"
+                      @bind-Value="_agentSymbol"
                       Counter="14"
                       HelperText="Unique name used to represent your agent"
                       Immediate
@@ -15,51 +16,40 @@
                       Variant="Variant.Filled">
         </MudTextField>
 
-        <MudSelect @bind-Value="_selectedFaction"
-                   Disabled="@(State.Value.Factions is null)"
-                   HelperText="Determines your starting location."
+        <MudSelect Adornment="Adornment.End"
+                   AdornmentIcon="@HonmaIcons.Faction"
+                   AnchorOrigin="Origin.BottomCenter"
+                   @bind-Value="_selectedFaction"
+                   HelperText="Determines your starting location"
                    Label="Faction"
                    T="Faction?"
                    Variant="Variant.Filled">
-
-            @if (State.Value.Factions is not null)
+            @foreach (var faction in State.Value.Factions.Where(faction => faction.IsRecruiting))
             {
-                var factions = State.Value.Factions.Where(faction => faction.IsRecruiting);
-
-
-                @foreach (var faction in factions)
-                {
-                    <MudSelectItem T="Faction?"
-                                   Value="faction">
-                        <MudStack AlignItems="AlignItems.Center"
-                                  Justify="Justify.SpaceBetween"
-                                  Row>
-                            <MudText>@faction.Name</MudText>
-                            <MudText Color="Color.Primary">[@faction.Symbol]</MudText>
-                        </MudStack>
-                    </MudSelectItem>
-                }
+                <MudSelectItem T="Faction?"
+                               Value="faction">
+                    <MudStack AlignItems="AlignItems.Center"
+                              Class="mr-2"
+                              Justify="Justify.SpaceBetween"
+                              Row>
+                        <MudText>@faction.Name</MudText>
+                        <MudText Color="Color.Primary">[@faction.Symbol]</MudText>
+                    </MudStack>
+                </MudSelectItem>
             }
-
         </MudSelect>
-
-        <MudText Typo="Typo.body2">
-            Not sure which faction to choose? Go to the
-            <MudLink Href="@Routes.Factions"
-                     Typo="Typo.body2">
-                factions page
-            </MudLink> to find out more about them.
-        </MudText>
-
-        <MudButton Class="mt-2 rounded-lg"
-                   Color="Color.Primary"
-                   Disabled="@(!CanRegister)"
-                   OnClick="@Register"
-                   Variant="Variant.Filled">
-            Register
-        </MudButton>
     </MudStack>
-</MudPaper>
+
+    <MudButton Class="rounded-lg"
+               Color="Color.Primary"
+               Disabled="@(!CanRegister)"
+               OnClick="Register"
+               Size="Size.Large"
+               StartIcon="@HonmaIcons.SignIn"
+               Variant="Variant.Filled">
+        Register
+    </MudButton>
+</MudStack>
 
 @code {
 

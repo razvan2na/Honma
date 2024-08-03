@@ -1,26 +1,36 @@
-﻿<MudPaper Class="pa-4 rounded-lg width-full"
-          Elevation="2">
-    <MudStack>
-        <MudText Typo="Typo.h6">Login With Token</MudText>
+﻿<MudStack Spacing="4">
+    <MudText Typo="Typo.h5">Login With Token</MudText>
 
-        <MudTextField @bind-Value="_token"
-                      Immediate
-                      Label="Token"
-                      Variant="Variant.Filled">
-        </MudTextField>
+    <MudTextField Adornment="Adornment.End"
+                  AdornmentIcon="@HonmaIcons.Key"
+                  @bind-Value="_token"
+                  Immediate
+                  Label="Token"
+                  Variant="Variant.Filled">
+    </MudTextField>
 
-        <MudButton Class="mt-2 rounded-lg"
-                   Color="Color.Primary"
-                   Disabled="@(string.IsNullOrWhiteSpace(_token))"
-                   Variant="Variant.Filled">
-            Login
-        </MudButton>
-
-    </MudStack>
-</MudPaper>
+    <MudButton Class="mt-2 rounded-lg"
+               Color="Color.Primary"
+               Disabled="@(string.IsNullOrWhiteSpace(_token))"
+               Size="Size.Large"
+               StartIcon="@HonmaIcons.SignIn"
+               Variant="Variant.Filled">
+        Login
+    </MudButton>
+</MudStack>
 
 @code {
 
+    [Inject] public required IDispatcher Dispatcher { get; set; }
+
     private string? _token;
+
+    private void Login()
+    {
+        if (!string.IsNullOrWhiteSpace(_token))
+        {
+            Dispatcher.Dispatch(new UserAgentLogin(_token));
+        }
+    }
 
 }
