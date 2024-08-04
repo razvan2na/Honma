@@ -9,7 +9,9 @@
         @foreach (var announcement in Announcements)
         {
             <MudStack Spacing="0">
-                <MudAlert>@announcement.Title</MudAlert>
+                <MudAlert>
+                    <b>@announcement.Title</b>
+                </MudAlert>
                 <MudText Class="ml-13 mr-4">@announcement.Body</MudText>
             </MudStack>
         }
