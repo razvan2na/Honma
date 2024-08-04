@@ -47,7 +47,7 @@
                   Row
                   Spacing="2">
             <MudIcon Icon="@HonmaIcons.ClockCounterClockwise"/>
-            <MudText>Last reset on <b>@Status.ResetDate.ToString(Formats.Date)</b></MudText>
+            <MudText>Last reset was on <b>@Status.ResetDate.ToString(Formats.Date)</b></MudText>
         </MudStack>
     </AppSurface>
 
@@ -56,7 +56,7 @@
                   Row
                   Spacing="2">
             <MudIcon Icon="@HonmaIcons.ClockCountdown"/>
-            <MudText>Next reset on <b>@Status.ServerResets.Next.ToString(Formats.Date)</b></MudText>
+            <MudText>Next reset is on <b>@Status.ServerResets.Next.ToString(Formats.Date)</b></MudText>
         </MudStack>
     </AppSurface>
 </MudStack>

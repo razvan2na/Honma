@@ -12,15 +12,17 @@
 
         <MudDivider/>
 
-        @foreach (var announcement in Announcements)
-        {
-            <MudStack Spacing="0">
-                <MudAlert>
-                    <b>@announcement.Title</b>
-                </MudAlert>
-                <MudText Class="ml-13 mr-4">@announcement.Body</MudText>
-            </MudStack>
-        }
+        <MudStack>
+            @foreach (var announcement in Announcements)
+            {
+                <MudStack Spacing="0">
+                    <MudAlert Class="rounded-lg">
+                        <b>@announcement.Title</b>
+                    </MudAlert>
+                    <MudText Class="ml-13 mr-4">@announcement.Body</MudText>
+                </MudStack>
+            }
+        </MudStack>
     </MudStack>
 </AppSurface>
 
