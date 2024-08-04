@@ -3,6 +3,7 @@ using Honma.Components.AgentHistory;
 using Honma.Components.Authentication;
 using Honma.Components.Contracts;
 using Honma.Components.Factions;
+using Honma.Components.Home;
 using Honma.Components.Ships;
 using Honma.Components.Systems;
 using Honma.Components.Waypoints;
@@ -17,12 +18,13 @@ public static class Utils
 {
     public static List<BreadcrumbItem> BuildBreadcrumbs(this RouteData routeData)
     {
-        var breadcrumbs = new List<BreadcrumbItem>
-        {
-            new(BreadcrumbTexts.Home, Routes.Home, false, HonmaIcons.Path)
-        };
+        var breadcrumbs = new List<BreadcrumbItem>();
 
-        if (routeData.PageType == typeof(LoginPage))
+        if (routeData.PageType == typeof(HomePage))
+        {
+            breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Home, Routes.Home, false, HonmaIcons.Home));
+        }
+        else if (routeData.PageType == typeof(LoginPage))
         {
             breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Login, Routes.Login, false, HonmaIcons.SignIn));
         }

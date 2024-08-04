@@ -2,6 +2,18 @@
             Color="Color.Primary"
             Margin="Margin.Normal">
 
+    <MudTooltip Arrow
+                Placement="Placement.Right"
+                Text="Home">
+        <MudNavLink Href="@Routes.Home"
+                    Icon="@HonmaIcons.Home"
+                    Match="NavLinkMatch.All">
+        </MudNavLink>
+    </MudTooltip>
+
+    <MudDivider Class="my-2"
+                DividerType="DividerType.Middle"/>
+
     <AuthorizeView>
         <Authorized>
             <MudTooltip Arrow

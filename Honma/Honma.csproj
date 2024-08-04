@@ -5,18 +5,21 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.7" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="8.0.7" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.7" PrivateAssets="all" />
-        <PackageReference Include="MudBlazor" Version="7.4.0" />
-        <PackageReference Include="Fluxor.Blazor.Web" Version="6.0.0" />
-        <PackageReference Include="OneOf" Version="3.0.271" />
-        <PackageReference Include="OneOf.SourceGenerator" Version="3.0.271" />
-        <PackageReference Include="Refit" Version="7.1.2" />
-        <PackageReference Include="Refit.HttpClientFactory" Version="7.1.2" />
+        <PackageReference Include="Blazored.LocalStorage" Version="4.5.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.7"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="8.0.7"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.7" PrivateAssets="all"/>
+        <PackageReference Include="MudBlazor" Version="7.4.0"/>
+        <PackageReference Include="Fluxor.Blazor.Web" Version="6.0.0"/>
+        <PackageReference Include="OneOf" Version="3.0.271"/>
+        <PackageReference Include="OneOf.SourceGenerator" Version="3.0.271"/>
+        <PackageReference Include="Refit" Version="7.1.2"/>
+        <PackageReference Include="Refit.HttpClientFactory" Version="7.1.2"/>
     </ItemGroup>
     <ItemGroup>
         <None Remove="Honma.csproj.DotSettings"/>
+    </ItemGroup>
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="Components\ServerStatus\ServerStatusDashboard.razor"/>
     </ItemGroup>
 </Project>

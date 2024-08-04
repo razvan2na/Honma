@@ -1,0 +1,33 @@
+﻿<AppSurface>
+    <MudStack>
+        <MudText Typo="Typo.h6">
+            Best explorers
+        </MudText>
+        <MudDivider/>
+
+        @foreach (var entry in Leaderboard.Take(10))
+        {
+            <MudStack AlignItems="AlignItems.Center"
+                      Justify="Justify.SpaceBetween"
+                      Row
+                      Spacing="16">
+                <MudText Style="text-wrap: nowrap">
+                    <b>@entry.AgentSymbol</b>
+                </MudText>
+                <MudStack AlignItems="AlignItems.Center"
+                          Row
+                          Spacing="1">
+                    <MudText>@entry.ChartCount</MudText>
+                    <MudIcon Color="Color.Tertiary"
+                             Icon="@HonmaIcons.Chart"/>
+                </MudStack>
+            </MudStack>
+        }
+    </MudStack>
+</AppSurface>
+
+@code {
+
+    [Parameter] public required List<LeaderboardCharts> Leaderboard { get; set; }
+
+}

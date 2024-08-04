@@ -6,19 +6,23 @@
            Gutters="false">
     <MudBreadcrumbs Items="_breadcrumbs">
         <ItemTemplate Context="item">
-            <MudStack AlignItems="AlignItems.Center"
-                      Row
-                      Spacing="2">
-                @if (item.Icon is not null)
-                {
-                    <MudIcon Color="Color.Inherit"
-                             Icon="@item.Icon"/>
-                }
-                <MudText Color="Color.Inherit"
-                         Typo="Typo.h6">
-                    @item.Text
-                </MudText>
-            </MudStack>
+            <MudLink Color="Color.Inherit"
+                     Href="@item.Href"
+                     Underline="Underline.None">
+                <MudStack AlignItems="AlignItems.Center"
+                          Row
+                          Spacing="2">
+                    @if (item.Icon is not null)
+                    {
+                        <MudIcon Color="Color.Inherit"
+                                 Icon="@item.Icon"/>
+                    }
+                    <MudText Color="Color.Inherit"
+                             Typo="Typo.h6">
+                        @item.Text
+                    </MudText>
+                </MudStack>
+            </MudLink>
         </ItemTemplate>
     </MudBreadcrumbs>
 
@@ -63,7 +67,7 @@
              Size="Size.Small"
              T="string"
              Variant="Variant.Text">
-        Alpha Build v0.1
+        Alpha Build v@(Globals.Version)
     </MudChip>
 </MudAppBar>
 

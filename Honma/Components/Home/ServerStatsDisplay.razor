@@ -1,0 +1,68 @@
+﻿<MudStack>
+    <MudStack AlignItems="AlignItems.Center"
+              Row>
+        <AppSurface Class="width-full">
+            <MudStack AlignItems="AlignItems.Center"
+                      Row
+                      Spacing="2">
+                <MudIcon Icon="@HonmaIcons.Agent"/>
+                <MudText><b>@Status.Stats.Agents</b> agents</MudText>
+            </MudStack>
+        </AppSurface>
+
+        <AppSurface Class="width-full">
+            <MudStack AlignItems="AlignItems.Center"
+                      Row
+                      Spacing="2">
+                <MudIcon Icon="@HonmaIcons.Ship"/>
+                <MudText><b>@Status.Stats.Ships</b> ships</MudText>
+            </MudStack>
+        </AppSurface>
+    </MudStack>
+
+    <MudStack AlignItems="AlignItems.Center"
+              Row>
+        <AppSurface Class="width-full">
+            <MudStack AlignItems="AlignItems.Center"
+                      Row
+                      Spacing="2">
+                <MudIcon Icon="@HonmaIcons.System"/>
+                <MudText><b>@Status.Stats.Systems</b> systems</MudText>
+            </MudStack>
+        </AppSurface>
+
+        <AppSurface Class="width-full">
+            <MudStack AlignItems="AlignItems.Center"
+                      Row
+                      Spacing="2">
+                <MudIcon Icon="@HonmaIcons.Waypoint"
+                         Size="Size.Small"/>
+                <MudText><b>@Status.Stats.Waypoints</b> waypoints</MudText>
+            </MudStack>
+        </AppSurface>
+    </MudStack>
+
+    <AppSurface Class="width-full">
+        <MudStack AlignItems="AlignItems.Center"
+                  Row
+                  Spacing="2">
+            <MudIcon Icon="@HonmaIcons.ClockCounterClockwise"/>
+            <MudText>Last reset on <b>@Status.ResetDate.ToString(Formats.Date)</b></MudText>
+        </MudStack>
+    </AppSurface>
+
+    <AppSurface Class="width-full">
+        <MudStack AlignItems="AlignItems.Center"
+                  Row
+                  Spacing="2">
+            <MudIcon Icon="@HonmaIcons.ClockCountdown"/>
+            <MudText>Next reset on <b>@Status.ServerResets.Next.ToString(Formats.Date)</b></MudText>
+        </MudStack>
+    </AppSurface>
+</MudStack>
+
+@code {
+
+    [Parameter] public required ServerStatus Status { get; set; }
+
+}

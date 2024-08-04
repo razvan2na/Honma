@@ -1,0 +1,38 @@
+﻿<MudStack AlignItems="AlignItems.Center"
+          Row>
+    <MudText Typo="Typo.h1">
+        <i class="@HonmaIcons.Path"></i>
+    </MudText>
+    <MudText Typo="Typo.h1">
+        <b>Honma</b>
+    </MudText>
+</MudStack>
+
+<MudText Typo="Typo.h5">
+    A (soon to be) fully-featured client for
+    <MudLink Href="https://spacetraders.io/"
+             Typo="Typo.h5">
+        SpaceTraders
+    </MudLink>
+</MudText>
+
+<MudStack AlignItems="AlignItems.Center"
+          Row>
+    <MudButton Class="mt-12 rounded-lg"
+               Color="Color.Primary"
+               EndIcon="@HonmaIcons.SignIn"
+               Href="@Routes.Login"
+               Size="Size.Large"
+               Variant="Variant.Filled">
+        Start exploring the universe
+    </MudButton>
+
+    <MudButton Class="mt-12 rounded-lg"
+               Color="Color.Primary"
+               EndIcon="@HonmaIcons.AgentHistory"
+               Href="@Routes.AgentHistory"
+               Size="Size.Large"
+               Variant="Variant.Outlined">
+        Return to your agent
+    </MudButton>
+</MudStack>

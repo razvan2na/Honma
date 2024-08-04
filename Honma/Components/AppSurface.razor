@@ -1,0 +1,12 @@
+﻿<MudPaper Class="@($"pa-4 rounded-lg {Class}")"
+          Elevation="0">
+    @ChildContent
+</MudPaper>
+
+@code {
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public string Class { get; set; } = string.Empty;
+
+}

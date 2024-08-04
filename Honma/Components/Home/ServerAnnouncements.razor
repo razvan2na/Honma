@@ -1,0 +1,23 @@
+﻿<AppSurface>
+    <MudStack>
+        <MudText Class="ml-4"
+                 Typo="Typo.h6">
+            Announcements
+        </MudText>
+        <MudDivider/>
+
+        @foreach (var announcement in Announcements)
+        {
+            <MudStack Spacing="0">
+                <MudAlert>@announcement.Title</MudAlert>
+                <MudText Class="ml-13 mr-4">@announcement.Body</MudText>
+            </MudStack>
+        }
+    </MudStack>
+</AppSurface>
+
+@code {
+
+    [Parameter] public required List<Announcement> Announcements { get; set; }
+
+}

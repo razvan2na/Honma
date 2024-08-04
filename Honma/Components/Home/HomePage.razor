@@ -1,0 +1,48 @@
+﻿@attribute [Route(Routes.Home)]
+@inherits FluxorComponent
+
+<MudContainer MaxWidth="MaxWidth.Large">
+    <MudStack Justify="Justify.SpaceBetween"
+              Row
+              Spacing="20">
+        <div class="mt-20">
+            <WelcomeSection/>
+        </div>
+
+        <MudSpacer/>
+
+        @if (State.Value.Status is not null)
+        {
+            <div class="flex-grow-1 mt-18">
+                <ServerStatsDisplay Status="State.Value.Status.Value"/>
+            </div>
+        }
+    </MudStack>
+
+    @if (State.Value.Status is not null)
+    {
+        var status = State.Value.Status.Value;
+
+        <MudStack AlignItems="AlignItems.Start"
+                  Class="mt-20"
+                  Row>
+            <ServerAnnouncements Announcements="status.Announcements"/>
+            <MostCreditsLeaderboard Leaderboard="status.Leaderboards.MostCredits"/>
+            <MostChartsLeaderboard Leaderboard="status.Leaderboards.MostSubmittedCharts"/>
+        </MudStack>
+    }
+</MudContainer>
+
+@code {
+
+    [Inject] public required IState<ServerStatusState> State { get; set; }
+
+    [Inject] public required IDispatcher Dispatcher { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Dispatcher.Dispatch(new ServerStatusLoad());
+    }
+
+}

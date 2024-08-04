@@ -8,6 +8,6 @@ public readonly record struct ServerStatus(
     ServerStats Stats,
     Leaderboards Leaderboards,
     ServerReset ServerResets,
-    IReadOnlyList<Announcement> Announcements,
-    IReadOnlyList<Link> Links
+    List<Announcement> Announcements,
+    List<Link> Links
 );

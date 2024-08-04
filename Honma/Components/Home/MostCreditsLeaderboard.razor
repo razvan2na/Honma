@@ -1,0 +1,33 @@
+﻿<AppSurface>
+    <MudStack>
+        <MudText Typo="Typo.h6">
+            Richest agents
+        </MudText>
+        <MudDivider/>
+
+        @foreach (var entry in Leaderboard.Take(10))
+        {
+            <MudStack AlignItems="AlignItems.Center"
+                      Justify="Justify.SpaceBetween"
+                      Row
+                      Spacing="16">
+                <MudText Style="text-wrap: nowrap">
+                    <b>@entry.AgentSymbol</b>
+                </MudText>
+                <MudStack AlignItems="AlignItems.Center"
+                          Row
+                          Spacing="1">
+                    <MudText>@entry.Credits</MudText>
+                    <MudIcon Color="Color.Secondary"
+                             Icon="@HonmaIcons.Credits"/>
+                </MudStack>
+            </MudStack>
+        }
+    </MudStack>
+</AppSurface>
+
+@code {
+
+    [Parameter] public required List<LeaderboardCredits> Leaderboard { get; set; }
+
+}
