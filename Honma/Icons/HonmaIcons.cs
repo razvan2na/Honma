@@ -7,12 +7,14 @@ public static class HonmaIcons
     public const string CaretRight = "ph-bold ph-caret-right";
     public const string ClockCountdown = "ph-bold ph-clock-countdown";
     public const string ClockCounterClockwise = "ph-bold ph-clock-counter-clockwise";
+    public const string Compass = "ph-bold ph-compass";
     public const string Copy = "ph-bold ph-copy";
     public const string Cube = "ph-bold ph-cube";
     public const string Home = "ph-bold ph-house-simple";
     public const string Medal = "ph-bold ph-medal";
     public const string Path = "ph-bold ph-path";
     public const string Planet = "ph-bold ph-planet";
+    public const string PiggyBank = "ph-bold ph-piggy-bank";
     public const string SignIn = "ph-bold ph-sign-in";
     public const string Trash = "ph-bold ph-trash-simple";
     public const string UserRectangle = "ph-bold ph-user-rectangle";
@@ -20,6 +22,7 @@ public static class HonmaIcons
 
     public const string Agent = "ph-bold ph-identification-badge";
     public const string AgentHistory = "ph-bold ph-user-list";
+    public const string Announcement = "ph-bold ph-megaphone-simple";
     public const string Cargo = "ph-bold ph-package";
     public const string Chart = "ph-bold ph-map-trifold";
     public const string Condition = "ph-bold ph-nut";

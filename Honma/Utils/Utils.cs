@@ -126,4 +126,20 @@ public static class Utils
 
         return result.ToString();
     }
+
+    public static string ToFormattedLargeNumber(this int number)
+    {
+        return ToFormattedLargeNumber((long)number);
+    }
+
+    public static string ToFormattedLargeNumber(this long number)
+    {
+        return number switch
+        {
+            >= 1_000_000_000 => $"{number / 1_000_000_000.0:0.##}b",
+            >= 1_000_000 => $"{number / 1_000_000.0:0.##}m",
+            >= 1_000 => $"{number / 1_000.0:0.##}k",
+            _ => number.ToString()
+        };
+    }
 }

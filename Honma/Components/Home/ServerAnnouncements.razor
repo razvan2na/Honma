@@ -1,9 +1,15 @@
 ﻿<AppSurface>
     <MudStack>
-        <MudText Class="ml-4"
-                 Typo="Typo.h6">
-            Announcements
-        </MudText>
+        <MudStack Class="ml-4"
+                  Row>
+            <MudIcon Class="mt-1"
+                     Icon="@HonmaIcons.Announcement"/>
+            <MudStack Spacing="0">
+                <MudText Typo="Typo.h6">Announcements</MudText>
+                <MudText Typo="Typo.subtitle2">From the official SpaceTraders server</MudText>
+            </MudStack>
+        </MudStack>
+
         <MudDivider/>
 
         @foreach (var announcement in Announcements)

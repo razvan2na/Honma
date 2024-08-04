@@ -1,28 +1,36 @@
 ﻿<AppSurface>
     <MudStack>
-        <MudText Typo="Typo.h6">
-            Best explorers
-        </MudText>
+        <MudStack Row>
+            <MudIcon Class="mt-1"
+                     Icon="@HonmaIcons.Compass"/>
+            <MudStack Spacing="0">
+                <MudText Typo="Typo.h6">Best explorers</MudText>
+                <MudText Typo="Typo.subtitle2">Most charts</MudText>
+            </MudStack>
+        </MudStack>
+
         <MudDivider/>
 
-        @foreach (var entry in Leaderboard.Take(10))
-        {
-            <MudStack AlignItems="AlignItems.Center"
-                      Justify="Justify.SpaceBetween"
-                      Row
-                      Spacing="16">
-                <MudText Style="text-wrap: nowrap">
-                    <b>@entry.AgentSymbol</b>
-                </MudText>
+        <MudStack Class="mt-2">
+            @foreach (var entry in Leaderboard.Take(10))
+            {
                 <MudStack AlignItems="AlignItems.Center"
+                          Justify="Justify.SpaceBetween"
                           Row
-                          Spacing="1">
-                    <MudText>@entry.ChartCount</MudText>
-                    <MudIcon Color="Color.Tertiary"
-                             Icon="@HonmaIcons.Chart"/>
+                          Spacing="16">
+                    <MudText Style="text-wrap: nowrap">
+                        <b>@entry.AgentSymbol</b>
+                    </MudText>
+                    <MudStack AlignItems="AlignItems.Center"
+                              Row
+                              Spacing="1">
+                        <MudText>@entry.ChartCount.ToFormattedLargeNumber()</MudText>
+                        <MudIcon Color="Color.Tertiary"
+                                 Icon="@HonmaIcons.Chart"/>
+                    </MudStack>
                 </MudStack>
-            </MudStack>
-        }
+            }
+        </MudStack>
     </MudStack>
 </AppSurface>
 

@@ -1,28 +1,36 @@
 ﻿<AppSurface>
     <MudStack>
-        <MudText Typo="Typo.h6">
-            Richest agents
-        </MudText>
+        <MudStack Row>
+            <MudIcon Class="mt-1"
+                     Icon="@HonmaIcons.PiggyBank"/>
+            <MudStack Spacing="0">
+                <MudText Typo="Typo.h6">Richest agents</MudText>
+                <MudText Typo="Typo.subtitle2">Most credits</MudText>
+            </MudStack>
+        </MudStack>
+
         <MudDivider/>
 
-        @foreach (var entry in Leaderboard.Take(10))
-        {
-            <MudStack AlignItems="AlignItems.Center"
-                      Justify="Justify.SpaceBetween"
-                      Row
-                      Spacing="16">
-                <MudText Style="text-wrap: nowrap">
-                    <b>@entry.AgentSymbol</b>
-                </MudText>
+        <MudStack Class="mt-2">
+            @foreach (var entry in Leaderboard.Take(10))
+            {
                 <MudStack AlignItems="AlignItems.Center"
+                          Justify="Justify.SpaceBetween"
                           Row
-                          Spacing="1">
-                    <MudText>@entry.Credits</MudText>
-                    <MudIcon Color="Color.Secondary"
-                             Icon="@HonmaIcons.Credits"/>
+                          Spacing="16">
+                    <MudText Style="text-wrap: nowrap">
+                        <b>@entry.AgentSymbol</b>
+                    </MudText>
+                    <MudStack AlignItems="AlignItems.Center"
+                              Row
+                              Spacing="1">
+                        <MudText>@entry.Credits.ToFormattedLargeNumber()</MudText>
+                        <MudIcon Color="Color.Secondary"
+                                 Icon="@HonmaIcons.Credits"/>
+                    </MudStack>
                 </MudStack>
-            </MudStack>
-        }
+            }
+        </MudStack>
     </MudStack>
 </AppSurface>
 
