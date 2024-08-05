@@ -2,10 +2,9 @@
     @foreach (var part in (ShipPart[]) [Ship.Frame, Ship.Reactor, Ship.Engine])
     {
         <MudItem xs="4">
-            <MudPaper Class="pa-4 rounded-lg"
-                      Elevation="0">
+            <AppSurface Light>
                 <ShipPartCard Part="part"/>
-            </MudPaper>
+            </AppSurface>
         </MudItem>
     }
 </MudGrid>

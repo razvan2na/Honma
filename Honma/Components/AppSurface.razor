@@ -1,5 +1,6 @@
-﻿<MudPaper Class="@($"pa-4 rounded-lg {Class}")"
-          Elevation="0">
+﻿<MudPaper Class="@($"pa-{Padding} rounded-lg {Class}")"
+          Elevation="0"
+          Style="@(Light ? "background: #3c3d45" : "")">
     @ChildContent
 </MudPaper>
 
@@ -8,5 +9,9 @@
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     [Parameter] public string Class { get; set; } = string.Empty;
+
+    [Parameter] public bool Light { get; set; }
+
+    [Parameter] public int Padding { get; set; } = 4;
 
 }

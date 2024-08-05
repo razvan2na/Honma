@@ -1,66 +1,89 @@
 ﻿<MudStack class="height-full">
-    <MudPaper Class="pa-4 rounded-lg"
-              Elevation="0">
+    <AppSurface>
         <MudStack AlignItems="AlignItems.Center"
                   Justify="Justify.SpaceBetween"
                   Row>
-            <MudStack AlignItems="AlignItems.Center"
-                      Row
-                      Spacing="1">
-                <MudIcon Icon="@HonmaIcons.Ship"
-                         Size="Size.Large"/>
-                <MudText Typo="Typo.h5">@Ship.Symbol</MudText>
-            </MudStack>
+            <MudText Class="ml-2 my-2"
+                     Typo="Typo.h4">
+                <b>@Ship.Registration.Name</b>
+            </MudText>
 
             <MudStack Row
                       Spacing="1">
-                <MudChip Class="rounded-lg"
-                         Color="Color.Secondary"
-                         T="string">
+                <MudChip Color="Color.Secondary"
+                         T="string"
+                         Variant="Variant.Text">
                     @Ship.Registration.Role
                 </MudChip>
-                <MudChip Class="rounded-lg"
-                         Color="Color.Primary"
-                         T="string">
+                <MudChip Color="Color.Primary"
+                         T="string"
+                         Variant="Variant.Text">
                     @Ship.Registration.FactionSymbol
                 </MudChip>
             </MudStack>
         </MudStack>
 
-        <MudStack Class="mt-4"
-                  Row>
-            <MudPaper Class="pa-2 rounded-lg"
-                      Elevation="0">
-                <MudStack Spacing="1">
-                    <MudText Typo="Typo.subtitle2">System</MudText>
-                    <MudLink Href="@($"{Routes.Systems}/{Ship.Nav.SystemSymbol}")">@Ship.Nav.SystemSymbol</MudLink>
-                </MudStack>
-            </MudPaper>
+        <AppSurface Class="mt-4"
+                    Light>
+            <MudStack Justify="Justify.SpaceBetween"
+                      Row>
+                <MudStack Row
+                          Spacing="8">
+                    <MudStack Spacing="0">
+                        <MudText Typo="Typo.subtitle2">Status</MudText>
+                        <MudText Typo="Typo.h6">@Ship.Nav.Status</MudText>
+                    </MudStack>
 
-            <MudPaper Class="pa-2 rounded-lg"
-                      Elevation="0">
-                <MudStack Spacing="1">
-                    <MudText Typo="Typo.subtitle2">Waypoint</MudText>
-                    <MudLink Href="@($"{Routes.Systems}/{Ship.Nav.SystemSymbol}{Routes.Waypoints}/{Ship.Nav.WaypointSymbol}")">@Ship.Nav.WaypointSymbol</MudLink>
-                </MudStack>
-            </MudPaper>
+                    <MudStack Spacing="0">
+                        <MudText Typo="Typo.subtitle2">System</MudText>
+                        <MudLink Href="@($"{Routes.Systems}/{Ship.Nav.SystemSymbol}")"
+                                 Typo="Typo.h6">
+                            @Ship.Nav.SystemSymbol
+                        </MudLink>
+                    </MudStack>
 
-            <MudPaper Class="pa-2 rounded-lg"
-                      Elevation="0">
-                <MudStack Spacing="1">
-                    <MudText Typo="Typo.subtitle2">Status</MudText>
-                    <MudText>@Ship.Nav.Status</MudText>
+                    <MudStack Spacing="0">
+                        <MudText Typo="Typo.subtitle2">Waypoint</MudText>
+                        <MudLink Href="@($"{Routes.Systems}/{Ship.Nav.SystemSymbol}{Routes.Waypoints}/{Ship.Nav.WaypointSymbol}")"
+                                 Typo="Typo.h6">
+                            @Ship.Nav.WaypointSymbol
+                        </MudLink>
+                        <MudText Typo="Typo.body2">@Ship.Nav.Route.Origin.Type</MudText>
+                    </MudStack>
                 </MudStack>
-            </MudPaper>
 
-            <MudPaper Class="pa-2 rounded-lg"
-                      Elevation="0">
-                <MudStack Spacing="1">
-                    <MudText Typo="Typo.subtitle2">Flight Mode</MudText>
-                    <MudText>@Ship.Nav.FlightMode</MudText>
+                <MudStack Row>
+                    <MudStack>
+                        <MudButton Size="Size.Small"
+                                   StartIcon="@HonmaIcons.Orbit"
+                                   Variant="Variant.Outlined">
+                            Move to orbit
+                        </MudButton>
+                        <MudButton Disabled="@(Ship.Nav.Status != "IN_ORBIT")"
+                                   Size="Size.Small"
+                                   StartIcon="@HonmaIcons.Route"
+                                   Variant="Variant.Outlined">
+                            Navigate
+                        </MudButton>
+                    </MudStack>
+
+                    <MudStack>
+                        <MudButton Disabled Class=""
+                                   Size="Size.Small"
+                                   StartIcon="@HonmaIcons.Jump"
+                                   Variant="Variant.Outlined">
+                            Jump
+                        </MudButton>
+                        <MudButton Disabled
+                                   Size="Size.Small"
+                                   StartIcon="@HonmaIcons.Warp"
+                                   Variant="Variant.Outlined">
+                            Warp
+                        </MudButton>
+                    </MudStack>
                 </MudStack>
-            </MudPaper>
-        </MudStack>
+            </MudStack>
+        </AppSurface>
 
         <MudGrid Class="my-2"
                  Spacing="4">
@@ -107,10 +130,9 @@
                                        Value="@PowerConsumption()"/>
             </MudItem>
         </MudGrid>
-    </MudPaper>
+    </AppSurface>
 
-    <MudPaper Class="rounded-lg"
-              Elevation="0">
+    <AppSurface Padding="0">
         <MudTabs Centered
                  Class="rounded-lg">
             <MudTabPanel Icon="@HonmaIcons.Loadout"
@@ -155,7 +177,7 @@
                 </MudTable>
             </MudTabPanel>
         </MudTabs>
-    </MudPaper>
+    </AppSurface>
 </MudStack>
 
 @code {

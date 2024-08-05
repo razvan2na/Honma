@@ -1,28 +1,35 @@
-﻿<MudPaper Class="rounded-lg"
-          Elevation="0">
-    <MudList SelectedValue="SelectedShip"
-             SelectedValueChanged="@((Ship? ship) => SelectedShipChanged.InvokeAsync(ship))"
-             SelectionMode="SelectionMode.SingleSelection"
-             T="Ship?">
-        @foreach (var ship in Ships)
-        {
-            <MudListItem T="Ship?"
-                         Value="ship">
-                <MudStack AlignItems="AlignItems.Center"
-                          Justify="Justify.SpaceBetween"
-                          Row>
-                    <MudText>@ship.Symbol</MudText>
-                    <MudChip Color="Color.Secondary"
-                             Size="Size.Small"
-                             T="string">
-                        @ship.Registration.Role
-                    </MudChip>
-                </MudStack>
+﻿<AppSurface>
+    <MudStack Spacing="4">
+        <MudList SelectedValue="SelectedShip"
+                 SelectedValueChanged="@((Ship? ship) => SelectedShipChanged.InvokeAsync(ship))"
+                 SelectionMode="SelectionMode.SingleSelection"
+                 T="Ship?">
+            <MudStack Spacing="1">
+                @foreach (var ship in Ships)
+                {
+                    <MudListItem Class="rounded-lg"
+                                 T="Ship?"
+                                 Value="ship">
+                        <MudStack AlignItems="AlignItems.Center"
+                                  Justify="Justify.SpaceBetween"
+                                  Row>
+                            <MudText>
+                                <b>@ship.Registration.Name</b>
+                            </MudText>
+                            <MudChip Color="Color.Secondary"
+                                     Size="Size.Small"
+                                     T="string"
+                                     Variant="Variant.Text">
+                                @ship.Registration.Role
+                            </MudChip>
+                        </MudStack>
 
-            </MudListItem>
-        }
-    </MudList>
-</MudPaper>
+                    </MudListItem>
+                }
+            </MudStack>
+        </MudList>
+    </MudStack>
+</AppSurface>
 
 @code {
 

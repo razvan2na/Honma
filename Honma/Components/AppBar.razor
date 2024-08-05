@@ -46,7 +46,7 @@
 
                 <CurrencyDisplay Amount="@agent.Credits"/>
                 <MudMenu AnchorOrigin="Origin.BottomRight"
-                         Class="ml-4 mr-4"
+                         Class="ml-4 rounded-lg"
                          Color="Color.Inherit"
                          Dense
                          Label="@agent.Symbol"
@@ -69,6 +69,9 @@
              Variant="Variant.Text">
         Alpha Build v@(Globals.Version)
     </MudChip>
+
+    <MudIconButton Href="https://github.com/razvan2na/Honma"
+                   Icon="@HonmaIcons.Github"/>
 </MudAppBar>
 
 @code {

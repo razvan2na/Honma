@@ -10,6 +10,7 @@ public static class HonmaIcons
     public const string Compass = "ph-bold ph-compass";
     public const string Copy = "ph-bold ph-copy";
     public const string Cube = "ph-bold ph-cube";
+    public const string Github = "ph-bold ph-github-logo";
     public const string Home = "ph-bold ph-house-simple";
     public const string Medal = "ph-bold ph-medal";
     public const string Path = "ph-bold ph-path";
@@ -34,6 +35,7 @@ public static class HonmaIcons
     public const string Frame = "ph-bold ph-cube-transparent";
     public const string Fuel = "ph-bold ph-gas-can";
     public const string Integrity = "ph-bold ph-subtract-square";
+    public const string Jump = "ph-bold ph-compass-rose";
     public const string Loadout = "ph-bold ph-circuitry";
     public const string Market = "ph-bold ph-storefront";
     public const string Module = "ph-bold ph-diamonds-four";
@@ -42,14 +44,17 @@ public static class HonmaIcons
     public const string MoraleLow = "ph-bold ph-smiley-nervous";
     public const string MoraleVeryLow = "ph-bold ph-smiley-sad";
     public const string Mount = "ph-bold ph-memory";
+    public const string Orbit = "ph-bold ph-planet";
     public const string Power = "ph-bold ph-lightning";
     public const string Range = "ph-bold ph-compass-tool";
     public const string Reactor = "ph-bold ph-atom";
+    public const string Route = "ph-bold ph-path";
     public const string Ship = "ph-bold ph-rocket-launch";
     public const string Shipyard = "ph-bold ph-crane-tower";
     public const string Speed = "ph-bold ph-speedometer";
     public const string Strength = "ph-bold ph-crosshair-simple";
     public const string System = "ph-bold ph-map-pin-simple-area";
+    public const string Warp = "ph-bold ph-aperture";
     public const string Waypoint = "ph-bold ph-map-pin-simple";
 
     public static readonly Dictionary<ShipPartSpecification, string> Specification = new()

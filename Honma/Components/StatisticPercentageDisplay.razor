@@ -2,13 +2,15 @@
     <MudStack AlignItems="AlignItems.Center"
               Justify="Justify.SpaceBetween"
               Row>
-        <TextWithIcon Text="@Title" Icon="@Icon"/>
+        <TextWithIcon Icon="@Icon"
+                      Text="@Title"/>
         <MudText>@_percentage%</MudText>
     </MudStack>
 
     <MudProgressLinear Class="mt-1"
                        Color="Color.Primary"
                        Max="100"
+                       Rounded
                        Value="@_percentage"/>
 </div>
 
