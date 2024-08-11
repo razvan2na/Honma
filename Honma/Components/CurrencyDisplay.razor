@@ -1,13 +1,12 @@
 ﻿<MudStack AlignItems="AlignItems.Center"
           Row
-          Spacing="0">
+          Spacing="1">
+    <MudText Typo="@Typo">
+        @Amount
+    </MudText>
     <MudIcon Color="Color.Secondary"
              Icon="@HonmaIcons.Credits"
              Size="@IconSize"/>
-    <MudText Style="line-height: normal"
-             Typo="@Typo">
-        @Amount
-    </MudText>
 </MudStack>
 
 @code {

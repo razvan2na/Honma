@@ -1,10 +1,10 @@
 ﻿@foreach (var ship in Shipyard.Ships ?? [])
 {
-    <MudPaper Class="ma-4 pa-4 rounded-lg"
-              Elevation="0">
+    <AppSurface Class="ma-4"
+                Light>
         <ShipyardShipDisplay Ship="ship"
                              Shipyard="Shipyard"/>
-    </MudPaper>
+    </AppSurface>
 }
 
 @code {

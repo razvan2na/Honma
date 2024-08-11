@@ -18,8 +18,7 @@
             }
         </MudPaper>
 
-        <MudPaper Class="mb-4 rounded-lg"
-                  Elevation="0">
+        <AppSurface Padding="0">
             <MudTabs Centered>
                 <MudTabPanel Disabled="@(waypoint.Traits.All(trait => trait.Symbol != WaypointTraitSymbol.Marketplace.ToString().ToMacroCase()))"
                              Icon="@HonmaIcons.Market"
@@ -36,7 +35,7 @@
                     }
                 </MudTabPanel>
             </MudTabs>
-        </MudPaper>
+        </AppSurface>
     }
 </MudContainer>
 
