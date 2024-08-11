@@ -55,7 +55,7 @@
 
     private void LoadShip(Ship ship)
     {
-        Dispatcher.Dispatch(new ShipUpdated(ship));
+        Dispatcher.Dispatch(new ShipLoad(ship.Symbol));
     }
 
 }
