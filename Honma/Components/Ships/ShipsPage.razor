@@ -1,41 +1,64 @@
 ﻿@attribute [Route(Routes.Ships)]
 @inherits FluxorComponent
 
-<MudGrid Spacing="4">
-    <MudItem Class="mt-2"
-             xs="3">
-        <ShipList SelectedShip="_selectedShip"
-                  SelectedShipChanged="@(ship => { if (ship?.Symbol == null) { return; } LoadShip(ship.Value); _selectedShip = ship; })"
-                  Ships="State.Value.Ships"/>
+<MudContainer MaxWidth="MaxWidth.Small">
+    <AppSurface>
+        <MudStack AlignItems="AlignItems.Center"
+                  Justify="Justify.SpaceBetween"
+                  Row>
+            <MudStack AlignItems="AlignItems.Center"
+                      Row
+                      Spacing="2">
+                <MudIcon Icon="@HonmaIcons.Ship"/>
+                <MudText Typo="Typo.h6">Ships</MudText>
+            </MudStack>
+            <MudPagination BoundaryCount="1"
+                           Count="@(State.Value.Pagination.Total / 10 + 1)"
+                           MiddleCount="3"
+                           Rectangular
+                           Selected="_page"
+                           SelectedChanged="PageChange"
+                           Size="Size.Small"
+                           Variant="Variant.Text"/>
+        </MudStack>
 
-        @if (State.Value.Pagination.Total / _pageSize > 1)
-        {
-            <MudPagination @bind-Selected="_page"
-                           Class="mt-4"
-                           Count="State.Value.Pagination.Total / _pageSize">
-            </MudPagination>
-        }
-    </MudItem>
+        <MudList Class="mt-4"
+                 Gutters="false"
+                 T="string">
+            @foreach (var ship in State.Value.Ships)
+            {
+                <MudListItem Class="rounded-lg"
+                             Href="@($"{Routes.Ships}/{ship.Symbol}")"
+                             T="string">
+                    <ChildContent>
+                        <MudStack AlignItems="AlignItems.Center"
+                                  Justify="Justify.SpaceBetween"
+                                  Row>
+                            <MudStack AlignItems="AlignItems.Center"
+                                      Class="width-full"
+                                      Justify="Justify.SpaceBetween"
+                                      Row>
+                                <MudText>@ship.Symbol</MudText>
+                                <MudStack AlignItems="AlignItems.Center"
+                                          Row>
+                                    <MudChip Color="Color.Secondary"
+                                             Size="Size.Small"
+                                             T="string"
+                                             Variant="Variant.Text">
+                                        @ship.Registration.Role
+                                    </MudChip>
+                                </MudStack>
+                            </MudStack>
 
-    <MudItem Class="height-screen mt-2"
-             xs="9">
-        @if (_selectedShip is null)
-        {
-            <MudPaper Class="height-full rounded-lg"
-                      Elevation="0">
-                <MudStack AlignItems="AlignItems.Center"
-                          Class="height-full"
-                          Justify="Justify.Center">
-                    <MudText>Select a ship from the list to view its details</MudText>
-                </MudStack>
-            </MudPaper>
-        }
-        else
-        {
-            <ShipDetails/>
-        }
-    </MudItem>
-</MudGrid>
+                            <MudIcon Icon="@HonmaIcons.CaretRight"
+                                     Size="Size.Small"/>
+                        </MudStack>
+                    </ChildContent>
+                </MudListItem>
+            }
+        </MudList>
+    </AppSurface>
+</MudContainer>
 
 @code {
 
@@ -44,18 +67,17 @@
     [Inject] public required IDispatcher Dispatcher { get; set; }
 
     private int _page = 1;
-    private int _pageSize = 10;
-    private Ship? _selectedShip;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        Dispatcher.Dispatch(new ShipsLoad(_pageSize, _page));
+        Dispatcher.Dispatch(new ShipsLoad(_page));
     }
 
-    private void LoadShip(Ship ship)
+    private void PageChange(int page)
     {
-        Dispatcher.Dispatch(new ShipLoad(ship.Symbol));
+        _page = page;
+        Dispatcher.Dispatch(new ShipsLoad(_page));
     }
 
 }

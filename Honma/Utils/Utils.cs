@@ -4,6 +4,7 @@ using Honma.Components.Authentication;
 using Honma.Components.Contracts;
 using Honma.Components.Factions;
 using Honma.Components.Home;
+using Honma.Components.Ship;
 using Honma.Components.Ships;
 using Honma.Components.Systems;
 using Honma.Components.Waypoints;
@@ -45,6 +46,13 @@ public static class Utils
         else if (routeData.PageType == typeof(ShipsPage))
         {
             breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Ships, Routes.Ships, false, HonmaIcons.Ship));
+        }
+        else if (routeData.PageType == typeof(ShipPage))
+        {
+            var shipSymbol = routeData.RouteValues.First(entry => entry.Key == "shipSymbol").Value!.ToString();
+
+            breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Ships, Routes.Ships, false, HonmaIcons.Ship));
+            breadcrumbs.Add(new BreadcrumbItem(shipSymbol!, $"{Routes.Ships}/{shipSymbol}", false, HonmaIcons.Ship));
         }
         else if (routeData.PageType == typeof(SystemsPage))
         {

@@ -3,7 +3,7 @@ using Honma.Models;
 
 namespace Honma.Stores;
 
-public readonly record struct ShipsLoad(int Limit, int Page);
+public readonly record struct ShipsLoad(int Page);
 
 public readonly record struct ShipsUpdated(IReadOnlyCollection<Ship> Ships, Pagination Pagination);
 

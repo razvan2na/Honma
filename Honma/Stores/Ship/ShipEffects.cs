@@ -13,7 +13,7 @@ public class ShipEffects(ISpaceTradersClient client, ISnackbar snackbar)
     {
         try
         {
-            var (ships, pagination) = await client.GetShips(action.Limit, action.Page);
+            var (ships, pagination) = await client.GetShips(10, action.Page);
 
             dispatcher.Dispatch(
                 new ShipsUpdated(

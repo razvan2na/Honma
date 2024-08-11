@@ -142,12 +142,6 @@
 
     private int _page = 1;
 
-    private static List<string> Traits =>
-        Enum.GetValues<WaypointTraitSymbol>()
-            .Select(trait => trait.ToString().ToNaturalLanguage())
-            .Order()
-            .ToList();
-
     protected override void OnInitialized()
     {
         base.OnInitialized();
