@@ -4,7 +4,8 @@
 <MudGrid Spacing="4">
     <MudItem Class="mt-2"
              xs="3">
-        <ShipList @bind-SelectedShip="_selectedShip"
+        <ShipList SelectedShip="_selectedShip"
+                  SelectedShipChanged="@(ship => { if (ship?.Symbol == null) { return; } LoadShip(ship.Value); _selectedShip = ship; })"
                   Ships="State.Value.Ships"/>
 
         @if (State.Value.Pagination.Total / _pageSize > 1)
@@ -31,7 +32,7 @@
         }
         else
         {
-            <ShipDetails Ship="_selectedShip.Value"/>
+            <ShipDetails/>
         }
     </MudItem>
 </MudGrid>
@@ -50,6 +51,11 @@
     {
         base.OnInitialized();
         Dispatcher.Dispatch(new ShipsLoad(_pageSize, _page));
+    }
+
+    private void LoadShip(Ship ship)
+    {
+        Dispatcher.Dispatch(new ShipUpdated(ship));
     }
 
 }

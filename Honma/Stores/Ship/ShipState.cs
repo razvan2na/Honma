@@ -7,7 +7,9 @@ namespace Honma.Stores;
 [FeatureState]
 public record ShipState
 {
-	public IReadOnlyCollection<Ship> Ships { get; init; } = [];
+    public IReadOnlyCollection<Ship> Ships { get; init; } = [];
 
-	public Pagination Pagination { get; init; }
+    public Pagination Pagination { get; init; }
+
+    public Ship? Ship { get; init; }
 }
