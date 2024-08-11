@@ -1,0 +1,43 @@
+﻿<MudList T="string">
+    @foreach (var waypoint in Waypoints)
+    {
+        <MudListItem Class="rounded-lg"
+                     OnClick="@(() => WaypointClicked.InvokeAsync(waypoint))">
+            <ChildContent>
+                <MudStack AlignItems="AlignItems.Center"
+                          Justify="Justify.SpaceBetween"
+                          Row>
+                    <MudStack AlignItems="AlignItems.Center"
+                              Class="width-full"
+                              Justify="Justify.SpaceBetween"
+                              Row>
+                        <MudText>
+                            <b>@waypoint.Symbol</b>
+                        </MudText>
+
+                        <MudStack AlignItems="AlignItems.Center"
+                                  Row>
+                            <MudChip Color="Color.Tertiary"
+                                     Size="Size.Small"
+                                     T="string"
+                                     Variant="Variant.Text">
+                                @waypoint.Type.Replace('_', ' ')
+                            </MudChip>
+                        </MudStack>
+                    </MudStack>
+
+                    <MudIcon Icon="@HonmaIcons.CaretRight"
+                             Size="Size.Small"/>
+                </MudStack>
+            </ChildContent>
+        </MudListItem>
+    }
+</MudList>
+
+@code {
+
+    [Parameter] public required List<Waypoint> Waypoints { get; set; }
+
+    [Parameter] public EventCallback<Waypoint> WaypointClicked { get; set; }
+
+}

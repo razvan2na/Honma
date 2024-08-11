@@ -1,0 +1,43 @@
+﻿<MudStack AlignItems="AlignItems.Center"
+          Class="my-2"
+          Justify="Justify.SpaceBetween"
+          Row>
+    <MudStack AlignItems="AlignItems.Center"
+              Row
+              Spacing="2">
+        <MudIcon Icon="@Icon"/>
+        <MudText Typo="Typo.h5">
+            @Title
+        </MudText>
+    </MudStack>
+
+    <MudPagination BoundaryCount="1"
+                   Count="@(Pagination.Total / 10 + 1)"
+                   DropShadow="false"
+                   MiddleCount="3"
+                   Rectangular
+                   Selected="Page"
+                   SelectedChanged="ChangePage"
+                   Size="Size.Small"
+                   Variant="Variant.Text"/>
+</MudStack>
+
+@code {
+
+    [Parameter] public required string Title { set; get; }
+
+    [Parameter] public required string Icon { get; set; }
+
+    [Parameter] public required Pagination Pagination { get; set; }
+
+    [Parameter] public required int Page { get; set; } = 1;
+
+    [Parameter] public EventCallback<int> PageChanged { get; set; }
+
+    private void ChangePage(int page)
+    {
+        Page = page;
+        PageChanged.InvokeAsync(page);
+    }
+
+}

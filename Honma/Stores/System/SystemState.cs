@@ -1,4 +1,5 @@
 ﻿using Fluxor;
+using Honma.Data;
 using Honma.Models;
 
 namespace Honma.Stores;
@@ -6,13 +7,13 @@ namespace Honma.Stores;
 [FeatureState]
 public record SystemState
 {
-	public IReadOnlyCollection<SystemDto> Systems { get; init; } = [];
+    public List<SystemDto> Systems { get; init; } = [];
 
-	public int TotalSystems { get; init; }
+    public Pagination SystemsPagination { get; init; } = new();
 
-	public SystemDto? System { get; init; }
+    public SystemDto? System { get; init; }
 
-	public IReadOnlyCollection<Waypoint> Waypoints { get; init; } = [];
+    public List<Waypoint> Waypoints { get; init; } = [];
 
-	public int TotalWaypoints { get; init; }
+    public Pagination WaypointsPagination { get; init; } = new();
 }

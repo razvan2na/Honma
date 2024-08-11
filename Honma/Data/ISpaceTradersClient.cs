@@ -38,17 +38,6 @@ public interface ISpaceTradersClient
     [Post("/my/ships/{shipSymbol}/orbit")]
     Task<Response<ShipNavUpdateResponse>> OrbitShip(string shipSymbol);
 
-    /// <summary>
-    /// Attempt to dock your ship at its current location. Docking will only succeed if your ship is capable of docking
-    /// at the time of the request.
-    /// <br/><br/>
-    /// Docked ships can access elements in their current location, such as the market or a shipyard, but cannot do
-    /// actions that require the ship to be above surface such as navigating or extracting.
-    /// <br/><br/>
-    /// The endpoint is idempotent - successive calls will succeed even if the ship is already docked.
-    /// </summary>
-    /// <param name="shipSymbol">The symbol of the ship.</param>
-    /// <returns></returns>
     [Post("/my/ships/{shipSymbol}/dock")]
     Task<Response<ShipNavUpdateResponse>> DockShip(string shipSymbol);
 
@@ -63,7 +52,7 @@ public interface ISpaceTradersClient
         string systemSymbol,
         [Query] int limit,
         [Query] int page,
-        [Query] string[]? traits = null,
+        [Query(CollectionFormat.Multi)] List<string>? traits = null,
         [Query] string? type = null);
 
     [Get("/systems/{systemSymbol}/waypoints/{waypointSymbol}")]

@@ -27,8 +27,16 @@
                   Class="mt-20"
                   Row>
             <ServerAnnouncements Announcements="status.Announcements"/>
-            <MostCreditsLeaderboard Leaderboard="status.Leaderboards.MostCredits"/>
-            <MostChartsLeaderboard Leaderboard="status.Leaderboards.MostSubmittedCharts"/>
+
+            @if (status.Leaderboards.MostCredits.Any())
+            {
+                <MostCreditsLeaderboard Leaderboard="status.Leaderboards.MostCredits"/>
+            }
+
+            @if (status.Leaderboards.MostSubmittedCharts.Any())
+            {
+                <MostChartsLeaderboard Leaderboard="status.Leaderboards.MostSubmittedCharts"/>
+            }
         </MudStack>
     }
 </MudContainer>

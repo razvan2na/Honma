@@ -2,31 +2,21 @@
 @inherits FluxorComponent
 
 <MudContainer MaxWidth="MaxWidth.Small">
-    <MudText Class="my-6"
-             Typo="Typo.h5">
-        Systems
-    </MudText>
+    <AppSurface>
+        <MudStack Spacing="4">
+            <ListHeader Icon="@HonmaIcons.System"
+                        Page="_page"
+                        PageChanged="PageChange"
+                        Pagination="State.Value.SystemsPagination"
+                        Title="Systems"/>
 
-    <MudPaper Class="rounded-lg"
-              Elevation="0">
-        <MudList T="string">
-            @foreach (var system in State.Value.Systems)
-            {
-                <MudListItem Href="@($"{Routes.Systems}/{system.Symbol}")">
-                    <ChildContent>
-                        <MudStack AlignItems="AlignItems.Center"
-                                  Row>
-                            <MudText>@system.Symbol</MudText>
-                            <MudChip Size="Size.Small"
-                                     T="string">
-                                @system.Type
-                            </MudChip>
-                        </MudStack>
-                    </ChildContent>
-                </MudListItem>
-            }
-        </MudList>
-    </MudPaper>
+            <MudDivider DividerType="DividerType.Middle"
+                        Light/>
+
+            <SystemsList SystemClicked="NavigateToSystem"
+                         Systems="State.Value.Systems"/>
+        </MudStack>
+    </AppSurface>
 </MudContainer>
 
 @code {
@@ -35,10 +25,25 @@
 
     [Inject] public required IDispatcher Dispatcher { get; set; }
 
+    [Inject] public required NavigationManager NavigationManager { get; set; }
+
+    private int _page = 1;
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        Dispatcher.Dispatch(new SystemsLoad(10, 1));
+        Dispatcher.Dispatch(new SystemsLoad(10, _page));
+    }
+
+    private void NavigateToSystem(SystemDto system)
+    {
+        NavigationManager.NavigateTo($"{Routes.Systems}/{system.Symbol}");
+    }
+
+    private void PageChange(int page)
+    {
+        _page = page;
+        Dispatcher.Dispatch(new SystemsLoad(10, _page));
     }
 
 }

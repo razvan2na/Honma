@@ -1,0 +1,22 @@
+﻿<MudDialog>
+    <TitleContent>
+        <MudText>Navigate @Ship.Symbol</MudText>
+    </TitleContent>
+    <DialogContent>
+    </DialogContent>
+</MudDialog>
+
+@code {
+
+    [Parameter] public required Ship Ship { get; set; }
+
+    [Inject] public required IState<SystemState> State { get; set; }
+
+    [Inject] public required IDispatcher Dispatcher { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+}

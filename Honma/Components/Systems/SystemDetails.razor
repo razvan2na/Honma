@@ -1,0 +1,39 @@
+﻿<MudStack Spacing="4">
+    <MudStack AlignItems="AlignItems.Center"
+              Justify="Justify.SpaceBetween"
+              Row>
+        <MudStack AlignItems="AlignItems.Center"
+                  Row
+                  Spacing="2">
+            <MudIcon Icon="@HonmaIcons.System"/>
+            <MudText Typo="Typo.h5">@System.Symbol</MudText>
+        </MudStack>
+        <MudChip Color="Color.Tertiary"
+                 T="string"
+                 Variant="Variant.Text">
+            @System.Type.Replace('_', ' ')
+        </MudChip>
+    </MudStack>
+
+    @if (System.Factions.Any())
+    {
+        <MudStack AlignItems="AlignItems.Center"
+                  Row
+                  Wrap="Wrap.Wrap">
+            @foreach (var faction in System.Factions)
+            {
+                <MudChip Color="Color.Secondary"
+                         T="string"
+                         Variant="Variant.Text">
+                    @faction.Symbol
+                </MudChip>
+            }
+        </MudStack>
+    }
+</MudStack>
+
+@code {
+
+    [Parameter] public required SystemDto System { get; set; }
+
+}

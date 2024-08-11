@@ -87,6 +87,7 @@
                                 }
 
                                 <MudButton Disabled="@(ship.Nav.Status != "IN_ORBIT")"
+                                           OnClick="async () => await ShowNavigationDialog(ship)"
                                            Size="Size.Small"
                                            StartIcon="@HonmaIcons.Route"
                                            Variant="Variant.Outlined">
@@ -218,6 +219,9 @@
 
     [Inject] public required IDispatcher Dispatcher { get; set; }
 
+    [Inject] public required IDialogService DialogService { get; set; }
+
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -240,6 +244,17 @@
     private void DockShip(Ship ship)
     {
         Dispatcher.Dispatch(new ShipDock(ship.Symbol));
+    }
+
+    private async Task ShowNavigationDialog(Ship ship)
+    {
+        var parameters = new DialogParameters<NavigateShipDialog>
+        {
+            { x => x.Ship, ship }
+        };
+
+        var dialog = await DialogService.ShowAsync<NavigateShipDialog>("Navigate ship", parameters);
+        var result = await dialog.Result;
     }
 
 }
