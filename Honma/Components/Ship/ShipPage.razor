@@ -252,8 +252,13 @@
         {
             { x => x.Ship, ship }
         };
+        var options = new DialogOptions
+        {
+            FullWidth = true,
+            BackgroundClass = "dialog-background"
+        };
 
-        var dialog = await DialogService.ShowAsync<NavigateShipDialog>("Navigate ship", parameters);
+        var dialog = await DialogService.ShowAsync<NavigateShipDialog>("Navigate ship", parameters, options);
         var result = await dialog.Result;
     }
 

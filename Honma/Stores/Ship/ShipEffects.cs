@@ -68,4 +68,14 @@ public class ShipEffects(ISpaceTradersClient client, ISnackbar snackbar)
         dispatcher.Dispatch(new ShipNavUpdated(action.ShipSymbol, shipNav));
         snackbar.Add("The ship has successfully docked at its current location.", Severity.Success);
     }
+
+    [EffectMethod]
+    public async Task Handle(ShipNavigate action, IDispatcher dispatcher)
+    {
+        var response = await client.NavigateShip(action.ShipSymbol, new NavigateShipRequest(action.WaypointSymbol));
+        Console.WriteLine(response.Data.Fuel);
+        Console.WriteLine(response.Data.Nav);
+        dispatcher.Dispatch(new ShipFuelUpdated(action.ShipSymbol, response.Data.Fuel));
+        dispatcher.Dispatch(new ShipNavUpdated(action.ShipSymbol, response.Data.Nav));
+    }
 }

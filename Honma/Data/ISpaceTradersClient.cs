@@ -41,6 +41,9 @@ public interface ISpaceTradersClient
     [Post("/my/ships/{shipSymbol}/dock")]
     Task<Response<ShipNavUpdateResponse>> DockShip(string shipSymbol);
 
+    [Post("/my/ships/{shipSymbol}/navigate")]
+    Task<Response<NavigateShipResponse>> NavigateShip(string shipSymbol, [Body] NavigateShipRequest request);
+
     [Get("/systems")]
     Task<PagedResponse<List<SystemDto>>> GetSystems([Query] int limit, [Query] int page);
 

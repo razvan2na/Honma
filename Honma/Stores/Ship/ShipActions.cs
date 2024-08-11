@@ -17,4 +17,8 @@ public readonly record struct ShipOrbit(string ShipSymbol);
 
 public readonly record struct ShipDock(string ShipSymbol);
 
+public readonly record struct ShipNavigate(string ShipSymbol, string WaypointSymbol);
+
 public readonly record struct ShipNavUpdated(string ShipSymbol, ShipNav Nav);
+
+public readonly record struct ShipFuelUpdated(string ShipSymbol, ShipFuel Fuel);

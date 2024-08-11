@@ -10,56 +10,8 @@
             </AppSurface>
 
             <AppSurface>
-                <MudStack Spacing="4">
-                    <ListHeader Icon="@HonmaIcons.Waypoint"
-                                Page="_page"
-                                PageChanged="PageChanged"
-                                Pagination="State.Value.WaypointsPagination"
-                                Title="Waypoints"/>
-
-                    <MudSelect AnchorOrigin="Origin.BottomCenter"
-                               Clearable
-                               Label="Traits"
-                               MultiSelection
-                               Placeholder="Choose waypoint trait filters"
-                               SelectedValuesChanged="TraitFiltersChanged"
-                               T="string"
-                               Variant="Variant.Filled">
-                        @foreach (var trait in Enum.GetValues<WaypointTraitSymbol>().OrderBy(trait => trait.ToString()))
-                        {
-                            <MudSelectItem Value="trait.ToString()">@trait.ToString().ToNaturalLanguage()</MudSelectItem>
-                        }
-                    </MudSelect>
-
-                    <MudSelect AnchorOrigin="Origin.BottomCenter"
-                               Clearable
-                               Label="Type"
-                               Placeholder="Choose a waypoint type filter"
-                               T="string"
-                               ValueChanged="TypeFilterChanged"
-                               Variant="Variant.Filled">
-                        @foreach (var type in Enum.GetValues<WaypointType>().OrderBy(type => type.ToString()))
-                        {
-                            <MudSelectItem Value="type.ToString()">
-                                @type.ToString().ToNaturalLanguage()
-                            </MudSelectItem>
-                        }
-                    </MudSelect>
-
-                    <MudDivider DividerType="DividerType.Middle"
-                                Light/>
-
-                    @if (State.Value.Waypoints.Count == 0)
-                    {
-                        <MudText Align="Align.Center"
-                                 Class="my-8">
-                            No waypoints found
-                        </MudText>
-                    }
-
-                    <WaypointsList WaypointClicked="NavigateToWaypoint"
-                                   Waypoints="State.Value.Waypoints"/>
-                </MudStack>
+                <WaypointsList SystemSymbol="@SystemSymbol"
+                               WaypointClicked="NavigateToWaypoint"/>
             </AppSurface>
         </MudStack>
     }
@@ -75,63 +27,15 @@
 
     [Inject] public required NavigationManager NavigationManager { get; set; }
 
-    private int _page = 1;
-    private string? _typeFilter;
-    private List<string> _traitFilters = [];
-
     protected override void OnInitialized()
     {
         base.OnInitialized();
         Dispatcher.Dispatch(new SystemLoad(SystemSymbol));
-        LoadWaypoints();
-    }
-
-    private void LoadWaypoints()
-    {
-        Dispatcher.Dispatch(new SystemWaypointsLoad(SystemSymbol, _page, _traitFilters, _typeFilter));
     }
 
     private void NavigateToWaypoint(Waypoint waypoint)
     {
         NavigationManager.NavigateTo($"{Routes.Systems}/{waypoint.SystemSymbol}{Routes.Waypoints}/{waypoint.Symbol}");
-    }
-
-    private void PageChanged(int page)
-    {
-        _page = page;
-        LoadWaypoints();
-    }
-
-    private void TraitFiltersChanged(IEnumerable<string> traits)
-    {
-        _page = 1;
-
-        var traitFilters = traits as List<string> ?? traits.ToList();
-
-        if (!traitFilters.Any())
-        {
-            _traitFilters = [];
-            LoadWaypoints();
-            return;
-        }
-
-        _traitFilters = traitFilters.Select(trait => trait.ToMacroCase()).ToList();
-        LoadWaypoints();
-    }
-
-    private void TypeFilterChanged(string type)
-    {
-        _page = 1;
-
-        if (string.IsNullOrWhiteSpace(type))
-        {
-            _typeFilter = null;
-            LoadWaypoints();
-            return;
-        }
-
-        _typeFilter = type.ToMacroCase();
-        LoadWaypoints();
     }
 
 }

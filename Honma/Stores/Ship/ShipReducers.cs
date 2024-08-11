@@ -36,4 +36,18 @@ public static class ShipReducers
             Ship = state.Ship.Value with { Nav = action.Nav }
         };
     }
+
+    [ReducerMethod]
+    public static ShipState Reduce(ShipState state, ShipFuelUpdated action)
+    {
+        if (state.Ship is null)
+        {
+            return state;
+        }
+
+        return state with
+        {
+            Ship = state.Ship.Value with { Fuel = action.Fuel }
+        };
+    }
 }
