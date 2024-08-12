@@ -150,4 +150,9 @@ public static class Utils
             _ => number.ToString()
         };
     }
+
+    public static DateTime AddTimezoneOffset(this DateTime dateTime, int offset)
+    {
+        return dateTime.Add(TimeSpan.FromMinutes(-offset));
+    }
 }

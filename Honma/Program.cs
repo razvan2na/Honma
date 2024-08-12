@@ -44,6 +44,7 @@ builder.Services.AddScoped<AuthenticationStateProvider>(provider =>
 builder.Services.AddScoped<ClipboardService>();
 builder.Services.AddScoped<UserTokenService>();
 builder.Services.AddScoped<AgentHistoryService>();
+builder.Services.AddScoped<TimeService>();
 
 builder.Logging.SetMinimumLevel(LogLevel.Warning);
 
