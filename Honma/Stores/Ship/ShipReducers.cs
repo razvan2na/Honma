@@ -50,4 +50,32 @@ public static class ShipReducers
             Ship = state.Ship.Value with { Fuel = action.Fuel }
         };
     }
+
+    [ReducerMethod]
+    public static ShipState Reduce(ShipState state, ShipCooldownUpdated action)
+    {
+        if (state.Ship is null)
+        {
+            return state;
+        }
+
+        return state with
+        {
+            Ship = state.Ship.Value with { Cooldown = action.Cooldown }
+        };
+    }
+
+    [ReducerMethod]
+    public static ShipState Reduce(ShipState state, ShipCargoUpdated action)
+    {
+        if (state.Ship is null)
+        {
+            return state;
+        }
+
+        return state with
+        {
+            Ship = state.Ship.Value with { Cargo = action.Cargo }
+        };
+    }
 }

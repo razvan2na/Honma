@@ -1,6 +1,4 @@
-﻿using Honma.Models;
-
-namespace Honma.Dtos;
+﻿namespace Honma.Models;
 
 public readonly record struct Extraction(
     string ShipSymbol,

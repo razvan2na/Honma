@@ -85,4 +85,12 @@ public class ShipEffects(ISpaceTradersClient client, ISnackbar snackbar)
         dispatcher.Dispatch(new UserAgentUpdated(response.Data.Agent));
         dispatcher.Dispatch(new ShipFuelUpdated(action.ShipSymbol, response.Data.Fuel));
     }
+
+    [EffectMethod]
+    public async Task Handle(ShipExtractResources action, IDispatcher dispatcher)
+    {
+        var response = await client.ExtractResources(action.ShipSymbol);
+        dispatcher.Dispatch(new ShipCooldownUpdated(action.ShipSymbol, response.Data.Cooldown));
+        dispatcher.Dispatch(new ShipCargoUpdated(action.ShipSymbol, response.Data.Cargo));
+    }
 }

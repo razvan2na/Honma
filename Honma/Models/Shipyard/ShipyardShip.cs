@@ -1,6 +1,4 @@
-﻿using Honma.Dtos;
-
-namespace Honma.Models;
+﻿namespace Honma.Models;
 
 public readonly record struct ShipyardShip(
     string Type,

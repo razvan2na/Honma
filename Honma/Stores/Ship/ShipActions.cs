@@ -21,6 +21,12 @@ public readonly record struct ShipNavigate(string ShipSymbol, string WaypointSym
 
 public readonly record struct ShipRefuel(string ShipSymbol, int? Units = null, bool? FromCargo = null);
 
+public readonly record struct ShipExtractResources(string ShipSymbol);
+
 public readonly record struct ShipNavUpdated(string ShipSymbol, ShipNav Nav);
 
 public readonly record struct ShipFuelUpdated(string ShipSymbol, ShipFuel Fuel);
+
+public readonly record struct ShipCooldownUpdated(string ShipSymbol, Cooldown Cooldown);
+
+public readonly record struct ShipCargoUpdated(string ShipSymbol, ShipCargo Cargo);

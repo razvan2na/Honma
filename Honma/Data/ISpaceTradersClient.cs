@@ -47,6 +47,9 @@ public interface ISpaceTradersClient
     [Post("/my/ships/{shipSymbol}/refuel")]
     Task<Response<RefuelShipResponse>> RefuelShip(string shipSymbol, [Body] RefuelShipRequest request);
 
+    [Post("/my/ships/{shipSymbol}/extract")]
+    Task<Response<ExtractResourcesResponse>> ExtractResources(string shipSymbol);
+
     [Get("/systems")]
     Task<PagedResponse<SystemDto>> GetSystems([Query] int limit, [Query] int page);
 

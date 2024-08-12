@@ -153,11 +153,12 @@
                                    Variant="Variant.Outlined">
                             Refuel
                         </MudButton>
-                        <MudButton Disabled
+                        <MudButton Disabled="@(ship.Nav.Status != "IN_ORBIT")"
+                                   OnClick="() => ExtractResources(ship)"
                                    Size="Size.Small"
                                    StartIcon="@HonmaIcons.Warp"
                                    Variant="Variant.Outlined">
-                            Warp
+                            Extract
                         </MudButton>
                     </MudStack>
                 </MudStack>
@@ -303,6 +304,11 @@
     private void RefuelShip(Ship ship)
     {
         Dispatcher.Dispatch(new ShipRefuel(ship.Symbol));
+    }
+
+    private void ExtractResources(Ship ship)
+    {
+        Dispatcher.Dispatch(new ShipExtractResources(ship.Symbol));
     }
 
     private async Task ShowNavigationDialog(Ship ship)

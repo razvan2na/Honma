@@ -3,7 +3,7 @@
 public readonly record struct Survey(
     string Signature,
     string Symbol,
-    IReadOnlyList<SurveyDeposit> Deposits,
+    List<SurveyDeposit> Deposits,
     DateTime Expiration,
     string Size
 );
