@@ -146,12 +146,12 @@
                     </MudStack>
 
                     <MudStack>
-                        <MudButton Class=""
-                                   Disabled
+                        <MudButton Disabled="@(ship.Nav.Status != "DOCKED")"
+                                   OnClick="() => RefuelShip(ship)"
                                    Size="Size.Small"
-                                   StartIcon="@HonmaIcons.Jump"
+                                   StartIcon="@HonmaIcons.Fuel"
                                    Variant="Variant.Outlined">
-                            Jump
+                            Refuel
                         </MudButton>
                         <MudButton Disabled
                                    Size="Size.Small"
@@ -300,6 +300,11 @@
         Dispatcher.Dispatch(new ShipDock(ship.Symbol));
     }
 
+    private void RefuelShip(Ship ship)
+    {
+        Dispatcher.Dispatch(new ShipRefuel(ship.Symbol));
+    }
+
     private async Task ShowNavigationDialog(Ship ship)
     {
         var parameters = new DialogParameters<NavigateShipDialog>
@@ -312,8 +317,7 @@
             BackgroundClass = "dialog-background"
         };
 
-        var dialog = await DialogService.ShowAsync<NavigateShipDialog>("Navigate ship", parameters, options);
-        var result = await dialog.Result;
+        await DialogService.ShowAsync<NavigateShipDialog>("Navigate ship", parameters, options);
     }
 
 }

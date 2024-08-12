@@ -15,22 +15,22 @@ public interface ISpaceTradersClient
     Task<Response<Agent>> GetMyAgent();
 
     [Get("/factions")]
-    Task<PagedResponse<List<Faction>>> GetFactions([Query] int limit, [Query] int page);
+    Task<PagedResponse<Faction>> GetFactions([Query] int limit, [Query] int page);
 
     [Get("/factions/{symbol}")]
     Task<Response<Faction>> GetFaction(string symbol);
 
     [Get("/my/contracts")]
-    Task<PagedResponse<List<Contract>>> GetContracts([Query] int limit, [Query] int page);
+    Task<PagedResponse<Contract>> GetContracts([Query] int limit, [Query] int page);
 
     [Post("/my/contracts/{contractId}/accept")]
     Task<Response<ContractAcceptResponse>> AcceptContract(string contractId);
 
     [Get("/my/ships")]
-    Task<PagedResponse<List<Ship>>> GetShips([Query] int limit, [Query] int page);
+    Task<PagedResponse<Ship>> GetShips([Query] int limit, [Query] int page);
 
     [Post("/my/ships")]
-    Task<Response<ShipPurchaseResponse>> PurchaseShip([Body] ShipPurchaseRequest request);
+    Task<Response<PurchaseShipResponse>> PurchaseShip([Body] PurchaseShipRequest request);
 
     [Get("/my/ships/{shipSymbol}")]
     Task<Response<Ship>> GetShip(string shipSymbol);
@@ -44,14 +44,17 @@ public interface ISpaceTradersClient
     [Post("/my/ships/{shipSymbol}/navigate")]
     Task<Response<NavigateShipResponse>> NavigateShip(string shipSymbol, [Body] NavigateShipRequest request);
 
+    [Post("/my/ships/{shipSymbol}/refuel")]
+    Task<Response<RefuelShipResponse>> RefuelShip(string shipSymbol, [Body] RefuelShipRequest request);
+
     [Get("/systems")]
-    Task<PagedResponse<List<SystemDto>>> GetSystems([Query] int limit, [Query] int page);
+    Task<PagedResponse<SystemDto>> GetSystems([Query] int limit, [Query] int page);
 
     [Get("/systems/{systemSymbol}")]
     Task<Response<SystemDto>> GetSystem(string systemSymbol);
 
     [Get("/systems/{systemSymbol}/waypoints")]
-    Task<PagedResponse<List<Waypoint>>> GetSystemWaypoints(
+    Task<PagedResponse<Waypoint>> GetSystemWaypoints(
         string systemSymbol,
         [Query] int limit,
         [Query] int page,

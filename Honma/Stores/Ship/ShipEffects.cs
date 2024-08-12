@@ -33,7 +33,7 @@ public class ShipEffects(ISpaceTradersClient client, ISnackbar snackbar)
     {
         try
         {
-            var response = (await client.PurchaseShip(new ShipPurchaseRequest(action.ShipType, action.WaypointSymbol)))
+            var response = (await client.PurchaseShip(new PurchaseShipRequest(action.ShipType, action.WaypointSymbol)))
                 .Data;
 
             dispatcher.Dispatch(new UserAgentUpdated(response.Agent));
@@ -73,9 +73,16 @@ public class ShipEffects(ISpaceTradersClient client, ISnackbar snackbar)
     public async Task Handle(ShipNavigate action, IDispatcher dispatcher)
     {
         var response = await client.NavigateShip(action.ShipSymbol, new NavigateShipRequest(action.WaypointSymbol));
-        Console.WriteLine(response.Data.Fuel);
-        Console.WriteLine(response.Data.Nav);
         dispatcher.Dispatch(new ShipFuelUpdated(action.ShipSymbol, response.Data.Fuel));
         dispatcher.Dispatch(new ShipNavUpdated(action.ShipSymbol, response.Data.Nav));
+    }
+
+    [EffectMethod]
+    public async Task Handle(ShipRefuel action, IDispatcher dispatcher)
+    {
+        var response =
+            await client.RefuelShip(action.ShipSymbol, new RefuelShipRequest(action.Units, action.FromCargo));
+        dispatcher.Dispatch(new UserAgentUpdated(response.Data.Agent));
+        dispatcher.Dispatch(new ShipFuelUpdated(action.ShipSymbol, response.Data.Fuel));
     }
 }

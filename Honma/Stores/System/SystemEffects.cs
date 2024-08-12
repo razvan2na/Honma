@@ -13,12 +13,7 @@ public class SystemEffects(ISpaceTradersClient client, ISnackbar snackbar)
         {
             var (systems, pagination) = await client.GetSystems(action.Limit, action.Page);
 
-            dispatcher.Dispatch(
-                new SystemsUpdated(
-                    systems ?? throw new InvalidOperationException(),
-                    pagination
-                )
-            );
+            dispatcher.Dispatch(new SystemsUpdated(systems, pagination));
         }
         catch (Exception exception)
         {
