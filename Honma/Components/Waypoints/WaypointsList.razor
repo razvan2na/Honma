@@ -14,7 +14,7 @@
                Placeholder="Choose waypoint trait filters"
                SelectedValuesChanged="TraitFiltersChanged"
                T="string"
-               Variant="Variant.Filled">
+               Variant="Variant.Outlined">
         @foreach (var trait in Enum.GetValues<WaypointTraitSymbol>().OrderBy(trait => trait.ToString()))
         {
             <MudSelectItem Value="trait.ToString()">@trait.ToString().ToNaturalLanguage()</MudSelectItem>
@@ -27,7 +27,7 @@
                Placeholder="Choose a waypoint type filter"
                T="string"
                ValueChanged="TypeFilterChanged"
-               Variant="Variant.Filled">
+               Variant="Variant.Outlined">
         @foreach (var type in Enum.GetValues<WaypointType>().OrderBy(type => type.ToString()))
         {
             <MudSelectItem Value="type.ToString()">

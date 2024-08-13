@@ -214,7 +214,8 @@
 
     <AppSurface Padding="0">
         <MudTabs Centered
-                 Class="rounded-lg">
+                 Class="rounded-lg"
+                 TabHeaderClass="rounded-lg">
             <MudTabPanel Icon="@HonmaIcons.Loadout"
                          Text="Loadout">
                 <div class="pa-4">
@@ -243,13 +244,21 @@
                           Items="ship.Cargo.Inventory">
                     <HeaderContent>
                         <MudTh>Name</MudTh>
-                        <MudTh>Description</MudTh>
                         <MudTh>Units</MudTh>
+                        <MudTh>Description</MudTh>
                     </HeaderContent>
                     <RowTemplate>
-                        <MudTd>@context.Name</MudTd>
-                        <MudTd>@context.Description</MudTd>
-                        <MudTd>@context.Units</MudTd>
+                        <MudTd>
+                            <MudText>
+                                <b>@context.Name</b>
+                            </MudText>
+                        </MudTd>
+                        <MudTd>
+                            <MudText>@context.Units</MudText>
+                        </MudTd>
+                        <MudTd>
+                            <MudText>@context.Description</MudText>
+                        </MudTd>
                     </RowTemplate>
                     <NoRecordsContent>
                         <MudText>Ship has no cargo</MudText>

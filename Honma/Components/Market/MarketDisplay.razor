@@ -1,0 +1,85 @@
+﻿@if (Market.TradeGoods?.Any() ?? false)
+{
+    <MudStack>
+        @foreach (var good in Market.TradeGoods)
+        {
+            <AppSurface Light>
+                <MudStack>
+                    <MudStack AlignItems="AlignItems.Center"
+                              Row>
+                        <MudText><b>@good.Symbol</b> x@(good.TradeVolume)</MudText>
+
+                        <MudSpacer/>
+
+                        <MudButton Color="Color.Success"
+                                   DropShadow="false"
+                                   EndIcon="@HonmaIcons.Credits"
+                                   Variant="Variant.Filled">
+                            Buy for @good.PurchasePrice
+                        </MudButton>
+                        <MudButton Color="Color.Error"
+                                   DropShadow="false"
+                                   EndIcon="@HonmaIcons.Credits"
+                                   Variant="Variant.Filled">
+                            Sell for @good.SellPrice
+                        </MudButton>
+                    </MudStack>
+                </MudStack>
+            </AppSurface>
+        }
+    </MudStack>
+}
+else
+{
+    <MudStack>
+
+        @foreach (var export in Market.Exports)
+        {
+            <AppSurface Light>
+                <MudStack AlignItems="AlignItems.Center"
+                          Justify="Justify.SpaceBetween"
+                          Row>
+                    <MudText>
+                        <b>@export.Name</b>
+                    </MudText>
+                    <MudText>Export</MudText>
+                </MudStack>
+            </AppSurface>
+        }
+
+        @foreach (var import in Market.Imports)
+        {
+            <AppSurface Light>
+                <MudStack AlignItems="AlignItems.Center"
+                          Justify="Justify.SpaceBetween"
+                          Row>
+                    <MudText>
+                        <b>@import.Name</b>
+                    </MudText>
+                    <MudText>Export</MudText>
+                </MudStack>
+            </AppSurface>
+        }
+
+        @foreach (var exchange in Market.Exchange)
+        {
+            <AppSurface Light>
+                <MudStack AlignItems="AlignItems.Center"
+                          Justify="Justify.SpaceBetween"
+                          Row>
+                    <MudText>
+                        <b>@exchange.Name</b>
+                    </MudText>
+                    <MudText>Export</MudText>
+                </MudStack>
+            </AppSurface>
+        }
+
+    </MudStack>
+}
+
+@code {
+
+    [Parameter] public required Market Market { get; set; }
+
+}

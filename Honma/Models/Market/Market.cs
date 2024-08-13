@@ -2,9 +2,9 @@
 
 public readonly record struct Market(
     string Symbol,
-    IReadOnlyList<TradeGood> Exports,
-    IReadOnlyList<TradeGood> Imports,
-    IReadOnlyList<TradeGood> Exchange,
-    IReadOnlyList<MarketTransaction> Transactions,
-    IReadOnlyList<MarketTradeGood> TradeGoods
+    List<TradeGood> Exports,
+    List<TradeGood> Imports,
+    List<TradeGood> Exchange,
+    List<MarketTransaction>? Transactions,
+    List<MarketTradeGood>? TradeGoods
 );

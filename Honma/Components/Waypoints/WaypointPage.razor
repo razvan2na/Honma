@@ -23,7 +23,12 @@
                 <MudTabPanel Disabled="@(waypoint.Traits.All(trait => trait.Symbol != WaypointTraitSymbol.Marketplace.ToString().ToMacroCase()))"
                              Icon="@HonmaIcons.Market"
                              Text="Market">
-
+                    <div class="pa-4">
+                        @if (MarketState.Value.Market is not null)
+                        {
+                            <MarketDisplay Market="MarketState.Value.Market.Value"/>
+                        }
+                    </div>
                 </MudTabPanel>
 
                 <MudTabPanel Disabled="@(waypoint.Traits.All(trait => trait.Symbol != WaypointTraitSymbol.Shipyard.ToString().ToMacroCase()))"
@@ -48,6 +53,8 @@
     [Inject] public required IState<WaypointState> WaypointState { get; set; }
 
     [Inject] public required IState<ShipyardState> ShipyardState { get; set; }
+
+    [Inject] public required IState<MarketState> MarketState { get; set; }
 
     [Inject] public required IDispatcher Dispatcher { get; set; }
 

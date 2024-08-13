@@ -10,4 +10,5 @@ public static class Routes
     public const string Ships = "/ships";
     public const string Systems = "/systems";
     public const string Waypoints = "/waypoints";
+    public const string Dashboard = "/dashboard";
 }

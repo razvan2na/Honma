@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Honma;
 using Honma.Authentication;
+using Honma.Clients;
 using Honma.Data;
 using Honma.Services;
+using Honma.Utils;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using MudBlazor.Services;
@@ -20,10 +22,8 @@ builder.Services.AddFluxor(options => { options.ScanAssemblies(typeof(Program).A
 
 // Register API interface with Refit, including handler for populating authentication header for every HTTP request.
 builder.Services.AddTransient<AuthenticationHeaderHandler>();
-builder.Services
-    .AddRefitClient<ISpaceTradersClient>()
-    .ConfigureHttpClient(client => client.BaseAddress = new Uri("https://api.spacetraders.io/v2"))
-    .AddHttpMessageHandler<AuthenticationHeaderHandler>();
+builder.Services.AddClient<ISpaceTradersClient>();
+builder.Services.AddClient<ISystemsClient>();
 
 // Register MudBlazor component library services.
 builder.Services.AddMudServices(configuration =>

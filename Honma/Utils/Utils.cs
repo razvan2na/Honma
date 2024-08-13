@@ -1,7 +1,10 @@
 ﻿using System.Text;
+using Honma.Authentication;
+using Honma.Clients;
 using Honma.Components.AgentHistory;
 using Honma.Components.Authentication;
 using Honma.Components.Contracts;
+using Honma.Components.Dashboard;
 using Honma.Components.Factions;
 using Honma.Components.Home;
 using Honma.Components.Ship;
@@ -12,6 +15,7 @@ using Honma.Constants;
 using Honma.Icons;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using Refit;
 
 namespace Honma.Utils;
 
@@ -28,6 +32,11 @@ public static class Utils
         else if (routeData.PageType == typeof(LoginPage))
         {
             breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Login, Routes.Login, false, HonmaIcons.SignIn));
+        }
+        else if (routeData.PageType == typeof(DashboardPage))
+        {
+            breadcrumbs.Add(
+                new BreadcrumbItem(BreadcrumbTexts.Dashboard, Routes.Dashboard, false, HonmaIcons.Dashboard));
         }
         else if (routeData.PageType == typeof(FactionsPage))
         {
@@ -154,5 +163,12 @@ public static class Utils
     public static DateTime AddTimezoneOffset(this DateTime dateTime, int offset)
     {
         return dateTime.Add(TimeSpan.FromMinutes(-offset));
+    }
+
+    public static void AddClient<T>(this IServiceCollection services) where T : class
+    {
+        services.AddRefitClient<T>()
+            .ConfigureHttpClient(client => client.BaseAddress = new Uri(Globals.SpaceTradersUrl))
+            .AddHttpMessageHandler<AuthenticationHeaderHandler>();
     }
 }

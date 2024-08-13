@@ -10,4 +10,5 @@ public static class BreadcrumbTexts
     public const string Ships = "Ships";
     public const string Systems = "Systems";
     public const string Waypoints = "Waypoints";
+    public const string Dashboard = "Dashboard";
 }
