@@ -1,25 +1,27 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Blazored.LocalStorage" Version="4.5.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.7"/>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="8.0.7"/>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.7" PrivateAssets="all"/>
-        <PackageReference Include="MudBlazor" Version="7.4.0"/>
-        <PackageReference Include="Fluxor.Blazor.Web" Version="6.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="9.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.0" PrivateAssets="all"/>
+        <PackageReference Include="MudBlazor" Version="7.15.0"/>
+        <PackageReference Include="Fluxor.Blazor.Web" Version="6.1.0"/>
         <PackageReference Include="OneOf" Version="3.0.271"/>
         <PackageReference Include="OneOf.SourceGenerator" Version="3.0.271"/>
-        <PackageReference Include="Refit" Version="7.1.2"/>
-        <PackageReference Include="Refit.HttpClientFactory" Version="7.1.2"/>
+        <PackageReference Include="Refit" Version="8.0.0"/>
+        <PackageReference Include="Refit.HttpClientFactory" Version="8.0.0"/>
     </ItemGroup>
     <ItemGroup>
         <None Remove="Honma.csproj.DotSettings"/>
     </ItemGroup>
     <ItemGroup>
         <_ContentIncludedByDefault Remove="Components\ServerStatus\ServerStatusDashboard.razor"/>
+        <_ContentIncludedByDefault Remove="Components\Dashboard\DashboardPage.razor"/>
     </ItemGroup>
 </Project>

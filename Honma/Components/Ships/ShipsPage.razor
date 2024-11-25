@@ -3,60 +3,54 @@
 
 <MudContainer MaxWidth="MaxWidth.Small">
     <AppSurface>
-        <MudStack AlignItems="AlignItems.Center"
-                  Justify="Justify.SpaceBetween"
-                  Row>
-            <MudStack AlignItems="AlignItems.Center"
-                      Row
-                      Spacing="2">
-                <MudIcon Icon="@HonmaIcons.Ship"/>
-                <MudText Typo="Typo.h6">Ships</MudText>
-            </MudStack>
-            <MudPagination BoundaryCount="1"
-                           Count="@(State.Value.Pagination.Total / 10 + 1)"
-                           MiddleCount="3"
-                           Rectangular
-                           Selected="_page"
-                           SelectedChanged="PageChange"
-                           Size="Size.Small"
-                           Variant="Variant.Text"/>
-        </MudStack>
+        <MudStack Spacing="4">
+            <ListHeader Icon="@HonmaIcons.Ship"
+                        Page="_page"
+                        PageChanged="PageChanged"
+                        Pagination="State.Value.Pagination"
+                        Title="Ships"/>
 
-        <MudList Class="mt-4"
-                 Gutters="false"
-                 T="string">
-            @foreach (var ship in State.Value.Ships)
-            {
-                <MudListItem Class="rounded-lg"
-                             Href="@($"{Routes.Ships}/{ship.Symbol}")"
-                             T="string">
-                    <ChildContent>
-                        <MudStack AlignItems="AlignItems.Center"
-                                  Justify="Justify.SpaceBetween"
-                                  Row>
+            <MudDivider DividerType="DividerType.Middle"
+                        Light/>
+
+            <MudList T="string">
+                @foreach (var ship in State.Value.Ships)
+                {
+                    <MudListItem Class="rounded-lg"
+                                 Href="@($"{Routes.Ships}/{ship.Symbol}")"
+                                 T="string">
+                        <ChildContent>
                             <MudStack AlignItems="AlignItems.Center"
-                                      Class="width-full"
                                       Justify="Justify.SpaceBetween"
                                       Row>
-                                <MudText>@ship.Symbol</MudText>
                                 <MudStack AlignItems="AlignItems.Center"
+                                          Class="width-full"
+                                          Justify="Justify.SpaceBetween"
                                           Row>
-                                    <MudChip Color="Color.Secondary"
-                                             Size="Size.Small"
-                                             T="string"
-                                             Variant="Variant.Text">
-                                        @ship.Registration.Role
-                                    </MudChip>
-                                </MudStack>
-                            </MudStack>
+                                    <MudText>
+                                        <b>@ship.Symbol</b>
+                                    </MudText>
 
-                            <MudIcon Icon="@HonmaIcons.CaretRight"
-                                     Size="Size.Small"/>
-                        </MudStack>
-                    </ChildContent>
-                </MudListItem>
-            }
-        </MudList>
+                                    <MudStack AlignItems="AlignItems.Center"
+                                              Row>
+                                        <MudChip Color="Color.Secondary"
+                                                 Size="Size.Small"
+                                                 T="string"
+                                                 Variant="Variant.Text">
+                                            @ship.Registration.Role
+                                        </MudChip>
+                                    </MudStack>
+                                </MudStack>
+
+                                <MudIcon Icon="@HonmaIcons.CaretRight"
+                                         Size="Size.Small"/>
+                            </MudStack>
+                        </ChildContent>
+                    </MudListItem>
+                }
+            </MudList>
+        </MudStack>
+
     </AppSurface>
 </MudContainer>
 
@@ -74,7 +68,7 @@
         Dispatcher.Dispatch(new ShipsLoad(_page));
     }
 
-    private void PageChange(int page)
+    private void PageChanged(int page)
     {
         _page = page;
         Dispatcher.Dispatch(new ShipsLoad(_page));

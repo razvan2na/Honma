@@ -47,7 +47,7 @@
                   Row
                   Spacing="2">
             <MudIcon Icon="@HonmaIcons.ClockCounterClockwise"/>
-            <MudText>Last reset was on <b>@Status.ResetDate.ToString(Formats.Date)</b></MudText>
+            <MudText>Last reset was on <b>@Status.ResetDate.AddTimezoneOffset(_timezoneOffset).ToString(Formats.Date)</b></MudText>
         </MudStack>
     </AppSurface>
 
@@ -56,7 +56,7 @@
                   Row
                   Spacing="2">
             <MudIcon Icon="@HonmaIcons.ClockCountdown"/>
-            <MudText>Next reset is on <b>@Status.ServerResets.Next.ToString(Formats.Date)</b></MudText>
+            <MudText>Next reset is on <b>@Status.ServerResets.Next.AddTimezoneOffset(_timezoneOffset).ToString(Formats.Date)</b></MudText>
         </MudStack>
     </AppSurface>
 </MudStack>
@@ -64,5 +64,14 @@
 @code {
 
     [Parameter] public required ServerStatus Status { get; set; }
+
+    [Inject] public required TimeService TimeService { get; set; }
+
+    private int _timezoneOffset;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _timezoneOffset = await TimeService.GetUserTimezoneOffset();
+    }
 
 }

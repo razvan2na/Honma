@@ -1,10 +1,8 @@
 ﻿using System.Text;
 using Honma.Authentication;
-using Honma.Clients;
 using Honma.Components.AgentHistory;
 using Honma.Components.Authentication;
 using Honma.Components.Contracts;
-using Honma.Components.Dashboard;
 using Honma.Components.Factions;
 using Honma.Components.Home;
 using Honma.Components.Ship;
@@ -32,11 +30,6 @@ public static class Utils
         else if (routeData.PageType == typeof(LoginPage))
         {
             breadcrumbs.Add(new BreadcrumbItem(BreadcrumbTexts.Login, Routes.Login, false, HonmaIcons.SignIn));
-        }
-        else if (routeData.PageType == typeof(DashboardPage))
-        {
-            breadcrumbs.Add(
-                new BreadcrumbItem(BreadcrumbTexts.Dashboard, Routes.Dashboard, false, HonmaIcons.Dashboard));
         }
         else if (routeData.PageType == typeof(FactionsPage))
         {
